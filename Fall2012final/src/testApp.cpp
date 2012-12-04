@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
+    // Housekeeping:
     ofSetCircleResolution(60);
     ofEnableSmoothing();
     ofSetFrameRate(60);
@@ -18,7 +19,16 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
+    // The canvas:
+    ofSetColor(255,0,0);
+    ofRect(ofGetWidth()/2, ofGetHeight()/2, 100, 100, 100);
+    
+    // The player-character;
+    ofSetColor(255);
     ofSphere(ofGetWidth()/2, ofGetHeight()/2, 0, 50);
+    
+    // Reset color:
+    ofSetColor(255);
 }
 
 //--------------------------------------------------------------

@@ -16,31 +16,38 @@ void testApp::setup(){
     backward = false;
     left = false;
     right = false;
+    playerVel = 10;
     
+    canvasSide = 500;
+    playerRad = 50;
     canvasX = ofGetWidth()/2;
     canvasY = ofGetHeight()/2;
-    canvasZ = -200;
-    canvasSize = 100;
+    canvasZ = -1000;
     playerX = ofGetWidth()/2;
-    playerY = ofGetHeight()/2+canvasSize/2;
+    // We want the base of the canvas and the base of the player
+    // to appear to be on the same floor (which is viewed as scaling
+    // into the screen). So we set the yPos of the player equal to the
+    // yPos of the canvas, accounting for the respective sizes:
+    playerY = canvasY+(canvasSide/2)-playerRad;
     playerZ = 0;
-    playerSize = 50;
+    //playerZ = canvasZ+(canvasSide/2)+playerRad; // Debug - test
+    // comparative placement.
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     
     if (forward == true) {
-        canvasZ += 10;
+        canvasZ += playerVel;
     }
     if (backward == true) {
-        canvasZ -= 10;
+        canvasZ -= playerVel;
     }
     if (left == true) {
-        playerX -= 10;
+        playerX -= playerVel;
     }
     if (right == true) {
-        playerX += 10;
+        playerX += playerVel;
     }
 }
 
@@ -51,11 +58,17 @@ void testApp::draw(){
     ofSetColor(255);
     ofSetRectMode(OF_RECTMODE_CENTER);
     //ofRect(ofGetWidth()/2, ofGetHeight()/2, 100, 100, 100);
-    ofBox(canvasX, canvasY, canvasZ, canvasSize);
+    ofBox(canvasX, canvasY, canvasZ, canvasSide);
     
-    // The player-character;
+    // The player-character:
+    // Debug to test positioning:
+    if (canvasZ >= playerZ-playerRad-(canvasSide/2)) {
+        ofSetColor(0, 255, 0);
+    }
+    else {
     ofSetColor(255,0,0);
-    ofSphere(playerX, playerY, playerZ, playerSize);
+    }
+    ofSphere(playerX, playerY, playerZ, playerRad);
     
     // Reset color:
     ofSetColor(255);

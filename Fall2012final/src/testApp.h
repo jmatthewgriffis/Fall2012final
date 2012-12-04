@@ -21,7 +21,14 @@ public:
     
     bool forward, backward, left, right; // Use for movement.
     
-    int playerX, playerY, playerZ, playerSize; // Positioning.
-    int canvasX, canvasY, canvasZ, canvasSize; // Positioning.
+    float playerX, playerY, playerZ; // Positioning.
+    float canvasX, canvasY, canvasZ; // Positioning.
+    int playerRad, canvasSide; // Sizing.
+    int playerVel; // Speed.
+    
+    /* Note to self: need to fix weird warping issue where moving too
+     far to the right or left warps the player-object's shape in the
+     direction of the canvas. This may be due to the contingent z-
+     positoning.*/
     
 };

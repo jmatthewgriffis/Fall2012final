@@ -21,4 +21,7 @@ public:
     
     bool forward, backward, left, right; // Use for movement.
     
+    int playerX, playerY, playerZ, playerSize; // Positioning.
+    int canvasX, canvasY, canvasZ, canvasSize; // Positioning.
+    
 };

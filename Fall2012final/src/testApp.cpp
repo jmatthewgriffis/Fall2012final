@@ -16,22 +16,31 @@ void testApp::setup(){
     backward = false;
     left = false;
     right = false;
+    
+    canvasX = ofGetWidth()/2;
+    canvasY = ofGetHeight()/2;
+    canvasZ = -200;
+    canvasSize = 100;
+    playerX = ofGetWidth()/2;
+    playerY = ofGetHeight()/2+canvasSize/2;
+    playerZ = 0;
+    playerSize = 50;
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     
     if (forward == true) {
-        //sphere.z += 10;
+        canvasZ += 10;
     }
     if (backward == true) {
-        
+        canvasZ -= 10;
     }
     if (left == true) {
-        
+        playerX -= 10;
     }
     if (right == true) {
-        
+        playerX += 10;
     }
 }
 
@@ -42,11 +51,11 @@ void testApp::draw(){
     ofSetColor(255);
     ofSetRectMode(OF_RECTMODE_CENTER);
     //ofRect(ofGetWidth()/2, ofGetHeight()/2, 100, 100, 100);
-    ofBox(ofGetWidth()/2, ofGetHeight()/2, -200, 100);
+    ofBox(canvasX, canvasY, canvasZ, canvasSize);
     
     // The player-character;
     ofSetColor(255,0,0);
-    ofSphere(ofGetWidth()/2, ofGetHeight()/2, 0, 50);
+    ofSphere(playerX, playerY, playerZ, playerSize);
     
     // Reset color:
     ofSetColor(255);

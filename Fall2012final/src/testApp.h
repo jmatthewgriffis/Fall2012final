@@ -26,6 +26,8 @@ public:
     int playerRad, canvasSide; // Sizing.
     int playerVel; // Speed.
     
+    ofImage mona;
+    
     /* Note to self: need to fix weird warping issue where moving too
      far to the right or left warps the player-object's shape in the
      direction of the canvas. This may be due to the contingent z-

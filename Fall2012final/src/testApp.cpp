@@ -11,6 +11,10 @@ void testApp::setup(){
     ofSetVerticalSync(true);
     ofBackground(0);
     
+    // Image credit:
+    // http://www.ibiblio.org/wm/paint/auth/vinci/joconde/joconde.jpg :
+    mona.loadImage("pics/mona_lisa.jpg");
+    
     // Movement:
     forward = false;
     backward = false;
@@ -54,11 +58,20 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    // The canvas:
-    ofSetColor(255);
+    // Setting the rect mode does not affect the 3D box. But it
+    // DOES affect the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
-    //ofRect(ofGetWidth()/2, ofGetHeight()/2, 100, 100, 100);
+    
+    // The canvas:
+    ofSetColor(0); // Canvas is invisible. Change to 255 for white.
     ofBox(canvasX, canvasY, canvasZ, canvasSide);
+    ofSetColor(255); // Color reset.
+    //ofRect(ofGetWidth()/2, ofGetHeight()/2, 100, 100, 100);
+    
+    // Draw a pic (I used math to reduce the original image's dimensions
+    // to fit within the 500x500 box. I would use Max Width and Max Height
+    // but I don't know how or if that's even possible):
+    mona.draw(canvasX, canvasY, canvasZ+(canvasSide/2), 321, 500);
     
     // The player-character:
     // Debug to test positioning:

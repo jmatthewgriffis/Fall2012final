@@ -30,7 +30,7 @@ public:
     
     float xVel, yVel, jumpSpd, gravity; // Speed.
     
-    ofImage mona;
+    ofImage davinci;
     
     /* Note to self: need to fix weird warping issue where moving too
      far to the right or left warps the player-object's shape in the

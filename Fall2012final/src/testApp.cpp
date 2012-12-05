@@ -13,7 +13,7 @@ void testApp::setup(){
     
     // Image credit:
     // http://www.ibiblio.org/wm/paint/auth/vinci/joconde/joconde.jpg :
-    mona.loadImage("pics/mona_lisa.jpg");
+    davinci.loadImage("pics/davinci.jpg");
     
     // Movement:
     forward = false;
@@ -203,7 +203,7 @@ void testApp::draw(){
     // Draw a pic (I used math to reduce the original image's dimensions
     // to fit within the 500x500 box. I would use Max Width and Max Height
     // but I don't know how or if that's even possible):
-    mona.draw(canvasX, canvasY, canvasZ+(canvasSide/2), 321, 500);
+    davinci.draw(canvasX, canvasY, canvasZ+(canvasSide/2), 321, 500);
     
     // The player-character:
     

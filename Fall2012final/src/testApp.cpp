@@ -81,9 +81,9 @@ void testApp::draw(){
     ofSetColor(0, 0, 255);
     ofBeginShape();
     // Back-left corner:
-    ofVertex((ofGetWidth()/2)-(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2)+(floorWidth/2));
+    ofVertex((ofGetWidth()/2)-(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2));
     // Back-right corner:
-    ofVertex((ofGetWidth()/2)+(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2)+(floorWidth/2));
+    ofVertex((ofGetWidth()/2)+(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2));
     // Front-right corner:
     ofVertex((ofGetWidth()/2)+(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2)+(floorWidth/2)+floorLength);
     // Front-left corner:

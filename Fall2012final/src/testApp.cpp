@@ -37,7 +37,7 @@ void testApp::setup(){
     leftWallx = centerW-(floorWidth/2);
     rightWallx = centerW+(floorWidth/2);
     floorHeight = centerH+(canvasSide/2);
-    //ceilingHeight = ;
+    ceilingHeight = floorWidth; // Temporary value.
     
     canvasX = centerW;
     canvasY = centerH;
@@ -110,6 +110,10 @@ void testApp::draw(){
     // DOES affect the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
     
+    //__________________________________________________________
+    
+    // Let's build a building! One surface at a time!
+    
     // The floor. This looks like a mess but it's not so bad. We
     // simply draw the floor by positioning the four corners as
     // vertices, relative to the existing objects so all the
@@ -126,6 +130,72 @@ void testApp::draw(){
     ofVertex(leftWallx, floorHeight, canvasFront+floorLength);
     ofEndShape();
     ofSetColor(255); // Color reset.
+    
+    // The left wall (same as with the floor):
+    ofSetColor(0, 0, 225);
+    ofBeginShape();
+    // Back-lower corner:
+    ofVertex(leftWallx, floorHeight, canvasFront);
+    // Back-upper corner:
+    ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
+    // Front-upper corner:
+    ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
+    // Front-lower corner:
+    ofVertex(leftWallx, floorHeight, canvasFront+floorLength);
+    ofEndShape();
+    ofSetColor(255); // Color reset.
+    
+    /*
+     // The right wall:
+     ofSetColor(0, 0, 255);
+     ofBeginShape();
+     // Back-left corner:
+     ofVertex(leftWallx, floorHeight, canvasFront);
+     // Back-right corner:
+     ofVertex(rightWallx, floorHeight, canvasFront);
+     // Front-right corner:
+     ofVertex(rightWallx, floorHeight, canvasFront+floorLength);
+     // Front-left corner:
+     ofVertex(leftWallx, floorHeight, canvasFront+floorLength);
+     ofEndShape();
+     ofSetColor(255); // Color reset.
+     */
+    
+    /*
+     // The back wall:
+     ofSetColor(0, 0, 255);
+     ofBeginShape();
+     // Back-left corner:
+     ofVertex(leftWallx, floorHeight, canvasFront);
+     // Back-right corner:
+     ofVertex(rightWallx, floorHeight, canvasFront);
+     // Front-right corner:
+     ofVertex(rightWallx, floorHeight, canvasFront+floorLength);
+     // Front-left corner:
+     ofVertex(leftWallx, floorHeight, canvasFront+floorLength);
+     ofEndShape();
+     ofSetColor(255); // Color reset.
+     */
+    
+    /*
+     // The ceiling:
+     ofSetColor(0, 0, 255);
+     ofBeginShape();
+     // Back-left corner:
+     ofVertex(leftWallx, floorHeight, canvasFront);
+     // Back-right corner:
+     ofVertex(rightWallx, floorHeight, canvasFront);
+     // Front-right corner:
+     ofVertex(rightWallx, floorHeight, canvasFront+floorLength);
+     // Front-left corner:
+     ofVertex(leftWallx, floorHeight, canvasFront+floorLength);
+     ofEndShape();
+     ofSetColor(255); // Color reset.
+     */
+    
+    // Building complete!
+    
+    //__________________________________________________________
     
     // The canvas:
     ofSetColor(0); // Canvas is invisible. Change to 255 for white.

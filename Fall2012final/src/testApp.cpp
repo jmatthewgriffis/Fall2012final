@@ -36,7 +36,8 @@ void testApp::setup(){
     // to appear to be on the same floor (which is viewed as scaling
     // into the screen). So we set the yPos of the player equal to the
     // yPos of the canvas, accounting for the respective sizes:
-    playerY = canvasY+(canvasSide/2)-playerRad;
+    //playerY = canvasY+(canvasSide/2)-playerRad;
+    playerY = ofGetHeight()/2-200;
     playerZ = 0;
     //playerZ = canvasZ+(canvasSide/2)+playerRad; // Debug - test
     // comparative placement.
@@ -65,6 +66,10 @@ void testApp::update(){
     if (right == true) {
         playerX += playerVel;
     }
+    
+    if (playerY < (ofGetHeight()/2)+(canvasSide/2)-playerRad) {
+        playerY += playerVel;
+    }
 }
 
 //--------------------------------------------------------------
@@ -75,9 +80,9 @@ void testApp::draw(){
     ofSetRectMode(OF_RECTMODE_CENTER);
     
     // The floor. This looks like a mess but it's not so bad. We
-    // simply draw the floor by connecting the four corners as
-    // vertices, and position them all relative to the existing objects
-    // so all the architecture moves together:
+    // simply draw the floor by positioning the four corners as
+    // vertices, relative to the existing objects so all the
+    // architecture moves together:
     ofSetColor(0, 0, 255);
     ofBeginShape();
     // Back-left corner:

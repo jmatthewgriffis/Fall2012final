@@ -23,7 +23,7 @@ public:
     
     float playerX, playerY, playerZ; // Positioning.
     float canvasX, canvasY, canvasZ; // Positioning.
-    int playerRad, canvasSide; // Sizing.
+    int playerRad, canvasSide, floorLength, floorWidth; // Sizing.
     int playerVel; // Speed.
     
     ofImage mona;

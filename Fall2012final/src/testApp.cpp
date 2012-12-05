@@ -22,8 +22,12 @@ void testApp::setup(){
     right = false;
     playerVel = 10;
     
+    // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
     playerRad = 50;
+    floorLength = 500;
+    floorWidth = 500;
+    
     canvasX = ofGetWidth()/2;
     canvasY = ofGetHeight()/2;
     canvasZ = -1000;
@@ -61,6 +65,22 @@ void testApp::draw(){
     // Setting the rect mode does not affect the 3D box. But it
     // DOES affect the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
+    
+    // The floor:
+    ofSetColor(0, 0, 255);
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2, 0);
+    ofRotate(90, 0, 0, 0);
+    //ofRect(0, 0, canvasZ+(canvasSide/2)+(floorWidth/2), floorLength, floorWidth);
+    //ofRect(canvasZ+(canvasSide/2)+(floorWidth/2), 0, 0, floorLength, floorWidth);
+    ofPopMatrix();
+    ofBeginShape();
+    ofVertex((ofGetWidth()/2)-(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2)+(floorWidth/2));
+    ofVertex((ofGetWidth()/2)+(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2)+(floorWidth/2));
+    ofVertex(ofGetWidth()/2,ofGetHeight()/2,0);
+    //ofvertex
+    ofEndShape();
+    ofSetColor(255); // Color reset.
     
     // The canvas:
     ofSetColor(0); // Canvas is invisible. Change to 255 for white.

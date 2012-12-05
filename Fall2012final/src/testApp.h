@@ -21,10 +21,13 @@ public:
     
     bool forward, backward, left, right, jump; // Use for movement.
     
-    float playerX, playerY, playerZ; // Positioning.
-    float canvasX, canvasY, canvasZ; // Positioning.
-    float floorHeight, centerW, centerH;
+    // Positioning:
+    float playerX, playerY, playerZ, canvasX, canvasY, canvasZ,
+    centerW, centerH, leftWallx, rightWallx, floorHeight, ceilingHeight,
+    canvasFront;
+    
     int playerRad, canvasSide, floorLength, floorWidth; // Sizing.
+    
     float xVel, yVel, jumpSpd, gravity; // Speed.
     
     ofImage mona;

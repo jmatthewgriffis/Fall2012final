@@ -31,10 +31,13 @@ void testApp::setup(){
     floorLength = 1000;
     floorWidth = 1000;
     
-    // Make code a little more readable:
+    // Make code much more readable:
     centerW = ofGetWidth()/2;
     centerH = ofGetHeight()/2;
+    leftWallx = centerW-(floorWidth/2);
+    rightWallx = centerW+(floorWidth/2);
     floorHeight = centerH+(canvasSide/2);
+    //ceilingHeight = ;
     
     canvasX = centerW;
     canvasY = centerH;
@@ -42,12 +45,17 @@ void testApp::setup(){
     playerX = centerW;
     playerY = floorHeight-playerRad;
     playerZ = 0;
+    
     //playerZ = canvasZ+(canvasSide/2)+playerRad; // Debug - test
     // comparative placement.
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
+    
+    // Have to initialize this variable in the update function,
+    // because it's dependent on another variable:
+    canvasFront = canvasZ+(canvasSide/2);
     
     // You might think you'd want to change the position of the
     // object when the object is moving, and for x and y that's
@@ -109,13 +117,13 @@ void testApp::draw(){
     ofSetColor(0, 0, 255);
     ofBeginShape();
     // Back-left corner:
-    ofVertex(centerW-(floorWidth/2), floorHeight, canvasZ+(canvasSide/2));
+    ofVertex(leftWallx, floorHeight, canvasFront);
     // Back-right corner:
-    ofVertex(centerW+(floorWidth/2), floorHeight, canvasZ+(canvasSide/2));
+    ofVertex(rightWallx, floorHeight, canvasFront);
     // Front-right corner:
-    ofVertex(centerW+(floorWidth/2), floorHeight, canvasZ+(canvasSide/2)+(floorWidth/2)+floorLength);
+    ofVertex(rightWallx, floorHeight, canvasFront+floorLength);
     // Front-left corner:
-    ofVertex(centerW-(floorWidth/2), floorHeight, canvasZ+(canvasSide/2)+(floorWidth/2)+floorLength);
+    ofVertex(leftWallx, floorHeight, canvasFront+floorLength);
     ofEndShape();
     ofSetColor(255); // Color reset.
     

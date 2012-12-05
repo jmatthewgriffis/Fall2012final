@@ -25,8 +25,8 @@ void testApp::setup(){
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
     playerRad = 50;
-    floorLength = 500;
-    floorWidth = 500;
+    floorLength = 1000;
+    floorWidth = 1000;
     
     canvasX = ofGetWidth()/2;
     canvasY = ofGetHeight()/2;
@@ -45,6 +45,14 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
     
+    // You might think you'd want to change the position of the
+    // object when the object is moving, and for x and y that's
+    // true. However, for z, since we don't have a camera following
+    // the player object, it would appear to grow smaller or larger,
+    // and we don't want that. So we move the world instead, shifting
+    // its position on the z-axis to keep the player object at the same
+    // scale while giving the illusion of movement. I'll move the world
+    // for ya, darling:
     if (forward == true) {
         canvasZ += playerVel;
     }
@@ -66,19 +74,20 @@ void testApp::draw(){
     // DOES affect the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
     
-    // The floor:
+    // The floor. This looks like a mess but it's not so bad. We
+    // simply draw the floor by connecting the four corners as
+    // vertices, and position them all relative to the existing objects
+    // so all the architecture moves together:
     ofSetColor(0, 0, 255);
-    ofPushMatrix();
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2, 0);
-    ofRotate(90, 0, 0, 0);
-    //ofRect(0, 0, canvasZ+(canvasSide/2)+(floorWidth/2), floorLength, floorWidth);
-    //ofRect(canvasZ+(canvasSide/2)+(floorWidth/2), 0, 0, floorLength, floorWidth);
-    ofPopMatrix();
     ofBeginShape();
+    // Back-left corner:
     ofVertex((ofGetWidth()/2)-(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2)+(floorWidth/2));
+    // Back-right corner:
     ofVertex((ofGetWidth()/2)+(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2)+(floorWidth/2));
-    ofVertex(ofGetWidth()/2,ofGetHeight()/2,0);
-    //ofvertex
+    // Front-right corner:
+    ofVertex((ofGetWidth()/2)+(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2)+(floorWidth/2)+floorLength);
+    // Front-left corner:
+    ofVertex((ofGetWidth()/2)-(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2)+(floorWidth/2)+floorLength);
     ofEndShape();
     ofSetColor(255); // Color reset.
     
@@ -94,7 +103,9 @@ void testApp::draw(){
     mona.draw(canvasX, canvasY, canvasZ+(canvasSide/2), 321, 500);
     
     // The player-character:
-    // Debug to test positioning:
+    
+    // Debug to test positioning by changing color when player and
+    // canvas are at the same depth:
     if (canvasZ >= playerZ-playerRad-(canvasSide/2)) {
         ofSetColor(0, 255, 0);
     }

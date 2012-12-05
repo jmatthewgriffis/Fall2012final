@@ -11,9 +11,15 @@ void testApp::setup(){
     ofSetVerticalSync(true);
     ofBackground(0);
     
+    // The paintings:
+    
     // Image credit:
     // http://www.ibiblio.org/wm/paint/auth/vinci/joconde/joconde.jpg :
     davinci.loadImage("pics/davinci.jpg");
+    
+    // Image credit:
+    // http://www.ibiblio.org/wm/paint/auth/mondrian/broadway.jpg
+    mondrian.loadImage("pics/mondrian.jpg");
     
     // Movement:
     forward = false;
@@ -204,6 +210,7 @@ void testApp::draw(){
     // to fit within the 500x500 box. I would use Max Width and Max Height
     // but I don't know how or if that's even possible):
     davinci.draw(canvasX, canvasY, canvasZ+(canvasSide/2), 321, 500);
+    //mondrian.draw(canvasX, canvasY, canvasZ+(canvasSide/2), ?, ?);
     
     // The player-character:
     

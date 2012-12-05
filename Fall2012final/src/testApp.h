@@ -31,10 +31,14 @@ public:
     float xVel, yVel, jumpSpd, gravity; // Speed.
     
     ofImage davinci;
+    ofImage mondrian;
     
     /* Note to self: need to fix weird warping issue where moving too
      far to the right or left warps the player-object's shape in the
      direction of the canvas. This may be due to the contingent z-
      positoning.*/
+    
+    /* Also it'd be nice to figure out how to make elements be drawn in front
+     or behind each other based on their z-position. */
     
 };

@@ -29,7 +29,7 @@ void testApp::setup(){
     canvasSide = 500;
     playerRad = 50;
     floorLength = 1000;
-    floorWidth = 1000;
+    floorWidth = 1250;
     
     // Make code much more readable:
     centerW = ofGetWidth()/2;
@@ -37,7 +37,7 @@ void testApp::setup(){
     leftWallx = centerW-(floorWidth/2);
     rightWallx = centerW+(floorWidth/2);
     floorHeight = centerH+(canvasSide/2);
-    ceilingHeight = floorWidth; // Temporary value.
+    ceilingHeight = floorWidth-(floorWidth/3); // Temporary value.
     
     canvasX = centerW;
     canvasY = centerH;
@@ -145,53 +145,50 @@ void testApp::draw(){
     ofEndShape();
     ofSetColor(255); // Color reset.
     
-    /*
-     // The right wall:
-     ofSetColor(0, 0, 255);
-     ofBeginShape();
-     // Back-left corner:
-     ofVertex(leftWallx, floorHeight, canvasFront);
-     // Back-right corner:
-     ofVertex(rightWallx, floorHeight, canvasFront);
-     // Front-right corner:
-     ofVertex(rightWallx, floorHeight, canvasFront+floorLength);
-     // Front-left corner:
-     ofVertex(leftWallx, floorHeight, canvasFront+floorLength);
-     ofEndShape();
-     ofSetColor(255); // Color reset.
-     */
+    // The right wall:
+    ofSetColor(0, 0, 225);
+    ofBeginShape();
+    // Back-lower corner:
+    ofVertex(rightWallx, floorHeight, canvasFront);
+    // Back-upper corner:
+    ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
+    // Front-upper corner:
+    ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
+    // Front-lower corner:
+    ofVertex(rightWallx, floorHeight, canvasFront+floorLength);
+    ofEndShape();
+    ofSetColor(255); // Color reset.
     
-    /*
+    
      // The back wall:
-     ofSetColor(0, 0, 255);
+     ofSetColor(0, 0, 200);
      ofBeginShape();
-     // Back-left corner:
+     // Lower-left corner:
      ofVertex(leftWallx, floorHeight, canvasFront);
-     // Back-right corner:
+     // Upper-left corner:
+     ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
+     // Upper-right corner:
+     ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
+     // Lower-right corner:
      ofVertex(rightWallx, floorHeight, canvasFront);
-     // Front-right corner:
-     ofVertex(rightWallx, floorHeight, canvasFront+floorLength);
-     // Front-left corner:
-     ofVertex(leftWallx, floorHeight, canvasFront+floorLength);
      ofEndShape();
      ofSetColor(255); // Color reset.
-     */
     
-    /*
+    
      // The ceiling:
      ofSetColor(0, 0, 255);
      ofBeginShape();
      // Back-left corner:
-     ofVertex(leftWallx, floorHeight, canvasFront);
+     ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
      // Back-right corner:
-     ofVertex(rightWallx, floorHeight, canvasFront);
+     ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
      // Front-right corner:
-     ofVertex(rightWallx, floorHeight, canvasFront+floorLength);
+     ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
      // Front-left corner:
-     ofVertex(leftWallx, floorHeight, canvasFront+floorLength);
+     ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
      ofEndShape();
      ofSetColor(255); // Color reset.
-     */
+     
     
     // Building complete!
     

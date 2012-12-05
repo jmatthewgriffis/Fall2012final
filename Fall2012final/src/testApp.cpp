@@ -20,7 +20,10 @@ void testApp::setup(){
     backward = false;
     left = false;
     right = false;
-    playerVel = 10;
+    xVel = 5;
+    yVel = 0;
+    jumpSpd = -7.8;
+    gravity = 0.3;
     
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
@@ -28,16 +31,16 @@ void testApp::setup(){
     floorLength = 1000;
     floorWidth = 1000;
     
-    canvasX = ofGetWidth()/2;
-    canvasY = ofGetHeight()/2;
+    // Make code a little more readable:
+    centerW = ofGetWidth()/2;
+    centerH = ofGetHeight()/2;
+    floorHeight = centerH+(canvasSide/2);
+    
+    canvasX = centerW;
+    canvasY = centerH;
     canvasZ = -1000;
-    playerX = ofGetWidth()/2;
-    // We want the base of the canvas and the base of the player
-    // to appear to be on the same floor (which is viewed as scaling
-    // into the screen). So we set the yPos of the player equal to the
-    // yPos of the canvas, accounting for the respective sizes:
-    //playerY = canvasY+(canvasSide/2)-playerRad;
-    playerY = ofGetHeight()/2-200;
+    playerX = centerW;
+    playerY = floorHeight-playerRad;
     playerZ = 0;
     //playerZ = canvasZ+(canvasSide/2)+playerRad; // Debug - test
     // comparative placement.
@@ -55,20 +58,40 @@ void testApp::update(){
     // scale while giving the illusion of movement. I'll move the world
     // for ya, darling:
     if (forward == true) {
-        canvasZ += playerVel;
+        canvasZ += xVel;
     }
     if (backward == true) {
-        canvasZ -= playerVel;
+        canvasZ -= xVel;
     }
     if (left == true) {
-        playerX -= playerVel;
+        playerX -= xVel;
     }
     if (right == true) {
-        playerX += playerVel;
+        playerX += xVel;
     }
     
-    if (playerY < (ofGetHeight()/2)+(canvasSide/2)-playerRad) {
-        playerY += playerVel;
+    // Update the player's yPos with velocity at all times (but mostly
+    // velocity will be zero):
+    playerY += yVel;
+    
+    // Check if player is in the air, and if so, update the yVel with
+    // gravity. This check isn't strictly necessary as the floor collision
+    // code below stops the player from falling farther, but this way
+    // is maybe a little more efficient since it's not having to undo the
+    // constant addition of gravity. It may not make a difference, though:
+    if (playerY < floorHeight-playerRad) {
+        yVel += gravity;
+    }
+    
+    if (jump == true) {
+        yVel = jumpSpd; // Give some yVel for a jump!
+        jump = false; // This prevents multiple jumps.
+    }
+    
+    // Let's make sure the player can't fall through the floor or get stuck:
+    if (playerY > floorHeight-playerRad) {
+        playerY = floorHeight-playerRad;
+        yVel = 0;
     }
 }
 
@@ -86,13 +109,13 @@ void testApp::draw(){
     ofSetColor(0, 0, 255);
     ofBeginShape();
     // Back-left corner:
-    ofVertex((ofGetWidth()/2)-(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2));
+    ofVertex(centerW-(floorWidth/2), floorHeight, canvasZ+(canvasSide/2));
     // Back-right corner:
-    ofVertex((ofGetWidth()/2)+(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2));
+    ofVertex(centerW+(floorWidth/2), floorHeight, canvasZ+(canvasSide/2));
     // Front-right corner:
-    ofVertex((ofGetWidth()/2)+(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2)+(floorWidth/2)+floorLength);
+    ofVertex(centerW+(floorWidth/2), floorHeight, canvasZ+(canvasSide/2)+(floorWidth/2)+floorLength);
     // Front-left corner:
-    ofVertex((ofGetWidth()/2)-(floorWidth/2), (ofGetHeight()/2)+(canvasSide/2), canvasZ+(canvasSide/2)+(floorWidth/2)+floorLength);
+    ofVertex(centerW-(floorWidth/2), floorHeight, canvasZ+(canvasSide/2)+(floorWidth/2)+floorLength);
     ofEndShape();
     ofSetColor(255); // Color reset.
     
@@ -115,7 +138,7 @@ void testApp::draw(){
         ofSetColor(0, 255, 0);
     }
     else {
-    ofSetColor(255,0,0);
+        ofSetColor(255,0,0);
     }
     ofSphere(playerX, playerY, playerZ, playerRad);
     
@@ -142,6 +165,13 @@ void testApp::keyPressed(int key){
         case OF_KEY_RIGHT:
             right = true;
             break;
+            
+        case ' ':
+            // Check if player is on the floor:
+            if (playerY == floorHeight-playerRad) {
+                jump = true;
+            }
+            break;
     }
     
 }
@@ -163,6 +193,10 @@ void testApp::keyReleased(int key){
             
         case OF_KEY_RIGHT:
             right = false;
+            break;
+            
+        case ' ':
+            jump = false;
             break;
     }
 }

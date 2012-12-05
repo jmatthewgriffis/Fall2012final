@@ -19,12 +19,13 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    bool forward, backward, left, right; // Use for movement.
+    bool forward, backward, left, right, jump; // Use for movement.
     
     float playerX, playerY, playerZ; // Positioning.
     float canvasX, canvasY, canvasZ; // Positioning.
+    float floorHeight, centerW, centerH;
     int playerRad, canvasSide, floorLength, floorWidth; // Sizing.
-    int playerVel; // Speed.
+    float xVel, yVel, jumpSpd, gravity; // Speed.
     
     ofImage mona;
     

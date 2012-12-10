@@ -20,9 +20,13 @@ void laser::update() {
 
 void laser::draw(float x, float y, float z, float l) {
     
+    laserRight = x;
+    laserLeft = x-l;
+    laserY = y;
+    laserZ = z;
     laserSpacing = 300;
-    ofSetColor(255, 0, 0);
+    ofSetColor(0, 255, 0);
     ofSetLineWidth(200);
-    ofLine(x, y, z, x-l, y, z);
+    ofLine(laserRight, laserY, laserZ, laserLeft, laserY, laserZ);
     ofSetColor(255); // Color reset.
 }

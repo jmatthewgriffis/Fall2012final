@@ -23,6 +23,7 @@ public:
     void gotMessage(ofMessage msg);
     
     bool forward, backward, left, right, jump; // Use for movement.
+    bool lasered; // Use for detecting collisions with lasers.
     
     // Positioning:
     float playerX, playerY, playerZ, canvasX, canvasY, canvasZ,

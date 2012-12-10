@@ -21,6 +21,7 @@ public:
     void draw(float x, float y, float z, float l);
 
 int laserSpacing;
+int laserRight, laserLeft, laserY, laserZ;
 
 };
 

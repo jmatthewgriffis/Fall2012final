@@ -21,8 +21,8 @@ void testApp::setup(){
     // http://www.ibiblio.org/wm/paint/auth/mondrian/broadway.jpg
     mondrian.loadImage("pics/mondrian.jpg");
     
+    lasered = false;
     // Movement:
-    forward = false;
     backward = false;
     left = false;
     right = false;
@@ -46,7 +46,7 @@ void testApp::setup(){
     playerX = centerW;
     playerY = floorHeight-playerRad;
     playerZ = 150;
-    canvasZ = -1000;
+    canvasZ = -2000;
     
     //playerZ = canvasZ+(canvasSide/2)+playerRad; // Debug - test
     // comparative placement.
@@ -112,6 +112,23 @@ void testApp::update(){
     if (playerY > floorHeight-playerRad) {
         playerY = floorHeight-playerRad;
         yVel = 0;
+    }
+    
+    // Collision detection between the player and the lasers. Hitting a laser
+    // currently makes the displayed painting disappear, as reflected in the draw:
+    for (int i=0; i<NHLASERS; i++) {
+        if (playerX+playerRad > myLasers[i].laserLeft) {
+            if (playerX-playerRad < myLasers[i].laserRight) {
+                if (playerY+playerRad > myLasers[i].laserY) {
+                    if (playerY-playerRad < myLasers[i].laserY) {
+                        if (playerZ == myLasers[i].laserZ) {
+                            lasered = true;
+                        }
+                    }
+                    
+                }
+            }
+        }
     }
 }
 
@@ -249,7 +266,9 @@ void testApp::draw(){
     // Draw a pic (I used math to reduce the original image's dimensions
     // to fit within the 500x500 box. I would use Max Width and Max Height
     // but I don't know how or if that's even possible):
+    if (lasered == false) {
     davinci.draw(canvasX, canvasY, canvasZ+(canvasSide/2), 321, 500);
+    }
     //mondrian.draw(canvasX, canvasY, canvasZ+(canvasSide/2), ?, ?);
 
     
@@ -262,7 +281,7 @@ void testApp::draw(){
     // Laser grid:
     
     for (int i=0; i<NHLASERS; i++) {
-        myLasers[i].draw(rightWallx, floorHeight-10, (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i), floorWidth);
+        myLasers[i].draw(rightWallx, floorHeight-20, (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i), floorWidth);
     }
     
 

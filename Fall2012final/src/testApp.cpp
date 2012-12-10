@@ -124,7 +124,7 @@ void testApp::draw(){
     // simply draw the floor by positioning the four corners as
     // vertices, relative to the existing objects so all the
     // architecture moves together:
-    ofSetColor(0, 0, 255);
+    ofSetColor(166,137,23);
     ofBeginShape();
     // Back-left corner:
     ofVertex(leftWallx, floorHeight, canvasFront);
@@ -138,7 +138,7 @@ void testApp::draw(){
     ofSetColor(255); // Color reset.
     
     // The left wall (same as with the floor):
-    ofSetColor(0, 0, 225);
+    ofSetColor(173,143,23);
     ofBeginShape();
     // Back-lower corner:
     ofVertex(leftWallx, floorHeight, canvasFront);
@@ -152,7 +152,7 @@ void testApp::draw(){
     ofSetColor(255); // Color reset.
     
     // The right wall:
-    ofSetColor(0, 0, 225);
+    ofSetColor(173,143,23);
     ofBeginShape();
     // Back-lower corner:
     ofVertex(rightWallx, floorHeight, canvasFront);
@@ -167,7 +167,7 @@ void testApp::draw(){
     
     
      // The back wall:
-     ofSetColor(0, 0, 200);
+     ofSetColor(179,156,70);
      ofBeginShape();
      // Lower-left corner:
      ofVertex(leftWallx, floorHeight, canvasFront);
@@ -182,7 +182,7 @@ void testApp::draw(){
     
     
      // The ceiling:
-     ofSetColor(0, 0, 255);
+     ofSetColor(166,137,23);
      ofBeginShape();
      // Back-left corner:
      ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
@@ -222,7 +222,7 @@ void testApp::draw(){
         ofSetColor(0, 255, 0);
     }
     else {
-        ofSetColor(255,0,0);
+        ofSetColor(0,130,255);
     }
     ofSphere(playerX, playerY, playerZ, playerRad);
     

@@ -63,14 +63,14 @@ void testApp::update(){
     canvasX = centerW;
     canvasY = centerH;
     
-    // You might think you'd want to change the position of the
-    // object when the object is moving, and for x and y that's
-    // true. However, for z, since we don't have a camera following
-    // the player object, it would appear to grow smaller or larger,
-    // and we don't want that. So we move the world instead, shifting
-    // its position on the z-axis to keep the player object at the same
-    // scale while giving the illusion of movement. I'll move the world
-    // for ya, darling:
+    /* You might think you'd want to change the position of the object
+     when the object is moving. However, for z, since we don't have a
+     camera following the player object, it would appear to grow smaller
+     or larger, and we don't want that. So we move the world instead,
+     shifting its position on the z-axis to keep the player object at the
+     same scale while giving the illusion of movement. We do the same on
+     the x and y axis to prevent weird warping and just give smoother movement.
+     I'll move the world for ya, darling: */
     if (forward == true) {
         if (playerZ > canvasFront+playerRad) {
             canvasZ += xVel;
@@ -172,35 +172,35 @@ void testApp::draw(){
     ofSetColor(255); // Color reset.
     
     
-     // The back wall:
-     ofSetColor(179,156,70);
-     ofBeginShape();
-     // Lower-left corner:
-     ofVertex(leftWallx, floorHeight, canvasFront);
-     // Upper-left corner:
-     ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
-     // Upper-right corner:
-     ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
-     // Lower-right corner:
-     ofVertex(rightWallx, floorHeight, canvasFront);
-     ofEndShape();
-     ofSetColor(255); // Color reset.
+    // The back wall:
+    ofSetColor(179,156,70);
+    ofBeginShape();
+    // Lower-left corner:
+    ofVertex(leftWallx, floorHeight, canvasFront);
+    // Upper-left corner:
+    ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
+    // Upper-right corner:
+    ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
+    // Lower-right corner:
+    ofVertex(rightWallx, floorHeight, canvasFront);
+    ofEndShape();
+    ofSetColor(255); // Color reset.
     
     
-     // The ceiling:
-     ofSetColor(166,137,23);
-     ofBeginShape();
-     // Back-left corner:
-     ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
-     // Back-right corner:
-     ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
-     // Front-right corner:
-     ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
-     // Front-left corner:
-     ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
-     ofEndShape();
-     ofSetColor(255); // Color reset.
-     
+    // The ceiling:
+    ofSetColor(166,137,23);
+    ofBeginShape();
+    // Back-left corner:
+    ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
+    // Back-right corner:
+    ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
+    // Front-right corner:
+    ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
+    // Front-left corner:
+    ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
+    ofEndShape();
+    ofSetColor(255); // Color reset.
+    
     
     // Building complete!
     
@@ -241,18 +241,26 @@ void testApp::keyPressed(int key){
     
     switch (key) {
         case OF_KEY_UP:
+        case 'w':
+        case 'W':
             forward = true;
             break;
             
         case OF_KEY_DOWN:
+        case 's':
+        case 'S':
             backward = true;
             break;
             
         case OF_KEY_LEFT:
+        case 'a':
+        case 'A':
             left = true;
             break;
             
         case OF_KEY_RIGHT:
+        case 'd':
+        case 'D':
             right = true;
             break;
             
@@ -270,18 +278,26 @@ void testApp::keyPressed(int key){
 void testApp::keyReleased(int key){
     switch (key) {
         case OF_KEY_UP:
+        case 'w':
+        case 'W':
             forward = false;
             break;
             
         case OF_KEY_DOWN:
+        case 's':
+        case 'S':
             backward = false;
             break;
             
         case OF_KEY_LEFT:
+        case 'a':
+        case 'A':
             left = false;
             break;
             
         case OF_KEY_RIGHT:
+        case 'd':
+        case 'D':
             right = false;
             break;
             

@@ -17,12 +17,13 @@ class laser {
 public:
     
     void setup(float x, float y, float z);
-    void update(float l, float laserLength);
+    void update(float l, float maxlaserLength, float z);
     void draw(float x, float y, float z, float l);
     
     int laserSpacing;
     int laserRight, laserLeft, laserY, laserZ;
-    float currLaserLength;
+    float currLaserLength, currLaserZPos;
+    float laserZVel;
     
 };
 

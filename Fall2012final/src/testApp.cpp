@@ -95,10 +95,10 @@ void testApp::update(){
     // velocity will be zero):
     playerY += yVel;
     
-    /* Check if player is in the air, and if so, update the yVel with gravity. 
-     This check isn't strictly necessary as the floor collision code below stops 
-     the player from falling farther, but this way is maybe a little more efficient 
-     since it's not having to undo the constant addition of gravity. It may not make 
+    /* Check if player is in the air, and if so, update the yVel with gravity.
+     This check isn't strictly necessary as the floor collision code below stops
+     the player from falling farther, but this way is maybe a little more efficient
+     since it's not having to undo the constant addition of gravity. It may not make
      a difference, though: */
     if (playerY < floorHeight-playerRad) {
         yVel += gravity;
@@ -115,9 +115,18 @@ void testApp::update(){
         yVel = 0;
     }
     
-    // Collision detection between the player and the lasers. Hitting a laser
-    // currently makes the displayed painting disappear, as reflected in the draw:
+    
+    
+    //__________________________________________________________
+    
+    
+    
+    // Let's do stuff with lasers!
+    
     for (int i=0; i<NHLASERS; i++) {
+        
+        // Collision detection between the player and the lasers. Hitting a laser
+        // currently makes the displayed painting disappear, as reflected in the draw:
         if (playerX+playerRad > myLasers[i].laserLeft) {
             if (playerX-playerRad < myLasers[i].laserRight) {
                 if (playerY+playerRad > myLasers[i].laserY) {
@@ -130,11 +139,15 @@ void testApp::update(){
                 }
             }
         }
-    }
-    
-    for (int i=0; i<NHLASERS; i++) {
-        myLasers[i].update(laserLength, floorWidth);
+        // Update the lasers' length and z-pos:
+        myLasers[i].update(laserLength, floorWidth, laserZPos);
         laserLength = myLasers[i].currLaserLength;
+        laserZPos = myLasers[i].currLaserZPos;
+        myLasers[i].laserZ += myLasers[i].laserZVel;
+        
+        //if (myLasers[i].laserZ) {
+            
+        //}
     }
 }
 
@@ -153,8 +166,8 @@ void testApp::draw(){
     
     // Let's build a building! One surface at a time!
     
-    /* The floor. This looks like a mess but it's not so bad. We simply 
-     draw the floor by positioning the four corners as vertices, relative 
+    /* The floor. This looks like a mess but it's not so bad. We simply
+     draw the floor by positioning the four corners as vertices, relative
      to the existing objects so all the architecture moves together: */
     ofSetColor(166,137,23);
     ofBeginShape();
@@ -239,44 +252,44 @@ void testApp::draw(){
     // The paintings:
     
     /* Want to get fancy? Use mesh. It's not useful right now:
-    ofSetColor(255); // Color reset.
-    
-    ofMesh mesh;
-    mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
-    
-    // Upper-right point:
-    mesh.addVertex(ofPoint(canvasX+(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
-    mesh.addTexCoord(ofPoint(canvasX+(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
-    
-    // Upper-left point:
-    mesh.addTexCoord(ofPoint(canvasX-(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
-    mesh.addVertex(ofPoint(canvasX-(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
-    
-    // Lower-right point:
-    mesh.addTexCoord(ofPoint(canvasX+(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
-    mesh.addVertex(ofPoint(canvasX+(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
-    
-    // Lower-left point:
-    mesh.addTexCoord(ofPoint(canvasX-(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
-    mesh.addVertex(ofPoint(canvasX-(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
-    
-    davinci.getTextureReference().bind();
-    mesh.draw();
-    davinci.getTextureReference().unbind();
+     ofSetColor(255); // Color reset.
+     
+     ofMesh mesh;
+     mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+     
+     // Upper-right point:
+     mesh.addVertex(ofPoint(canvasX+(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
+     mesh.addTexCoord(ofPoint(canvasX+(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
+     
+     // Upper-left point:
+     mesh.addTexCoord(ofPoint(canvasX-(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
+     mesh.addVertex(ofPoint(canvasX-(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
+     
+     // Lower-right point:
+     mesh.addTexCoord(ofPoint(canvasX+(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
+     mesh.addVertex(ofPoint(canvasX+(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
+     
+     // Lower-left point:
+     mesh.addTexCoord(ofPoint(canvasX-(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
+     mesh.addVertex(ofPoint(canvasX-(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
+     
+     davinci.getTextureReference().bind();
+     mesh.draw();
+     davinci.getTextureReference().unbind();
      */
     
     ofSetColor(87, 70, 23); // Dark brown.
     ofRect(canvasX, canvasY, canvasZ+(canvasSide/2), 341, 520); // Picture frame.
     ofSetColor(255); // Color reset.
-
+    
     // Draw a pic (I used math to reduce the original image's dimensions
     // to fit within the 500x500 box. I would use Max Width and Max Height
     // but I don't know how or if that's even possible):
     if (lasered == false) {
-    davinci.draw(canvasX, canvasY, canvasZ+(canvasSide/2), 321, 500);
+        davinci.draw(canvasX, canvasY, canvasZ+(canvasSide/2), 321, 500);
     }
     //mondrian.draw(canvasX, canvasY, canvasZ+(canvasSide/2), ?, ?);
-
+    
     
     
     
@@ -287,10 +300,15 @@ void testApp::draw(){
     // Laser grid:
     
     for (int i=0; i<NHLASERS; i++) {
-        myLasers[i].draw(rightWallx, floorHeight-20, (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i), laserLength);
+        
+        // Position the lasers on the z-axis:
+        laserZPos = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
+        
+        // Draw them:
+        myLasers[i].draw(rightWallx, floorHeight-20, laserZPos, laserLength);
     }
     
-
+    
     //__________________________________________________________
     
     

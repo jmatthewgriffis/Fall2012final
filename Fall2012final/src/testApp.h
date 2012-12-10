@@ -28,7 +28,7 @@ public:
     // Positioning:
     float playerX, playerY, playerZ, canvasX, canvasY, canvasZ,
     centerW, centerH, leftWallx, rightWallx, floorHeight, ceilingHeight,
-    canvasFront;
+    canvasFront, laserZPos;
     
     float playerRad, canvasSide, floorLength, floorWidth, laserLength; // Sizing.
     
@@ -38,6 +38,7 @@ public:
     
     ofImage davinci;
     ofImage mondrian;
+    
     
     /* It'd be nice to figure out how to make elements be drawn in front
      or behind each other based on their z-position.

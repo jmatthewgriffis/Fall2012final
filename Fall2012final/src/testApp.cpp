@@ -262,7 +262,7 @@ void testApp::draw(){
     // Laser grid:
     
     for (int i=0; i<NHLASERS; i++) {
-        myLasers[i].draw(rightWallx, floorHeight-10, (canvasZ+10)+(50*i));
+        myLasers[i].draw(rightWallx, floorHeight-10, (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i), floorWidth);
     }
     
 

@@ -18,8 +18,10 @@ public:
     
     void setup(float x, float y, float z);
     void update();
-    void draw(float x, float y, float z);
-    
+    void draw(float x, float y, float z, float l);
+
+int laserSpacing;
+
 };
 
 #endif

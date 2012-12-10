@@ -37,20 +37,16 @@ void testApp::setup(){
     floorLength = 1000;
     floorWidth = 1250;
     
-    // Make code much more readable:
+    // Make code more readable:
     centerW = ofGetWidth()/2;
     centerH = ofGetHeight()/2;
-    leftWallx = centerW-(floorWidth/2);
-    rightWallx = centerW+(floorWidth/2);
     floorHeight = centerH+(canvasSide/2);
     ceilingHeight = floorWidth-(floorWidth/3); // Temporary value.
     
-    canvasX = centerW;
-    canvasY = centerH;
-    canvasZ = -1000;
     playerX = centerW;
     playerY = floorHeight-playerRad;
-    playerZ = 0;
+    playerZ = 150;
+    canvasZ = -1000;
     
     //playerZ = canvasZ+(canvasSide/2)+playerRad; // Debug - test
     // comparative placement.
@@ -59,9 +55,13 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
     
-    // Have to initialize this variable in the update function,
-    // because it's dependent on another variable:
+    // Have to initialize these variables in the update function,
+    // because they are dependent on other variables (that update):
     canvasFront = canvasZ+(canvasSide/2);
+    leftWallx = centerW-(floorWidth/2);
+    rightWallx = centerW+(floorWidth/2);
+    canvasX = centerW;
+    canvasY = centerH;
     
     // You might think you'd want to change the position of the
     // object when the object is moving, and for x and y that's
@@ -78,10 +78,10 @@ void testApp::update(){
         canvasZ -= xVel;
     }
     if (left == true) {
-        playerX -= xVel;
+        centerW += xVel;
     }
     if (right == true) {
-        playerX += xVel;
+        centerW -= xVel;
     }
     
     // Update the player's yPos with velocity at all times (but mostly

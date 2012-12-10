@@ -72,16 +72,22 @@ void testApp::update(){
     // scale while giving the illusion of movement. I'll move the world
     // for ya, darling:
     if (forward == true) {
-        canvasZ += xVel;
+        if (playerZ > canvasFront+playerRad) {
+            canvasZ += xVel;
+        }
     }
     if (backward == true) {
         canvasZ -= xVel;
     }
     if (left == true) {
-        centerW += xVel;
+        if (playerX > leftWallx+playerRad) {
+            centerW += xVel;
+        }
     }
     if (right == true) {
-        centerW -= xVel;
+        if (playerX < rightWallx-playerRad) {
+            centerW -= xVel;
+        }
     }
     
     // Update the player's yPos with velocity at all times (but mostly

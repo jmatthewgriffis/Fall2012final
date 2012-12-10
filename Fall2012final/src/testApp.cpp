@@ -210,6 +210,8 @@ void testApp::draw(){
     // to fit within the 500x500 box. I would use Max Width and Max Height
     // but I don't know how or if that's even possible):
     davinci.draw(canvasX, canvasY, canvasZ+(canvasSide/2), 321, 500);
+    
+    // Draw a pic (need to fill in dimensions and uncomment):
     //mondrian.draw(canvasX, canvasY, canvasZ+(canvasSide/2), ?, ?);
     
     // The player-character:

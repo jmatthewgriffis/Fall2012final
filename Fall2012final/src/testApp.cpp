@@ -61,7 +61,7 @@ void testApp::update(){
     leftWallx = centerW-(floorWidth/2);
     rightWallx = centerW+(floorWidth/2);
     canvasX = centerW;
-    canvasY = centerH;
+    canvasY = centerH-100;
     
     /* You might think you'd want to change the position of the object
      when the object is moving. However, for z, since we don't have a
@@ -94,11 +94,11 @@ void testApp::update(){
     // velocity will be zero):
     playerY += yVel;
     
-    // Check if player is in the air, and if so, update the yVel with
-    // gravity. This check isn't strictly necessary as the floor collision
-    // code below stops the player from falling farther, but this way
-    // is maybe a little more efficient since it's not having to undo the
-    // constant addition of gravity. It may not make a difference, though:
+    /* Check if player is in the air, and if so, update the yVel with gravity. 
+     This check isn't strictly necessary as the floor collision code below stops 
+     the player from falling farther, but this way is maybe a little more efficient 
+     since it's not having to undo the constant addition of gravity. It may not make 
+     a difference, though: */
     if (playerY < floorHeight-playerRad) {
         yVel += gravity;
     }
@@ -122,14 +122,17 @@ void testApp::draw(){
     // DOES affect the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
     
+    
+    
     //__________________________________________________________
+    
+    
     
     // Let's build a building! One surface at a time!
     
-    // The floor. This looks like a mess but it's not so bad. We
-    // simply draw the floor by positioning the four corners as
-    // vertices, relative to the existing objects so all the
-    // architecture moves together:
+    /* The floor. This looks like a mess but it's not so bad. We simply 
+     draw the floor by positioning the four corners as vertices, relative 
+     to the existing objects so all the architecture moves together: */
     ofSetColor(166,137,23);
     ofBeginShape();
     // Back-left corner:
@@ -204,41 +207,78 @@ void testApp::draw(){
     
     // Building complete!
     
+    
+    
     //__________________________________________________________
     
-    // The canvas:
-    ofSetColor(0); // Canvas is invisible. Change to 255 for white.
-    ofBox(canvasX, canvasY, canvasZ, canvasSide);
-    ofSetColor(255); // Color reset.
-    //ofRect(ofGetWidth()/2, ofGetHeight()/2, 100, 100, 100);
     
+    
+    // The paintings:
+    
+    /* Want to get fancy? Use mesh. It's not useful right now:
+    ofSetColor(255); // Color reset.
+    
+    ofMesh mesh;
+    mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    
+    // Upper-right point:
+    mesh.addVertex(ofPoint(canvasX+(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
+    mesh.addTexCoord(ofPoint(canvasX+(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
+    
+    // Upper-left point:
+    mesh.addTexCoord(ofPoint(canvasX-(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
+    mesh.addVertex(ofPoint(canvasX-(canvasSide/2),canvasY-(canvasSide/2),canvasFront));
+    
+    // Lower-right point:
+    mesh.addTexCoord(ofPoint(canvasX+(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
+    mesh.addVertex(ofPoint(canvasX+(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
+    
+    // Lower-left point:
+    mesh.addTexCoord(ofPoint(canvasX-(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
+    mesh.addVertex(ofPoint(canvasX-(canvasSide/2),canvasY+(canvasSide/2),canvasFront));
+    
+    davinci.getTextureReference().bind();
+    mesh.draw();
+    davinci.getTextureReference().unbind();
+     */
+    
+    ofSetColor(87, 70, 23); // Dark brown.
+    ofRect(canvasX, canvasY, canvasZ+(canvasSide/2), 341, 520); // Picture frame.
+    ofSetColor(255); // Color reset.
+
     // Draw a pic (I used math to reduce the original image's dimensions
     // to fit within the 500x500 box. I would use Max Width and Max Height
     // but I don't know how or if that's even possible):
     davinci.draw(canvasX, canvasY, canvasZ+(canvasSide/2), 321, 500);
-    
-    // Draw a pic (need to fill in dimensions and uncomment):
     //mondrian.draw(canvasX, canvasY, canvasZ+(canvasSide/2), ?, ?);
+
+    
+    
+    
+    //__________________________________________________________
+    
+    
     
     // The player-character:
     
     // Debug to test positioning by changing color when player and
     // canvas are at the same depth:
     if (canvasZ >= playerZ-playerRad-(canvasSide/2)) {
-        ofSetColor(0, 255, 0);
+        ofSetColor(0, 255, 0); // Green.
     }
     else {
-        ofSetColor(0,130,255);
+        ofSetColor(0,130,255); // Blue.
     }
     ofSphere(playerX, playerY, playerZ, playerRad);
     
-    // Reset color:
-    ofSetColor(255);
+    ofSetColor(255); // Color reset.
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     
+    // Use WASD and arrow keys so people can play however they
+    // are comfortable:
     switch (key) {
         case OF_KEY_UP:
         case 'w':

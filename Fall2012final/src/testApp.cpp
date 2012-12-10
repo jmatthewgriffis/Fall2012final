@@ -259,6 +259,17 @@ void testApp::draw(){
     
     
     
+    // Laser grid:
+    
+    for (int i=0; i<NHLASERS; i++) {
+        myLasers[i].draw(rightWallx, floorHeight-10, (canvasZ+10)+(50*i));
+    }
+    
+
+    //__________________________________________________________
+    
+    
+    
     // The player-character:
     
     // Debug to test positioning by changing color when player and

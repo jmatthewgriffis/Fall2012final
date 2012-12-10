@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include "laser.h"
+
+#define NHLASERS 10
 
 class testApp : public ofBaseApp{
     
@@ -29,6 +32,8 @@ public:
     int playerRad, canvasSide, floorLength, floorWidth; // Sizing.
     
     float xVel, yVel, jumpSpd, gravity; // Speed.
+    
+    laser myLasers [NHLASERS]; // Array of horizontal lasers.
     
     ofImage davinci;
     ofImage mondrian;

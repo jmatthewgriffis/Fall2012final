@@ -36,6 +36,7 @@ void testApp::setup(){
     playerRad = 50;
     floorLength = 1000;
     floorWidth = 1250;
+    laserLength = 0;
     
     // Make code more readable:
     centerW = ofGetWidth()/2;
@@ -129,6 +130,11 @@ void testApp::update(){
                 }
             }
         }
+    }
+    
+    for (int i=0; i<NHLASERS; i++) {
+        myLasers[i].update(laserLength, floorWidth);
+        laserLength = myLasers[i].currLaserLength;
     }
 }
 
@@ -281,7 +287,7 @@ void testApp::draw(){
     // Laser grid:
     
     for (int i=0; i<NHLASERS; i++) {
-        myLasers[i].draw(rightWallx, floorHeight-20, (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i), floorWidth);
+        myLasers[i].draw(rightWallx, floorHeight-20, (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i), laserLength);
     }
     
 

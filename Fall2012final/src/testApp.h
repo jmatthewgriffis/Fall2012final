@@ -30,7 +30,7 @@ public:
     centerW, centerH, leftWallx, rightWallx, floorHeight, ceilingHeight,
     canvasFront;
     
-    int playerRad, canvasSide, floorLength, floorWidth; // Sizing.
+    float playerRad, canvasSide, floorLength, floorWidth, laserLength; // Sizing.
     
     float xVel, yVel, jumpSpd, gravity; // Speed.
     

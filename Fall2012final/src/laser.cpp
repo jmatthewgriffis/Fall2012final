@@ -13,7 +13,7 @@
 void laser::setup(float x, float y, float z) {
     pulseColor = false;
     counter = 0;
-    counterMax = 120;
+    counterMax = 30;
 }
 
 void laser::update(float l, float maxLaserLength) {
@@ -30,12 +30,14 @@ void laser::update(float l, float maxLaserLength) {
     // in the other page:
     currLaserLength = l;
     
+    // Control color using a counter. Everytime the counter
+    // maxes out, we reset it and switch the color:
     if (counter < counterMax) {
         counter++;
     }
     else if (counter >= counterMax) {
-        pulseColor = !pulseColor;
-        counter=0;
+        pulseColor = !pulseColor; // This flips the boolean.
+        counter=0; // This resets the counter.
     }
 }
 
@@ -52,7 +54,7 @@ void laser::draw(float x, float y, float z, float x2, float y2, float z2, float 
     laserSpacing = 300;
     
     if (pulseColor == true) {
-        ofSetColor(0, 255, 0);
+        ofSetColor(255, 0, 50);
     }
     else if (pulseColor == false) {
         ofSetColor(255, 0, 0);

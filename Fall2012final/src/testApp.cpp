@@ -69,6 +69,8 @@ void testApp::setup(){
     playerZ = 150;
     canvasZ = -floorLength-(canvasSide/2);
     
+    // It's necessary to initialize the lasers in order to run
+    // their setup functions and get the effects of the contents:
     for (int i=0; i<NHLASERS; i++) {
         myLasers[i].setup(0, 0, 0);
     }

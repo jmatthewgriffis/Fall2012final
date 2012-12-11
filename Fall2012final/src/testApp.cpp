@@ -348,9 +348,9 @@ void testApp::draw(){
         myLasers[i].draw(rightWallx-laserLength, laserHeight, laserZsMod[i], rightWallx, laserHeight, laserZsMod[i], laserLength);
     }
     
-    /*for (int i=0; i<NVLASERS; i++) {
-     myLasersV[i].draw(leftWallx+myLasersV[i].laserSpacing*i, floorHeight-20, canvasFront, floorLength);
-     }*/
+    for (int i=0; i<NVLASERS; i++) {
+     myLasersV[i].draw(leftWallx+myLasersV[i].laserSpacing*i, laserHeight, canvasFront, leftWallx+myLasersV[i].laserSpacing*i, laserHeight, canvasFront+floorLength, floorLength);
+     }
     
     
     //__________________________________________________________

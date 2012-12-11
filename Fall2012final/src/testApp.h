@@ -28,7 +28,7 @@ public:
     // Positioning:
     float playerX, playerY, playerZ, canvasX, canvasY, canvasZ,
     centerW, centerH, leftWallx, rightWallx, floorHeight, ceilingHeight,
-    canvasFront, staticLaserZPos, movingLaserZPos;
+    canvasFront;
     
     float playerRad, canvasSide, floorLength, floorWidth, laserLength; // Sizing.
     

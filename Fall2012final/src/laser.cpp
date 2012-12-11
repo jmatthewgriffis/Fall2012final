@@ -16,18 +16,24 @@ void laser::setup(float x, float y, float z) {
 
 void laser::update(float l, float maxLaserLength) {
     
+    // Check if the laser has stretched the length of the room
+    // yet, and if not, stretch it:
     if (l < maxLaserLength) {
         l++;
     }
+    // Set the result equal to an external variable we can use
+    // in the other page:
     currLaserLength = l;
 }
 
 void laser::draw(float x, float y, float z, float l) {
     
+    // Set lots of things equal to external variables:
     laserRight = x;
     laserLeft = x-l;
     laserY = y;
     laserZ = z;
+    
     laserSpacing = 300;
     ofSetColor(0, 255, 0);
     ofSetLineWidth(200);

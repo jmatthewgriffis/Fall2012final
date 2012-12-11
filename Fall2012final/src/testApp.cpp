@@ -126,66 +126,67 @@ void testApp::update(){
     
     
     
-    // Let's do stuff with lasers! First, a for loop to cycle through all of them:
+    // Let's do stuff with lasers!
+    
+    /* Because of the way we will draw the lasers, constantly referring their original position to
+     the relative location of the architecture, we cannot give the lasers their own independent
+     movement the usual way. So, we use an unorthodox method - each frame we increase or decrease
+     the displacement from the lasers' original positions using a "velocity" incremented by a
+     directional integer. It does the trick: */
+    laserZVel += direction;
+    
+    // Now, a for loop to cycle through all of the lasers:
     
     for (int i=0; i<NHLASERS; i++) {
-        for (int j=i; j<NHLASERS; j++) {
-            
-            // Collision detection between the player and the lasers. Hitting a laser
-            // currently makes the displayed painting disappear, as reflected in the draw:
-            if (playerX+playerRad > myLasers[i].laserLeft) {
-                if (playerX-playerRad < myLasers[i].laserRight) {
-                    if (playerY+playerRad > myLasers[i].laserY) {
-                        if (playerY-playerRad < myLasers[i].laserY) {
-                            if (playerZ == laserZsMod[j]) {
-                                lasered = true;
-                            }
+        
+        // Collision detection between the player and the lasers. Hitting a laser
+        // currently makes the displayed painting disappear, as reflected in the draw:
+        if (playerX+playerRad > myLasers[i].laserLeft) {
+            if (playerX-playerRad < myLasers[i].laserRight) {
+                if (playerY+playerRad > myLasers[i].laserY) {
+                    if (playerY-playerRad < myLasers[i].laserY) {
+                        if (playerZ == laserZsMod[i]) {
+                            lasered = true;
                         }
-                        
                     }
+                    
                 }
             }
-            
-            // Update the lasers' length and z-pos:
-            
-            // Position the lasers on the z-axis (not including movement) and store each value in
-            // its own array element:
-            laserZs[j] = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
-            
-            // Modify the lasers' z-pos based on their own velocity:
-            laserZsMod[j] = laserZs[j] + laserZVel;
-            
-            // Feed variables into the lasers' update function:
-            myLasers[i].update(laserLength, floorWidth);
-            
-            // Set a variable on this page equal to the updated result from the laser's function:
-            laserLength = myLasers[i].currLaserLength;
-            
-            // Collision detection: 
-            if (laserZsMod[j] <= canvasFront || laserZsMod[j] >= canvasFront+floorLength) {
-                direction *= -1;
-            }
+        }
+        
+        // Update the lasers' length and z-pos:
+        
+        // Position the lasers on the z-axis (not including movement) and store each value in
+        // its own array element:
+        laserZs[i] = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
+        
+        // Modify the lasers' z-pos based on their own velocity:
+        laserZsMod[i] = laserZs[i] + laserZVel;
+        
+        // Feed variables into the lasers' update function:
+        myLasers[i].update(laserLength, floorWidth);
+        
+        // Set a variable on this page equal to the updated result from the laser's function:
+        laserLength = myLasers[i].currLaserLength;
+        
+        // Collision detection: if a laser hits the front or back of the room, all
+        // the lasers reverse direction:
+        if (laserZsMod[i] <= canvasFront || laserZsMod[i] >= canvasFront+floorLength) {
+            direction *= -1;
         }
     }
-    laserZVel += direction;
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    // Setting the rect mode does not affect the 3D box. But it
-    // DOES affect the images:
+    // Setting the rect mode affects the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
     
     
     
     //__________________________________________________________
-    //for (int i=0; i<NHLASERS; i++) {
-        for (int j=0; j<NHLASERS; j++) {
-            //laserZs[j] = 50*j;
-            cout<<"j = "<<j<<" zPos = "<<laserZs[j]<<endl;
-        }
-    //}
+    
     
     
     // Let's build a building! One surface at a time!
@@ -324,13 +325,7 @@ void testApp::draw(){
     // Laser grid:
     
     for (int i=0; i<NHLASERS; i++) {
-        for (int j=i; j<NHLASERS; j++) {
-        
-        // Position the lasers on the z-axis (not including movement):
-        //staticLaserZPos = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
-        // Draw the lasers:
-        myLasers[i].draw(rightWallx, floorHeight-20, laserZsMod[j], laserLength);
-    }
+        myLasers[i].draw(rightWallx, floorHeight-20, laserZsMod[i], laserLength);
     }
     
     

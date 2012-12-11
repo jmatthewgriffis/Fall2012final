@@ -43,7 +43,7 @@ public:
     
     // Laser grid:
     
-    float laserLength;
+    float laserLength, laserHeight;
     int laserZVel;
     int direction; // Boolean-like, to control direction.
     int lcounter, ltimer; // Use to control the timing of the lasers.
@@ -54,6 +54,7 @@ public:
     laser myLasers [NHLASERS]; // Array of horizontal lasers.
     float laserZs [NHLASERS]; // Array of z-pos variables.
     float laserZsMod [NHLASERS]; // Array of modified z-pos variables.
+    
     laser myLasersV [NVLASERS]; // Array of vertical lasers.
     float laserXs [NVLASERS]; // Array of x-pos variables.
     float laserXsMod [NVLASERS]; // Array of modified x-pos variables.

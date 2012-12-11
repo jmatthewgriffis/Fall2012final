@@ -50,6 +50,7 @@ void testApp::setup(){
     centerH = ofGetHeight()/2;
     floorHeight = centerH+(canvasSide/2);
     ceilingHeight = floorWidth-(floorWidth/3); // Temporary value.
+    laserHeight = floorHeight-20;
     
     playerX = centerW;
     playerY = floorHeight-playerRad;
@@ -132,12 +133,14 @@ void testApp::update(){
         
         // Collision detection between the player and the lasers. Hitting a laser
         // currently makes the displayed painting disappear, as reflected in the draw:
-        if (playerX+playerRad > myLasers[i].laserLeft) {
-            if (playerX-playerRad < myLasers[i].laserRight) {
-                if (playerY+playerRad > myLasers[i].laserY) {
-                    if (playerY-playerRad < myLasers[i].laserY) {
-                        if (playerZ+playerRad >= laserZsMod[i] && playerZ-playerRad <= laserZsMod[i]) {
-                            lasered = true;
+        if (playerX+playerRad > myLasers[i].xPos1) {
+            if (playerX-playerRad < myLasers[i].xPos2) {
+                if (playerY+playerRad > myLasers[i].yPos1) {
+                    if (playerY-playerRad < myLasers[i].yPos2) {
+                        if (playerZ+playerRad >= myLasers[i].zPos1) {
+                            if (playerZ-playerRad <= myLasers[i].zPos2) {
+                                lasered = true;
+                            }
                         }
                     }
                     
@@ -342,8 +345,12 @@ void testApp::draw(){
     // Laser grid:
     
     for (int i=0; i<NHLASERS; i++) {
-        myLasers[i].draw(rightWallx, floorHeight-20, laserZsMod[i], laserLength);
+        myLasers[i].draw(rightWallx-laserLength, laserHeight, laserZsMod[i], rightWallx, laserHeight, laserZsMod[i], laserLength);
     }
+    
+    /*for (int i=0; i<NVLASERS; i++) {
+     myLasersV[i].draw(leftWallx+myLasersV[i].laserSpacing*i, floorHeight-20, canvasFront, floorLength);
+     }*/
     
     
     //__________________________________________________________

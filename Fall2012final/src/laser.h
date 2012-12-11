@@ -18,10 +18,10 @@ public:
     
     void setup(float x, float y, float z);
     void update(float l, float maxlaserLength);
-    void draw(float x, float y, float z, float l);
+    void draw(float x, float y, float z, float x2, float y2, float z2, float l);
     
     int laserSpacing;
-    int laserRight, laserLeft, laserY, laserZ;
+    float xPos1,xPos2,yPos1,yPos2,zPos1,zPos2;
     float currLaserLength;
     
 };

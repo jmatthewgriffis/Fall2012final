@@ -29,17 +29,21 @@ void laser::update(float l, float maxLaserLength) {
     currLaserLength = l;
 }
 
-void laser::draw(float x, float y, float z, float l) {
+void laser::draw(float x, float y, float z, float x2, float y2, float z2, float l) {
     
     // Set lots of things equal to external variables:
-    laserRight = x;
-    laserLeft = x-l;
-    laserY = y;
-    laserZ = z;
+    xPos1 = x;
+    xPos2 = x2;
+    yPos1 = y;
+    yPos2 = y2;
+    zPos1 = z;
+    zPos2 = z2;
     
     laserSpacing = 300;
     ofSetColor(255, 0, 0);
     ofSetLineWidth(200);
-    ofLine(laserRight, laserY, laserZ, laserLeft, laserY, laserZ);
+    // Use the external variables (which copy the data fed into the draw function)
+    // to draw the laser(s):
+    ofLine(xPos1, yPos1, zPos1, xPos2, yPos2, zPos2);
     ofSetColor(255); // Color reset.
 }

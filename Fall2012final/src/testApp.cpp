@@ -45,9 +45,9 @@ void testApp::setup(){
     lcounter = 0; // This will count up to initiate laser movement.
     ltimer = 120; // This is what lcounter counts towards.
     
-    windowsill.r = 127;
-    windowsill.g = 127;
-    windowsill.b = 127;
+    windowsill.r = 255;
+    windowsill.g = 255;
+    windowsill.b = 255;
     
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;

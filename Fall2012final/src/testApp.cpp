@@ -45,9 +45,9 @@ void testApp::setup(){
     lcounter = 0; // This will count up to initiate laser movement.
     ltimer = 120; // This is what lcounter counts towards.
     
-    windowsill.r = 255;
-    windowsill.g = 255;
-    windowsill.b = 255;
+    windowsill.r = 150;
+    windowsill.g = 150;
+    windowsill.b = 150;
     
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
@@ -553,6 +553,60 @@ void testApp::draw(){
     // Windowsill:
     ofSetColor(windowsill);
     ofLine(rightWallx, canvasY+200, canvasFront+floorLength-1200, rightWallx, canvasY+200, canvasFront+floorLength-1600);
+    
+    
+    // Top-front window:
+    ofSetColor(255); // Color reset.
+    
+    ofMesh mesh7;
+    mesh7.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    
+    // Upper-right point:
+    mesh7.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-300));
+    mesh7.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-300));
+    
+    // Upper-left point:
+    mesh7.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-300));
+    mesh7.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-300));
+    
+    // Lower-right point:
+    mesh7.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-700));
+    mesh7.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-700));
+    
+    // Lower-left point:
+    mesh7.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-700));
+    mesh7.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-700));
+    
+    nightSky.getTextureReference().bind();
+    mesh7.draw();
+    nightSky.getTextureReference().unbind();
+    
+    
+    // Top-back window:
+    ofSetColor(255); // Color reset.
+    
+    ofMesh mesh8;
+    mesh8.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    
+    // Upper-right point:
+    mesh8.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1100));
+    mesh8.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1100));
+    
+    // Upper-left point:
+    mesh8.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1100));
+    mesh8.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1100));
+    
+    // Lower-right point:
+    mesh8.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1500));
+    mesh8.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1500));
+    
+    // Lower-left point:
+    mesh8.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1500));
+    mesh8.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1500));
+    
+    nightSky.getTextureReference().bind();
+    mesh8.draw();
+    nightSky.getTextureReference().unbind();
     
     
     

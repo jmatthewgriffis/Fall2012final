@@ -58,7 +58,7 @@ void testApp::setup(){
     playerX = centerW;
     playerY = floorHeight-playerRad;
     playerZ = 150;
-    canvasZ = -1000;
+    canvasZ = -floorLength-(canvasSide/2);
 }
 
 //--------------------------------------------------------------
@@ -86,7 +86,12 @@ void testApp::update(){
         }
     }
     if (backward == true) {
-        canvasZ -= xVel;
+        // Give the player a little freedom to pull back from the room
+        // but not much:
+        if (playerZ < canvasFront+floorLength+300) {
+            canvasZ -= xVel;
+        }
+        
     }
     if (left == true) {
         if (playerX > leftWallx+playerRad) {

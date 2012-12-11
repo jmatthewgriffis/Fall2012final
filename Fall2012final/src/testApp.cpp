@@ -594,6 +594,10 @@ void testApp::draw(){
     nightSky.getTextureReference().unbind();
     
     // Let's fake that the windows are recessed:
+    ofSetColor(windowsill);
+    ofLine(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-300, canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-700);
+    ofLine(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-700,canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-700);
+    ofLine(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-300,canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-700);
     
     
     // Top-back window:
@@ -623,6 +627,10 @@ void testApp::draw(){
     nightSky.getTextureReference().unbind();
     
     // Let's fake that the windows are recessed:
+    ofSetColor(windowsill);
+    ofLine(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1100, canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1500);
+    ofLine(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1500,canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1500);
+    ofLine(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1100,canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1500);
     
     
     

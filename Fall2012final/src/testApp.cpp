@@ -34,7 +34,9 @@ void testApp::setup(){
     jumpSpd = -7.8;
     gravity = 0.3;
     laserZVel = 0;
+    laserXVel = 0;
     direction = 1;
+    direction2 = 1;
     lcounter = 0; // This will count up to initiate laser movement.
     ltimer = 60; // This is what lcounter counts towards.
     
@@ -188,27 +190,27 @@ void testApp::update(){
                     
                 }
             }
-        }
+        }*/
         
         // Update the lasers' length and z-pos:
         
         // Position the lasers on the z-axis (not including movement) and store each value in
         // its own array element:
-        laserXs[i] = canvasFront+myLasers[i].laserSpacing+(myLasers[i].laserSpacing*i);
+        laserXs[i] = leftWallx+myLasersV[i].laserSpacing+(myLasersV[i].laserSpacing*i);
         
         // Modify the lasers' z-pos based on their own velocity:
-        laserZsMod[i] = laserZs[i] + laserZVel;
+        laserXsMod[i] = laserXs[i] + laserXVel;
         
         // Feed variables into the lasers' update function:
-        myLasers[i].update(laserLength, floorWidth);
+        //myLasersV[i].update(laserLength, floorWidth);
         
         // Set a variable on this page equal to the updated result from the laser's function:
-        laserLength = myLasers[i].currLaserLength;
+        //laserLength = myLasers[i].currLaserLength;
         
         // Collision detection: if a laser hits the front or back of the room, all
         // the lasers reverse direction:
-        if (laserZsMod[i] <= canvasFront || laserZsMod[i] >= canvasFront+floorLength) {
-            direction *= -1;
+        /*if (laserXsMod[i] <= rightWallx || laserXsMod[i] >= rightWallx) {
+            direction2 *= -1;
         }*/
     }
     
@@ -235,12 +237,13 @@ void testApp::update(){
     if (lpause == false) {
         laserZVel += direction;
     }
+    laserXVel += direction2;
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    //cout<<lcounter<<endl; // Debug.
+    cout<<laserXVel<<endl; // Debug.
     
     // Setting the rect mode affects the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
@@ -391,7 +394,7 @@ void testApp::draw(){
     }
     
     for (int i=0; i<NVLASERS; i++) {
-     myLasersV[i].draw(leftWallx+myLasersV[i].laserSpacing*i, laserHeight, canvasFront, leftWallx+myLasersV[i].laserSpacing*i, laserHeight, canvasFront+floorLength, floorLength);
+     myLasersV[i].draw(laserXsMod[i], laserHeight, canvasFront, laserXsMod[i], laserHeight, canvasFront+floorLength, floorLength);
      }
     
     

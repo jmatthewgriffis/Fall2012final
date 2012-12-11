@@ -12,27 +12,14 @@
 
 void laser::setup(float x, float y, float z) {
     
-    laserZVel = 0;
-    
 }
 
-void laser::update(float l, float maxLaserLength, float z) {
+void laser::update(float l, float maxLaserLength) {
     
     if (l < maxLaserLength) {
         l++;
     }
     currLaserLength = l;
-    
-    laserZVel++;
-    
-    
-    for (int i=0; i<NHLASERS; i++) {
-    z++;
-    currLaserZPos = z;
-    
-    //cout<<z<<endl;
-    
-    }
 }
 
 void laser::draw(float x, float y, float z, float l) {

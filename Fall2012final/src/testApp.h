@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "laser.h"
 
-#define NHLASERS 10
+#define NHLASERS 3
 
 class testApp : public ofBaseApp{
     
@@ -34,6 +34,7 @@ public:
     
     float xVel, yVel, jumpSpd, gravity; // Speed.
     
+    int laserZVel;
     int direction; // Boolean-like, to control direction.
     
     laser myLasers [NHLASERS]; // Array of horizontal lasers.

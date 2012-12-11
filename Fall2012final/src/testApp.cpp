@@ -21,8 +21,10 @@ void testApp::setup(){
     // http://www.ibiblio.org/wm/paint/auth/mondrian/broadway.jpg
     mondrian.loadImage("pics/mondrian.jpg");
     
-    lasered = false;
+    lasered = false; // Boolean for collision.
+    
     // Movement:
+    forward = false;
     backward = false;
     left = false;
     right = false;
@@ -30,6 +32,7 @@ void testApp::setup(){
     yVel = 0;
     jumpSpd = -7.8;
     gravity = 0.3;
+    laserZVel = 0;
     direction = 1;
     
     // Establish sizes first to refer to them when positioning.
@@ -48,14 +51,11 @@ void testApp::setup(){
     playerX = centerW;
     playerY = floorHeight-playerRad;
     playerZ = 150;
-    canvasZ = -2000;
+    canvasZ = -1000;
     
     for (int i=0; i<NHLASERS; i++) {
-        myLasers[i].setup(0, 0, 0);
+        //myLasers[i].setup(0, 0, 0);
     }
-    
-    //playerZ = canvasZ+(canvasSide/2)+playerRad; // Debug - test
-    // comparative placement.
 }
 
 //--------------------------------------------------------------
@@ -126,7 +126,7 @@ void testApp::update(){
     
     
     
-    // Let's do stuff with lasers!
+    // Let's do stuff with lasers! First, a for loop to cycle through all of them:
     
     for (int i=0; i<NHLASERS; i++) {
         for (int j=i; j<NHLASERS; j++) {
@@ -137,7 +137,7 @@ void testApp::update(){
                 if (playerX-playerRad < myLasers[i].laserRight) {
                     if (playerY+playerRad > myLasers[i].laserY) {
                         if (playerY-playerRad < myLasers[i].laserY) {
-                            if (playerZ == myLasers[i].laserZ) {
+                            if (playerZ == laserZsMod[j]) {
                                 lasered = true;
                             }
                         }
@@ -148,18 +148,26 @@ void testApp::update(){
             
             // Update the lasers' length and z-pos:
             
-            // Position the lasers on the z-axis (not including movement):
-            //laserZs[j].staticLaserZPos = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
-            
+            // Position the lasers on the z-axis (not including movement) and store each value in
+            // its own array element:
             laserZs[j] = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
             
-            laserZsMod[j] = laserZs[j] + myLasers[i].laserZVel*direction;
+            // Modify the lasers' z-pos based on their own velocity:
+            laserZsMod[j] = laserZs[j] + laserZVel;
             
-            myLasers[i].update(laserLength, floorWidth, laserZs[j]);
+            // Feed variables into the lasers' update function:
+            myLasers[i].update(laserLength, floorWidth);
+            
+            // Set a variable on this page equal to the updated result from the laser's function:
             laserLength = myLasers[i].currLaserLength;
-            movingLaserZPos = myLasers[i].currLaserZPos;
+            
+            // Collision detection: 
+            if (laserZsMod[j] <= canvasFront || laserZsMod[j] >= canvasFront+floorLength) {
+                direction *= -1;
+            }
         }
     }
+    laserZVel += direction;
 }
 
 //--------------------------------------------------------------

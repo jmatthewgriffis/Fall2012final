@@ -68,6 +68,13 @@ void testApp::setup(){
     playerY = floorHeight-playerRad;
     playerZ = 150;
     canvasZ = -floorLength-(canvasSide/2);
+    
+    for (int i=0; i<NHLASERS; i++) {
+        myLasers[i].setup(0, 0, 0);
+    }
+    for (int i=0; i<NVLASERS; i++) {
+        myLasersV[i].setup(0, 0, 0);
+    }
 }
 
 //--------------------------------------------------------------

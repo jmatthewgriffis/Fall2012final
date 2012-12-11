@@ -24,6 +24,10 @@ public:
     float xPos1,xPos2,yPos1,yPos2,zPos1,zPos2;
     float currLaserLength;
     
+    bool pulseColor; // Use this to change the color for a pulsing effect.
+    
+    int counter, counterMax; // Use to control pulsing.
+    
 };
 
 #endif

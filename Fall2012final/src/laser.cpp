@@ -11,7 +11,9 @@
 //--------------------------------------------------------------
 
 void laser::setup(float x, float y, float z) {
-    
+    pulseColor = false;
+    counter = 0;
+    counterMax = 120;
 }
 
 void laser::update(float l, float maxLaserLength) {
@@ -27,6 +29,14 @@ void laser::update(float l, float maxLaserLength) {
     // Set the result equal to an external variable we can use
     // in the other page:
     currLaserLength = l;
+    
+    if (counter < counterMax) {
+        counter++;
+    }
+    else if (counter >= counterMax) {
+        pulseColor = !pulseColor;
+        counter=0;
+    }
 }
 
 void laser::draw(float x, float y, float z, float x2, float y2, float z2, float l) {
@@ -40,7 +50,15 @@ void laser::draw(float x, float y, float z, float x2, float y2, float z2, float 
     zPos2 = z2;
     
     laserSpacing = 300;
-    ofSetColor(255, 0, 0);
+    
+    if (pulseColor == true) {
+        ofSetColor(0, 255, 0);
+    }
+    else if (pulseColor == false) {
+        ofSetColor(255, 0, 0);
+    }
+    
+    
     ofSetLineWidth(200);
     // Use the external variables (which copy the data fed into the draw function)
     // to draw the laser(s):

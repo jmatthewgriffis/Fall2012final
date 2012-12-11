@@ -128,7 +128,7 @@ void testApp::update(){
     
     // Let's do stuff with lasers!
     
-    // First, a for loop to cycle through all of the lasers:
+    // First, a for loop to cycle through all of the horizontal lasers:
     for (int i=0; i<NHLASERS; i++) {
         
         // Collision detection between the player and the lasers. Hitting a laser
@@ -152,7 +152,7 @@ void testApp::update(){
         
         // Position the lasers on the z-axis (not including movement) and store each value in
         // its own array element:
-        laserZs[i] = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
+        laserZs[i] = canvasFront+myLasers[i].laserSpacing+(myLasers[i].laserSpacing*i);
         
         // Modify the lasers' z-pos based on their own velocity:
         laserZsMod[i] = laserZs[i] + laserZVel;
@@ -168,6 +168,48 @@ void testApp::update(){
         if (laserZsMod[i] <= canvasFront || laserZsMod[i] >= canvasFront+floorLength) {
             direction *= -1;
         }
+    }
+    
+    // Now, a for loop to cycle through all of the vertical lasers:
+    for (int i=0; i<NVLASERS; i++) {
+        
+        // Collision detection between the player and the lasers. Hitting a laser
+        // currently makes the displayed painting disappear, as reflected in the draw:
+        /*if (playerX+playerRad > myLasers[i].xPos1) {
+            if (playerX-playerRad < myLasers[i].xPos2) {
+                if (playerY+playerRad > myLasers[i].yPos1) {
+                    if (playerY-playerRad < myLasers[i].yPos2) {
+                        if (playerZ+playerRad >= myLasers[i].zPos1) {
+                            if (playerZ-playerRad <= myLasers[i].zPos2) {
+                                lasered = true;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+        
+        // Update the lasers' length and z-pos:
+        
+        // Position the lasers on the z-axis (not including movement) and store each value in
+        // its own array element:
+        laserXs[i] = canvasFront+myLasers[i].laserSpacing+(myLasers[i].laserSpacing*i);
+        
+        // Modify the lasers' z-pos based on their own velocity:
+        laserZsMod[i] = laserZs[i] + laserZVel;
+        
+        // Feed variables into the lasers' update function:
+        myLasers[i].update(laserLength, floorWidth);
+        
+        // Set a variable on this page equal to the updated result from the laser's function:
+        laserLength = myLasers[i].currLaserLength;
+        
+        // Collision detection: if a laser hits the front or back of the room, all
+        // the lasers reverse direction:
+        if (laserZsMod[i] <= canvasFront || laserZsMod[i] >= canvasFront+floorLength) {
+            direction *= -1;
+        }*/
     }
     
     /* Because of the way we will draw the lasers, constantly referring their original position to
@@ -324,16 +366,16 @@ void testApp::draw(){
      */
     
     ofSetColor(87, 70, 23); // Dark brown.
-    ofRect(canvasX, canvasY, canvasZ+(canvasSide/2), 341, 520); // Picture frame.
+    ofRect(canvasX, canvasY, canvasFront, 341, 520); // Picture frame.
     ofSetColor(255); // Color reset.
     
     // Draw a pic (I used math to reduce the original image's dimensions
     // to fit within the 500x500 box. I would use Max Width and Max Height
     // but I don't know how or if that's even possible):
     if (lasered == false) {
-        davinci.draw(canvasX, canvasY, canvasZ+(canvasSide/2), 321, 500);
+        davinci.draw(canvasX, canvasY, canvasFront, 321, 500);
     }
-    //mondrian.draw(canvasX, canvasY, canvasZ+(canvasSide/2), ?, ?);
+    //mondrian.draw(canvasX, canvasY, canvasFront, ?, ?);
     
     
     

@@ -30,6 +30,7 @@ void testApp::setup(){
     yVel = 0;
     jumpSpd = -7.8;
     gravity = 0.3;
+    direction = 1;
     
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
@@ -152,7 +153,9 @@ void testApp::update(){
             
             laserZs[j] = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
             
-            myLasers[i].update(laserLength, floorWidth, staticLaserZPos);
+            laserZsMod[j] = laserZs[j] + myLasers[i].laserZVel*direction;
+            
+            myLasers[i].update(laserLength, floorWidth, laserZs[j]);
             laserLength = myLasers[i].currLaserLength;
             movingLaserZPos = myLasers[i].currLaserZPos;
         }
@@ -318,7 +321,7 @@ void testApp::draw(){
         // Position the lasers on the z-axis (not including movement):
         //staticLaserZPos = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
         // Draw the lasers:
-        myLasers[i].draw(rightWallx, floorHeight-20, laserZs[j], laserLength);
+        myLasers[i].draw(rightWallx, floorHeight-20, laserZsMod[j], laserLength);
     }
     }
     

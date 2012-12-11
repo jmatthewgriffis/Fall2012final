@@ -12,6 +12,8 @@
 // This file contains all the OF code. Make sure to "include" it:
 #include "ofMain.h"
 
+#define NHLASERS 10
+
 class laser {
     
 public:
@@ -24,6 +26,8 @@ public:
     int laserRight, laserLeft, laserY, laserZ;
     float currLaserLength, currLaserZPos;
     float laserZVel;
+    
+    float laserZsMod [NHLASERS]; // Array of z-pos.
     
 };
 

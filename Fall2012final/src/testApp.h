@@ -34,8 +34,11 @@ public:
     
     float xVel, yVel, jumpSpd, gravity; // Speed.
     
+    int direction; // Boolean-like, to control direction.
+    
     laser myLasers [NHLASERS]; // Array of horizontal lasers.
-    int laserZs [NHLASERS]; // Array of z-pos variables.
+    float laserZs [NHLASERS]; // Array of z-pos variables.
+    float laserZsMod [NHLASERS]; // Array of modified z-pos variables.
     
     ofImage davinci;
     ofImage mondrian;

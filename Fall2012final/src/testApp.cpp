@@ -46,6 +46,7 @@ void testApp::setup(){
     floorLength = 2000;
     floorWidth = 1250;
     laserLength = 0;
+    laserLengthV = 0;
     
     // Make code more readable:
     centerW = ofGetWidth()/2;
@@ -178,19 +179,19 @@ void testApp::update(){
         // Collision detection between the player and the lasers. Hitting a laser
         // currently makes the displayed painting disappear, as reflected in the draw:
         /*if (playerX+playerRad > myLasers[i].xPos1) {
-            if (playerX-playerRad < myLasers[i].xPos2) {
-                if (playerY+playerRad > myLasers[i].yPos1) {
-                    if (playerY-playerRad < myLasers[i].yPos2) {
-                        if (playerZ+playerRad >= myLasers[i].zPos1) {
-                            if (playerZ-playerRad <= myLasers[i].zPos2) {
-                                lasered = true;
-                            }
-                        }
-                    }
-                    
-                }
-            }
-        }*/
+         if (playerX-playerRad < myLasers[i].xPos2) {
+         if (playerY+playerRad > myLasers[i].yPos1) {
+         if (playerY-playerRad < myLasers[i].yPos2) {
+         if (playerZ+playerRad >= myLasers[i].zPos1) {
+         if (playerZ-playerRad <= myLasers[i].zPos2) {
+         lasered = true;
+         }
+         }
+         }
+         
+         }
+         }
+         }*/
         
         // Update the lasers' length and z-pos:
         
@@ -202,10 +203,10 @@ void testApp::update(){
         laserXsMod[i] = laserXs[i] + laserXVel;
         
         // Feed variables into the lasers' update function:
-        //myLasersV[i].update(laserLength, floorWidth);
+        myLasersV[i].update(laserLengthV, floorLength);
         
         // Set a variable on this page equal to the updated result from the laser's function:
-        //laserLength = myLasers[i].currLaserLength;
+        laserLengthV = myLasersV[i].currLaserLength;
         
         // Collision detection: if a laser hits the front or back of the room, all
         // the lasers reverse direction:
@@ -220,30 +221,34 @@ void testApp::update(){
      the displacement from the lasers' original positions using a "velocity" incremented by a
      directional integer. It does the trick: */
     
-    // First we check if the lasers have stretched across the full width of the room:
+    // First we check if the lasers have stretched across the full width of the room
+    // and then if they have stretched across the full length of the room:
     if (laserLength == floorWidth) {
-        // If so, we check if the timer has reached its goal and if not, add to it:
-        if (lcounter < ltimer) {
-            lcounter ++;
-        }
-        // If the timer has reached its goal, we turn off the lasers' movement boolean. The
-        // effect is that the lasers stretch across the room, pause for a set interval, then move:
-        else {
-            lpause = false;
+        if (laserLengthV == floorLength) {
+            // If so, we check if the timer has reached its goal and if not, add to it:
+            if (lcounter < ltimer) {
+                lcounter ++;
+            }
+            // If the timer has reached its goal, we turn off the lasers' movement boolean. The
+            // effect is that the lasers stretch across the room, pause for a set interval, then move:
+            else {
+                lpause = false;
+            }
         }
     }
     
     // We check if the lasers should move, and if so, move them:
     if (lpause == false) {
         laserZVel += direction;
+        laserXVel += direction2;
     }
-    laserXVel += direction2;
+    
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    cout<<laserXVel<<endl; // Debug.
+    //cout<<laserXVel<<endl; // Debug.
     
     // Setting the rect mode affects the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
@@ -396,8 +401,8 @@ void testApp::draw(){
     
     // Lasers parallel to the z-axis ("vertical" lasers):
     for (int i=0; i<NVLASERS; i++) {
-     myLasersV[i].draw(laserXsMod[i], laserHeight, canvasFront, laserXsMod[i], laserHeight, canvasFront+floorLength, floorLength);
-     }
+        myLasersV[i].draw(laserXsMod[i], laserHeight, canvasFront, laserXsMod[i], laserHeight, canvasFront+laserLengthV, laserLengthV);
+    }
     
     
     //__________________________________________________________

@@ -4,7 +4,7 @@
 #include "laser.h"
 
 #define NHLASERS 6
-#define NVLASERS 3
+#define NVLASERS 4
 
 class testApp : public ofBaseApp{
     

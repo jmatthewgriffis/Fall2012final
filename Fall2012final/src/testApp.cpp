@@ -85,6 +85,7 @@ void testApp::update(){
     // Have to initialize these variables in the update function,
     // because they are dependent on other variables (that update):
     canvasFront = canvasZ+(canvasSide/2);
+    roomFront = canvasFront+floorLength;
     leftWallx = centerW-(floorWidth/2);
     rightWallx = centerW+(floorWidth/2);
     canvasX = centerW;
@@ -106,7 +107,7 @@ void testApp::update(){
     if (backward == true) {
         // Give the player a little freedom to pull back from the room
         // but not much:
-        if (playerZ < canvasFront+floorLength+225) {
+        if (playerZ < roomFront+225) {
             canvasZ -= xVel;
         }
         
@@ -191,7 +192,7 @@ void testApp::update(){
         
         // Collision detection: if a laser hits the front or back of the room, all
         // the lasers reverse direction:
-        if (laserZsMod[i] <= canvasFront || laserZsMod[i] >= canvasFront+floorLength) {
+        if (laserZsMod[i] <= canvasFront || laserZsMod[i] >= roomFront) {
             direction *= -1;
         }
     }
@@ -294,9 +295,9 @@ void testApp::draw(){
     // Back-right corner:
     ofVertex(rightWallx, floorHeight, canvasFront);
     // Front-right corner:
-    ofVertex(rightWallx, floorHeight, canvasFront+floorLength);
+    ofVertex(rightWallx, floorHeight, roomFront);
     // Front-left corner:
-    ofVertex(leftWallx, floorHeight, canvasFront+floorLength);
+    ofVertex(leftWallx, floorHeight, roomFront);
     ofEndShape();
     ofSetColor(255); // Color reset.
     
@@ -308,9 +309,9 @@ void testApp::draw(){
     // Back-upper corner:
     ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
     // Front-upper corner:
-    ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
+    ofVertex(leftWallx, floorHeight-ceilingHeight, roomFront);
     // Front-lower corner:
-    ofVertex(leftWallx, floorHeight, canvasFront+floorLength);
+    ofVertex(leftWallx, floorHeight, roomFront);
     ofEndShape();
     ofSetColor(255); // Color reset.
     
@@ -322,9 +323,9 @@ void testApp::draw(){
     // Back-upper corner:
     ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
     // Front-upper corner:
-    ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
+    ofVertex(rightWallx, floorHeight-ceilingHeight, roomFront);
     // Front-lower corner:
-    ofVertex(rightWallx, floorHeight, canvasFront+floorLength);
+    ofVertex(rightWallx, floorHeight, roomFront);
     ofEndShape();
     ofSetColor(255); // Color reset.
     
@@ -352,9 +353,9 @@ void testApp::draw(){
     // Back-right corner:
     ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
     // Front-right corner:
-    ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
+    ofVertex(rightWallx, floorHeight-ceilingHeight, roomFront);
     // Front-left corner:
-    ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront+floorLength);
+    ofVertex(leftWallx, floorHeight-ceilingHeight, roomFront);
     ofEndShape();
     ofSetColor(255); // Color reset.
     
@@ -376,20 +377,20 @@ void testApp::draw(){
     mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
     // Upper-right point:
-    mesh.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-600));
-    mesh.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-600));
+    mesh.addVertex(ofPoint(leftWallx,canvasY-200,roomFront-600));
+    mesh.addTexCoord(ofPoint(leftWallx,canvasY-200,roomFront-600));
     
     // Upper-left point:
-    mesh.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-200));
-    mesh.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-200));
+    mesh.addTexCoord(ofPoint(leftWallx,canvasY-200,roomFront-200));
+    mesh.addVertex(ofPoint(leftWallx,canvasY-200,roomFront-200));
     
     // Lower-right point:
-    mesh.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-600));
-    mesh.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-600));
+    mesh.addTexCoord(ofPoint(leftWallx,canvasY+200,roomFront-600));
+    mesh.addVertex(ofPoint(leftWallx,canvasY+200,roomFront-600));
     
     // Lower-left point:
-    mesh.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-200));
-    mesh.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-200));
+    mesh.addTexCoord(ofPoint(leftWallx,canvasY+200,roomFront-200));
+    mesh.addVertex(ofPoint(leftWallx,canvasY+200,roomFront-200));
     
     nightSky.getTextureReference().bind();
     mesh.draw();
@@ -397,9 +398,9 @@ void testApp::draw(){
     
     // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
-    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-200, leftWallx, canvasY+200, canvasFront+floorLength-600);
-    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-600, leftWallx, canvasY-200, canvasFront+floorLength-600);
-    ofLine(leftWallx, canvasY-200, canvasFront+floorLength-200, leftWallx, canvasY-200, canvasFront+floorLength-600);
+    ofLine(leftWallx, canvasY+200, roomFront-200, leftWallx, canvasY+200, roomFront-600);
+    ofLine(leftWallx, canvasY+200, roomFront-600, leftWallx, canvasY-200, roomFront-600);
+    ofLine(leftWallx, canvasY-200, roomFront-200, leftWallx, canvasY-200, roomFront-600);
     
     
     // Left-middle window:
@@ -409,20 +410,20 @@ void testApp::draw(){
     mesh2.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
     // Upper-right point:
-    mesh2.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1100));
-    mesh2.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1100));
+    mesh2.addVertex(ofPoint(leftWallx,canvasY-200,roomFront-1100));
+    mesh2.addTexCoord(ofPoint(leftWallx,canvasY-200,roomFront-1100));
     
     // Upper-left point:
-    mesh2.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-700));
-    mesh2.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-700));
+    mesh2.addTexCoord(ofPoint(leftWallx,canvasY-200,roomFront-700));
+    mesh2.addVertex(ofPoint(leftWallx,canvasY-200,roomFront-700));
     
     // Lower-right point:
-    mesh2.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1100));
-    mesh2.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1100));
+    mesh2.addTexCoord(ofPoint(leftWallx,canvasY+200,roomFront-1100));
+    mesh2.addVertex(ofPoint(leftWallx,canvasY+200,roomFront-1100));
     
     // Lower-left point:
-    mesh2.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-700));
-    mesh2.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-700));
+    mesh2.addTexCoord(ofPoint(leftWallx,canvasY+200,roomFront-700));
+    mesh2.addVertex(ofPoint(leftWallx,canvasY+200,roomFront-700));
     
     nightSky.getTextureReference().bind();
     mesh2.draw();
@@ -430,9 +431,9 @@ void testApp::draw(){
     
     // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
-    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-700, leftWallx, canvasY+200, canvasFront+floorLength-1100);
-    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-1100, leftWallx, canvasY-200, canvasFront+floorLength-1100);
-    ofLine(leftWallx, canvasY-200, canvasFront+floorLength-700, leftWallx, canvasY-200, canvasFront+floorLength-1100);
+    ofLine(leftWallx, canvasY+200, roomFront-700, leftWallx, canvasY+200, roomFront-1100);
+    ofLine(leftWallx, canvasY+200, roomFront-1100, leftWallx, canvasY-200, roomFront-1100);
+    ofLine(leftWallx, canvasY-200, roomFront-700, leftWallx, canvasY-200, roomFront-1100);
     
     
     // Left-back window:
@@ -442,20 +443,20 @@ void testApp::draw(){
     mesh3.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
     // Upper-right point:
-    mesh3.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1600));
-    mesh3.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1600));
+    mesh3.addVertex(ofPoint(leftWallx,canvasY-200,roomFront-1600));
+    mesh3.addTexCoord(ofPoint(leftWallx,canvasY-200,roomFront-1600));
     
     // Upper-left point:
-    mesh3.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1200));
-    mesh3.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1200));
+    mesh3.addTexCoord(ofPoint(leftWallx,canvasY-200,roomFront-1200));
+    mesh3.addVertex(ofPoint(leftWallx,canvasY-200,roomFront-1200));
     
     // Lower-right point:
-    mesh3.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1600));
-    mesh3.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1600));
+    mesh3.addTexCoord(ofPoint(leftWallx,canvasY+200,roomFront-1600));
+    mesh3.addVertex(ofPoint(leftWallx,canvasY+200,roomFront-1600));
     
     // Lower-left point:
-    mesh3.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1200));
-    mesh3.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1200));
+    mesh3.addTexCoord(ofPoint(leftWallx,canvasY+200,roomFront-1200));
+    mesh3.addVertex(ofPoint(leftWallx,canvasY+200,roomFront-1200));
     
     nightSky.getTextureReference().bind();
     mesh3.draw();
@@ -463,9 +464,9 @@ void testApp::draw(){
     
     // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
-    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-1200, leftWallx, canvasY+200, canvasFront+floorLength-1600);
-    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-1600, leftWallx, canvasY-200, canvasFront+floorLength-1600);
-    ofLine(leftWallx, canvasY-200, canvasFront+floorLength-1200, leftWallx, canvasY-200, canvasFront+floorLength-1600);
+    ofLine(leftWallx, canvasY+200, roomFront-1200, leftWallx, canvasY+200, roomFront-1600);
+    ofLine(leftWallx, canvasY+200, roomFront-1600, leftWallx, canvasY-200, roomFront-1600);
+    ofLine(leftWallx, canvasY-200, roomFront-1200, leftWallx, canvasY-200, roomFront-1600);
     
     
     // Right-front window:
@@ -475,20 +476,20 @@ void testApp::draw(){
     mesh4.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
     // Upper-right point:
-    mesh4.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-600));
-    mesh4.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-600));
+    mesh4.addVertex(ofPoint(rightWallx,canvasY-200,roomFront-600));
+    mesh4.addTexCoord(ofPoint(rightWallx,canvasY-200,roomFront-600));
     
     // Upper-left point:
-    mesh4.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-200));
-    mesh4.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-200));
+    mesh4.addTexCoord(ofPoint(rightWallx,canvasY-200,roomFront-200));
+    mesh4.addVertex(ofPoint(rightWallx,canvasY-200,roomFront-200));
     
     // Lower-right point:
-    mesh4.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-600));
-    mesh4.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-600));
+    mesh4.addTexCoord(ofPoint(rightWallx,canvasY+200,roomFront-600));
+    mesh4.addVertex(ofPoint(rightWallx,canvasY+200,roomFront-600));
     
     // Lower-left point:
-    mesh4.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-200));
-    mesh4.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-200));
+    mesh4.addTexCoord(ofPoint(rightWallx,canvasY+200,roomFront-200));
+    mesh4.addVertex(ofPoint(rightWallx,canvasY+200,roomFront-200));
     
     nightSky.getTextureReference().bind();
     mesh4.draw();
@@ -496,9 +497,9 @@ void testApp::draw(){
     
     // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
-    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-200, rightWallx, canvasY+200, canvasFront+floorLength-600);
-    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-600, rightWallx, canvasY-200, canvasFront+floorLength-600);
-    ofLine(rightWallx, canvasY-200, canvasFront+floorLength-200, rightWallx, canvasY-200, canvasFront+floorLength-600);
+    ofLine(rightWallx, canvasY+200, roomFront-200, rightWallx, canvasY+200, roomFront-600);
+    ofLine(rightWallx, canvasY+200, roomFront-600, rightWallx, canvasY-200, roomFront-600);
+    ofLine(rightWallx, canvasY-200, roomFront-200, rightWallx, canvasY-200, roomFront-600);
     
     
     // Right-middle window:
@@ -508,20 +509,20 @@ void testApp::draw(){
     mesh5.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
     // Upper-right point:
-    mesh5.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1100));
-    mesh5.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1100));
+    mesh5.addVertex(ofPoint(rightWallx,canvasY-200,roomFront-1100));
+    mesh5.addTexCoord(ofPoint(rightWallx,canvasY-200,roomFront-1100));
     
     // Upper-left point:
-    mesh5.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-700));
-    mesh5.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-700));
+    mesh5.addTexCoord(ofPoint(rightWallx,canvasY-200,roomFront-700));
+    mesh5.addVertex(ofPoint(rightWallx,canvasY-200,roomFront-700));
     
     // Lower-right point:
-    mesh5.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1100));
-    mesh5.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1100));
+    mesh5.addTexCoord(ofPoint(rightWallx,canvasY+200,roomFront-1100));
+    mesh5.addVertex(ofPoint(rightWallx,canvasY+200,roomFront-1100));
     
     // Lower-left point:
-    mesh5.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-700));
-    mesh5.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-700));
+    mesh5.addTexCoord(ofPoint(rightWallx,canvasY+200,roomFront-700));
+    mesh5.addVertex(ofPoint(rightWallx,canvasY+200,roomFront-700));
     
     nightSky.getTextureReference().bind();
     mesh5.draw();
@@ -529,9 +530,9 @@ void testApp::draw(){
     
     // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
-    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-700, rightWallx, canvasY+200, canvasFront+floorLength-1100);
-    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-1100, rightWallx, canvasY-200, canvasFront+floorLength-1100);
-    ofLine(rightWallx, canvasY-200, canvasFront+floorLength-700, rightWallx, canvasY-200, canvasFront+floorLength-1100);
+    ofLine(rightWallx, canvasY+200, roomFront-700, rightWallx, canvasY+200, roomFront-1100);
+    ofLine(rightWallx, canvasY+200, roomFront-1100, rightWallx, canvasY-200, roomFront-1100);
+    ofLine(rightWallx, canvasY-200, roomFront-700, rightWallx, canvasY-200, roomFront-1100);
     
     
     // Right-back window:
@@ -541,20 +542,20 @@ void testApp::draw(){
     mesh6.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
     // Upper-right point:
-    mesh6.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1600));
-    mesh6.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1600));
+    mesh6.addVertex(ofPoint(rightWallx,canvasY-200,roomFront-1600));
+    mesh6.addTexCoord(ofPoint(rightWallx,canvasY-200,roomFront-1600));
     
     // Upper-left point:
-    mesh6.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1200));
-    mesh6.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1200));
+    mesh6.addTexCoord(ofPoint(rightWallx,canvasY-200,roomFront-1200));
+    mesh6.addVertex(ofPoint(rightWallx,canvasY-200,roomFront-1200));
     
     // Lower-right point:
-    mesh6.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1600));
-    mesh6.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1600));
+    mesh6.addTexCoord(ofPoint(rightWallx,canvasY+200,roomFront-1600));
+    mesh6.addVertex(ofPoint(rightWallx,canvasY+200,roomFront-1600));
     
     // Lower-left point:
-    mesh6.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1200));
-    mesh6.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1200));
+    mesh6.addTexCoord(ofPoint(rightWallx,canvasY+200,roomFront-1200));
+    mesh6.addVertex(ofPoint(rightWallx,canvasY+200,roomFront-1200));
     
     nightSky.getTextureReference().bind();
     mesh6.draw();
@@ -562,9 +563,9 @@ void testApp::draw(){
     
     // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
-    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-1200, rightWallx, canvasY+200, canvasFront+floorLength-1600);
-    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-1600, rightWallx, canvasY-200, canvasFront+floorLength-1600);
-    ofLine(rightWallx, canvasY-200, canvasFront+floorLength-1200, rightWallx, canvasY-200, canvasFront+floorLength-1600);
+    ofLine(rightWallx, canvasY+200, roomFront-1200, rightWallx, canvasY+200, roomFront-1600);
+    ofLine(rightWallx, canvasY+200, roomFront-1600, rightWallx, canvasY-200, roomFront-1600);
+    ofLine(rightWallx, canvasY-200, roomFront-1200, rightWallx, canvasY-200, roomFront-1600);
     
     
     // Top-front window:
@@ -574,20 +575,20 @@ void testApp::draw(){
     mesh7.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
     // Upper-right point:
-    mesh7.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-300));
-    mesh7.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-300));
+    mesh7.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-300));
+    mesh7.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-300));
     
     // Upper-left point:
-    mesh7.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-300));
-    mesh7.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-300));
+    mesh7.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-300));
+    mesh7.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-300));
     
     // Lower-right point:
-    mesh7.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-700));
-    mesh7.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-700));
+    mesh7.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-700));
+    mesh7.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-700));
     
     // Lower-left point:
-    mesh7.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-700));
-    mesh7.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-700));
+    mesh7.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-700));
+    mesh7.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-700));
     
     nightSky.getTextureReference().bind();
     mesh7.draw();
@@ -595,9 +596,9 @@ void testApp::draw(){
     
     // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
-    ofLine(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-300, canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-700);
-    ofLine(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-700,canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-700);
-    ofLine(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-300,canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-700);
+    ofLine(canvasX+300,floorHeight-ceilingHeight,roomFront-300, canvasX+300,floorHeight-ceilingHeight,roomFront-700);
+    ofLine(canvasX+300,floorHeight-ceilingHeight,roomFront-700,canvasX-300,floorHeight-ceilingHeight,roomFront-700);
+    ofLine(canvasX-300,floorHeight-ceilingHeight,roomFront-300,canvasX-300,floorHeight-ceilingHeight,roomFront-700);
     
     
     // Top-back window:
@@ -607,20 +608,20 @@ void testApp::draw(){
     mesh8.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
     // Upper-right point:
-    mesh8.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1100));
-    mesh8.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1100));
+    mesh8.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-1100));
+    mesh8.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-1100));
     
     // Upper-left point:
-    mesh8.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1100));
-    mesh8.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1100));
+    mesh8.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-1100));
+    mesh8.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-1100));
     
     // Lower-right point:
-    mesh8.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1500));
-    mesh8.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1500));
+    mesh8.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-1500));
+    mesh8.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-1500));
     
     // Lower-left point:
-    mesh8.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1500));
-    mesh8.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1500));
+    mesh8.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-1500));
+    mesh8.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-1500));
     
     nightSky.getTextureReference().bind();
     mesh8.draw();
@@ -628,9 +629,9 @@ void testApp::draw(){
     
     // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
-    ofLine(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1100, canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1500);
-    ofLine(canvasX+300,floorHeight-ceilingHeight,canvasFront+floorLength-1500,canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1500);
-    ofLine(canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1100,canvasX-300,floorHeight-ceilingHeight,canvasFront+floorLength-1500);
+    ofLine(canvasX+300,floorHeight-ceilingHeight,roomFront-1100, canvasX+300,floorHeight-ceilingHeight,roomFront-1500);
+    ofLine(canvasX+300,floorHeight-ceilingHeight,roomFront-1500,canvasX-300,floorHeight-ceilingHeight,roomFront-1500);
+    ofLine(canvasX-300,floorHeight-ceilingHeight,roomFront-1100,canvasX-300,floorHeight-ceilingHeight,roomFront-1500);
     
     
     

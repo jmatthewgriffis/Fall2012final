@@ -133,7 +133,7 @@ void testApp::update(){
             if (playerX-playerRad < myLasers[i].laserRight) {
                 if (playerY+playerRad > myLasers[i].laserY) {
                     if (playerY-playerRad < myLasers[i].laserY) {
-                        if (playerZ == laserZsMod[i]) {
+                        if (playerZ+playerRad >= laserZsMod[i] && playerZ-playerRad <= laserZsMod[i]) {
                             lasered = true;
                         }
                     }

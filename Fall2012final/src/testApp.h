@@ -28,13 +28,14 @@ public:
     // Positioning:
     float playerX, playerY, playerZ, canvasX, canvasY, canvasZ,
     centerW, centerH, leftWallx, rightWallx, floorHeight, ceilingHeight,
-    canvasFront, laserZPos;
+    canvasFront, staticLaserZPos, movingLaserZPos;
     
     float playerRad, canvasSide, floorLength, floorWidth, laserLength; // Sizing.
     
     float xVel, yVel, jumpSpd, gravity; // Speed.
     
     laser myLasers [NHLASERS]; // Array of horizontal lasers.
+    int laserZs [NHLASERS]; // Array of z-pos variables.
     
     ofImage davinci;
     ofImage mondrian;

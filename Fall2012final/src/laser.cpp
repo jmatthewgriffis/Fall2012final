@@ -11,7 +11,9 @@
 //--------------------------------------------------------------
 
 void laser::setup(float x, float y, float z) {
+    
     laserZVel = 5;
+    
 }
 
 void laser::update(float l, float maxLaserLength, float z) {
@@ -21,6 +23,10 @@ void laser::update(float l, float maxLaserLength, float z) {
     }
     currLaserLength = l;
     
+    //z ++;
+    //currLaserZPos = z;
+    
+    //cout<<z<<endl;
     
 }
 

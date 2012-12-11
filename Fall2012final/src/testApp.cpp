@@ -49,6 +49,10 @@ void testApp::setup(){
     playerZ = 150;
     canvasZ = -2000;
     
+    for (int i=0; i<NHLASERS; i++) {
+        myLasers[i].setup(0, 0, 0);
+    }
+    
     //playerZ = canvasZ+(canvasSide/2)+playerRad; // Debug - test
     // comparative placement.
 }
@@ -124,30 +128,34 @@ void testApp::update(){
     // Let's do stuff with lasers!
     
     for (int i=0; i<NHLASERS; i++) {
-        
-        // Collision detection between the player and the lasers. Hitting a laser
-        // currently makes the displayed painting disappear, as reflected in the draw:
-        if (playerX+playerRad > myLasers[i].laserLeft) {
-            if (playerX-playerRad < myLasers[i].laserRight) {
-                if (playerY+playerRad > myLasers[i].laserY) {
-                    if (playerY-playerRad < myLasers[i].laserY) {
-                        if (playerZ == myLasers[i].laserZ) {
-                            lasered = true;
+        for (int j=i; j<NHLASERS; j++) {
+            
+            // Collision detection between the player and the lasers. Hitting a laser
+            // currently makes the displayed painting disappear, as reflected in the draw:
+            if (playerX+playerRad > myLasers[i].laserLeft) {
+                if (playerX-playerRad < myLasers[i].laserRight) {
+                    if (playerY+playerRad > myLasers[i].laserY) {
+                        if (playerY-playerRad < myLasers[i].laserY) {
+                            if (playerZ == myLasers[i].laserZ) {
+                                lasered = true;
+                            }
                         }
+                        
                     }
-                    
                 }
             }
-        }
-        // Update the lasers' length and z-pos:
-        myLasers[i].update(laserLength, floorWidth, laserZPos);
-        laserLength = myLasers[i].currLaserLength;
-        laserZPos = myLasers[i].currLaserZPos;
-        myLasers[i].laserZ += myLasers[i].laserZVel;
-        
-        //if (myLasers[i].laserZ) {
             
-        //}
+            // Update the lasers' length and z-pos:
+            
+            // Position the lasers on the z-axis (not including movement):
+            //laserZs[j].staticLaserZPos = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
+            
+            laserZs[j] = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
+            
+            myLasers[i].update(laserLength, floorWidth, staticLaserZPos);
+            laserLength = myLasers[i].currLaserLength;
+            movingLaserZPos = myLasers[i].currLaserZPos;
+        }
     }
 }
 
@@ -161,7 +169,12 @@ void testApp::draw(){
     
     
     //__________________________________________________________
-    
+    //for (int i=0; i<NHLASERS; i++) {
+        for (int j=0; j<NHLASERS; j++) {
+            //laserZs[j] = 50*j;
+            cout<<"j = "<<j<<" zPos = "<<laserZs[j]<<endl;
+        }
+    //}
     
     
     // Let's build a building! One surface at a time!
@@ -300,12 +313,13 @@ void testApp::draw(){
     // Laser grid:
     
     for (int i=0; i<NHLASERS; i++) {
+        for (int j=i; j<NHLASERS; j++) {
         
-        // Position the lasers on the z-axis:
-        laserZPos = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
-        
-        // Draw them:
-        myLasers[i].draw(rightWallx, floorHeight-20, laserZPos, laserLength);
+        // Position the lasers on the z-axis (not including movement):
+        //staticLaserZPos = (canvasZ+(canvasSide/2)+myLasers[i].laserSpacing)+(myLasers[i].laserSpacing*i);
+        // Draw the lasers:
+        myLasers[i].draw(rightWallx, floorHeight-20, laserZs[j], laserLength);
+    }
     }
     
     

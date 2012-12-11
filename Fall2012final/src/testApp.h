@@ -24,6 +24,7 @@ public:
     
     bool forward, backward, left, right, jump; // Use for movement.
     bool lasered; // Use for detecting collisions with lasers.
+    bool lpause; // Use for stalling the laser movement.
     
     // Positioning:
     float playerX, playerY, playerZ, canvasX, canvasY, canvasZ,
@@ -36,6 +37,7 @@ public:
     
     int laserZVel;
     int direction; // Boolean-like, to control direction.
+    int lcounter, ltimer; // Use to control the timing of the lasers.
     
     laser myLasers [NHLASERS]; // Array of horizontal lasers.
     float laserZs [NHLASERS]; // Array of z-pos variables.

@@ -22,6 +22,7 @@ void testApp::setup(){
     mondrian.loadImage("pics/mondrian.jpg");
     
     lasered = false; // Boolean for collision.
+    lpause = true; // Stall laser movement.
     
     // Movement:
     forward = false;
@@ -34,6 +35,8 @@ void testApp::setup(){
     gravity = 0.3;
     laserZVel = 0;
     direction = 1;
+    lcounter = 0; // This will count up to initiate laser movement.
+    ltimer = 60; // This is what lcounter counts towards.
     
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
@@ -169,13 +172,30 @@ void testApp::update(){
      movement the usual way. So, we use an unorthodox method - each frame we increase or decrease
      the displacement from the lasers' original positions using a "velocity" incremented by a
      directional integer. It does the trick: */
+    
+    // First we check if the lasers have stretched across the full width of the room:
     if (laserLength == floorWidth) {
+        // If so, we check if the timer has reached its goal and if not, add to it:
+        if (lcounter < ltimer) {
+            lcounter ++;
+        }
+        // If the timer has reached its goal, we turn off the lasers' movement boolean. The
+        // effect is that the lasers stretch across the room, pause for a set interval, then move:
+        else {
+            lpause = false;
+        }
+    }
+    
+    // We check if the lasers should move, and if so, move them:
+    if (lpause == false) {
         laserZVel += direction;
     }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    
+    cout<<lcounter<<endl; // Debug.
     
     // Setting the rect mode affects the images:
     ofSetRectMode(OF_RECTMODE_CENTER);

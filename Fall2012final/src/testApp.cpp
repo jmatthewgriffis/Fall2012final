@@ -278,7 +278,7 @@ void testApp::draw(){
     /* The floor. This looks like a mess but it's not so bad. We simply
      draw the floor by positioning the four corners as vertices, relative
      to the existing objects so all the architecture moves together: */
-    ofSetColor(127);
+    ofSetColor(50);
     ofBeginShape();
     // Back-left corner:
     ofVertex(leftWallx, floorHeight, canvasFront);
@@ -292,7 +292,7 @@ void testApp::draw(){
     ofSetColor(255); // Color reset.
     
     // The left wall (same as with the floor):
-    ofSetColor(173,143,23);
+    ofSetColor(60);
     ofBeginShape();
     // Back-lower corner:
     ofVertex(leftWallx, floorHeight, canvasFront);
@@ -306,7 +306,7 @@ void testApp::draw(){
     ofSetColor(255); // Color reset.
     
     // The right wall:
-    ofSetColor(173,143,23);
+    ofSetColor(60);
     ofBeginShape();
     // Back-lower corner:
     ofVertex(rightWallx, floorHeight, canvasFront);
@@ -321,7 +321,7 @@ void testApp::draw(){
     
     
     // The back wall:
-    ofSetColor(179,156,70);
+    ofSetColor(40);
     ofBeginShape();
     // Lower-left corner:
     ofVertex(leftWallx, floorHeight, canvasFront);
@@ -336,7 +336,7 @@ void testApp::draw(){
     
     
     // The ceiling:
-    ofSetColor(166,137,23);
+    ofSetColor(70);
     ofBeginShape();
     // Back-left corner:
     ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
@@ -580,9 +580,10 @@ void testApp::draw(){
      davinci.getTextureReference().unbind();
      */
     
-    ofSetColor(87, 70, 23); // Dark brown.
+    ofSetColor(60, 50, 23); // Dark brown.
     ofRect(canvasX, canvasY, canvasFront, 341, 520); // Picture frame.
-    ofSetColor(255); // Color reset.
+    ofSetColor(127); // This is cool. Limiting the color range to closer to
+    // grayscale makes the painting appear as though in dim lighting conditions.
     
     // Draw a pic (I used math to reduce the original image's dimensions
     // to fit within the 500x500 box. I would use Max Width and Max Height
@@ -591,6 +592,8 @@ void testApp::draw(){
         davinci.draw(canvasX, canvasY, canvasFront, 321, 500);
     }
     //mondrian.draw(canvasX, canvasY, canvasFront, ?, ?);
+    
+    ofSetColor(255); // Color reset.
     
     
     

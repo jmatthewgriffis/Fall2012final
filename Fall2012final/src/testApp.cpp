@@ -45,6 +45,10 @@ void testApp::setup(){
     lcounter = 0; // This will count up to initiate laser movement.
     ltimer = 120; // This is what lcounter counts towards.
     
+    windowsill.r = 127;
+    windowsill.g = 127;
+    windowsill.b = 127;
+    
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
     playerRad = 50;
@@ -382,6 +386,10 @@ void testApp::draw(){
     mesh.draw();
     nightSky.getTextureReference().unbind();
     
+    // Windowsill:
+    ofSetColor(windowsill);
+    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-200, leftWallx, canvasY+200, canvasFront+floorLength-600);
+    
     
     // Left-middle window:
     ofSetColor(255); // Color reset.
@@ -408,6 +416,10 @@ void testApp::draw(){
     nightSky.getTextureReference().bind();
     mesh2.draw();
     nightSky.getTextureReference().unbind();
+    
+    // Windowsill:
+    ofSetColor(windowsill);
+    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-700, leftWallx, canvasY+200, canvasFront+floorLength-1100);
     
     
     // Left-back window:
@@ -436,6 +448,10 @@ void testApp::draw(){
     mesh3.draw();
     nightSky.getTextureReference().unbind();
     
+    // Windowsill:
+    ofSetColor(windowsill);
+    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-1200, leftWallx, canvasY+200, canvasFront+floorLength-1600);
+    
     
     // Right-front window:
     ofSetColor(255); // Color reset.
@@ -462,6 +478,10 @@ void testApp::draw(){
     nightSky.getTextureReference().bind();
     mesh4.draw();
     nightSky.getTextureReference().unbind();
+    
+    // Windowsill:
+    ofSetColor(windowsill);
+    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-200, rightWallx, canvasY+200, canvasFront+floorLength-600);
     
     
     // Right-middle window:
@@ -490,6 +510,10 @@ void testApp::draw(){
     mesh5.draw();
     nightSky.getTextureReference().unbind();
     
+    // Windowsill:
+    ofSetColor(windowsill);
+    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-700, rightWallx, canvasY+200, canvasFront+floorLength-1100);
+    
     
     // Right-back window:
     ofSetColor(255); // Color reset.
@@ -516,6 +540,10 @@ void testApp::draw(){
     nightSky.getTextureReference().bind();
     mesh6.draw();
     nightSky.getTextureReference().unbind();
+    
+    // Windowsill:
+    ofSetColor(windowsill);
+    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-1200, rightWallx, canvasY+200, canvasFront+floorLength-1600);
     
     
     

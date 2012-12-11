@@ -39,6 +39,8 @@ public:
     
     float xVel, yVel, jumpSpd, gravity; // Speed.
     
+    ofColor windowsill;
+    
     //__________________________________________________________
     
     // Laser grid:

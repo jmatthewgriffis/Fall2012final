@@ -53,6 +53,7 @@ void laser::draw(float x, float y, float z, float x2, float y2, float z2, float 
     
     laserSpacing = 300;
     
+    // Change color based on the counter and boolean:
     if (pulseColor == true) {
         ofSetColor(255, 0, 50);
     }

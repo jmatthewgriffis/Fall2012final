@@ -713,6 +713,11 @@ void testApp::keyReleased(int key){
         case ' ':
             jump = false;
             break;
+            
+        case 'r':
+        case 'R':
+            setup();
+            break;
     }
 }
 

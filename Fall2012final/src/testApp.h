@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "laser.h"
 
-#define NHLASERS 3
+#define NHLASERS 6
 
 class testApp : public ofBaseApp{
     

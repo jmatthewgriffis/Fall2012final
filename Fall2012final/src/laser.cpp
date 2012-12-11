@@ -19,7 +19,10 @@ void laser::update(float l, float maxLaserLength) {
     // Check if the laser has stretched the length of the room
     // yet, and if not, stretch it:
     if (l < maxLaserLength) {
-        l++;
+        l+=3;
+    }
+    if (l > maxLaserLength) {
+        l = maxLaserLength;
     }
     // Set the result equal to an external variable we can use
     // in the other page:
@@ -35,7 +38,7 @@ void laser::draw(float x, float y, float z, float l) {
     laserZ = z;
     
     laserSpacing = 300;
-    ofSetColor(0, 255, 0);
+    ofSetColor(255, 0, 0);
     ofSetLineWidth(200);
     ofLine(laserRight, laserY, laserZ, laserLeft, laserY, laserZ);
     ofSetColor(255); // Color reset.

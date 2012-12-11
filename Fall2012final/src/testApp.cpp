@@ -38,7 +38,7 @@ void testApp::setup(){
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
     playerRad = 50;
-    floorLength = 1000;
+    floorLength = 2000;
     floorWidth = 1250;
     laserLength = 0;
     
@@ -52,10 +52,6 @@ void testApp::setup(){
     playerY = floorHeight-playerRad;
     playerZ = 150;
     canvasZ = -1000;
-    
-    for (int i=0; i<NHLASERS; i++) {
-        //myLasers[i].setup(0, 0, 0);
-    }
 }
 
 //--------------------------------------------------------------
@@ -128,15 +124,7 @@ void testApp::update(){
     
     // Let's do stuff with lasers!
     
-    /* Because of the way we will draw the lasers, constantly referring their original position to
-     the relative location of the architecture, we cannot give the lasers their own independent
-     movement the usual way. So, we use an unorthodox method - each frame we increase or decrease
-     the displacement from the lasers' original positions using a "velocity" incremented by a
-     directional integer. It does the trick: */
-    laserZVel += direction;
-    
-    // Now, a for loop to cycle through all of the lasers:
-    
+    // First, a for loop to cycle through all of the lasers:
     for (int i=0; i<NHLASERS; i++) {
         
         // Collision detection between the player and the lasers. Hitting a laser
@@ -174,6 +162,15 @@ void testApp::update(){
         if (laserZsMod[i] <= canvasFront || laserZsMod[i] >= canvasFront+floorLength) {
             direction *= -1;
         }
+    }
+    
+    /* Because of the way we will draw the lasers, constantly referring their original position to
+     the relative location of the architecture, we cannot give the lasers their own independent
+     movement the usual way. So, we use an unorthodox method - each frame we increase or decrease
+     the displacement from the lasers' original positions using a "velocity" incremented by a
+     directional integer. It does the trick: */
+    if (laserLength == floorWidth) {
+        laserZVel += direction;
     }
 }
 

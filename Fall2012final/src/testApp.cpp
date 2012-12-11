@@ -178,28 +178,28 @@ void testApp::update(){
         
         // Collision detection between the player and the lasers. Hitting a laser
         // currently makes the displayed painting disappear, as reflected in the draw:
-        /*if (playerX+playerRad > myLasers[i].xPos1) {
-         if (playerX-playerRad < myLasers[i].xPos2) {
-         if (playerY+playerRad > myLasers[i].yPos1) {
-         if (playerY-playerRad < myLasers[i].yPos2) {
-         if (playerZ+playerRad >= myLasers[i].zPos1) {
-         if (playerZ-playerRad <= myLasers[i].zPos2) {
-         lasered = true;
-         }
-         }
-         }
-         
-         }
-         }
-         }*/
+        if (playerX+playerRad > myLasersV[i].xPos1) {
+            if (playerX-playerRad < myLasersV[i].xPos2) {
+                if (playerY+playerRad > myLasersV[i].yPos1) {
+                    if (playerY-playerRad < myLasersV[i].yPos2) {
+                        if (playerZ+playerRad >= myLasersV[i].zPos1) {
+                            if (playerZ-playerRad <= myLasersV[i].zPos2) {
+                                lasered = true;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
         
-        // Update the lasers' length and z-pos:
+        // Update the lasers' length and x-pos:
         
-        // Position the lasers on the z-axis (not including movement) and store each value in
+        // Position the lasers on the x-axis (not including movement) and store each value in
         // its own array element:
         laserXs[i] = leftWallx+myLasersV[i].laserSpacing+(myLasersV[i].laserSpacing*i);
         
-        // Modify the lasers' z-pos based on their own velocity:
+        // Modify the lasers' x-pos based on their own velocity:
         laserXsMod[i] = laserXs[i] + laserXVel;
         
         // Feed variables into the lasers' update function:
@@ -208,7 +208,7 @@ void testApp::update(){
         // Set a variable on this page equal to the updated result from the laser's function:
         laserLengthV = myLasersV[i].currLaserLength;
         
-        // Collision detection: if a laser hits the front or back of the room, all
+        // Collision detection: if a laser hits the right or left of the room, all
         // the lasers reverse direction:
         if (laserXsMod[i] <= leftWallx || laserXsMod[i] >= rightWallx) {
             direction2 *= -1;

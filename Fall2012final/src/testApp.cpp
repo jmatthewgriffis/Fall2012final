@@ -209,9 +209,9 @@ void testApp::update(){
         
         // Collision detection: if a laser hits the front or back of the room, all
         // the lasers reverse direction:
-        /*if (laserXsMod[i] <= rightWallx || laserXsMod[i] >= rightWallx) {
+        if (laserXsMod[i] <= leftWallx || laserXsMod[i] >= rightWallx) {
             direction2 *= -1;
-        }*/
+        }
     }
     
     /* Because of the way we will draw the lasers, constantly referring their original position to
@@ -389,10 +389,12 @@ void testApp::draw(){
     
     // Laser grid:
     
+    // Lasers parallel to the x-axis ("horizontal" lasers):
     for (int i=0; i<NHLASERS; i++) {
         myLasers[i].draw(rightWallx-laserLength, laserHeight, laserZsMod[i], rightWallx, laserHeight, laserZsMod[i], laserLength);
     }
     
+    // Lasers parallel to the z-axis ("vertical" lasers):
     for (int i=0; i<NVLASERS; i++) {
      myLasersV[i].draw(laserXsMod[i], laserHeight, canvasFront, laserXsMod[i], laserHeight, canvasFront+floorLength, floorLength);
      }

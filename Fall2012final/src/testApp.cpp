@@ -38,13 +38,13 @@ void testApp::setup(){
     direction = 1;
     direction2 = 1;
     lcounter = 0; // This will count up to initiate laser movement.
-    ltimer = 60; // This is what lcounter counts towards.
+    ltimer = 120; // This is what lcounter counts towards.
     
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
     playerRad = 50;
-    floorLength = 2000;
-    floorWidth = 1250;
+    floorLength = 1800; // This should be NHLASERS/laserSpacing.
+    floorWidth = 1200; // This should be NVLASERS/laserSpacing.
     laserLength = 0;
     laserLengthV = 0;
     
@@ -88,7 +88,7 @@ void testApp::update(){
     if (backward == true) {
         // Give the player a little freedom to pull back from the room
         // but not much:
-        if (playerZ < canvasFront+floorLength+300) {
+        if (playerZ < canvasFront+floorLength+225) {
             canvasZ -= xVel;
         }
         
@@ -160,7 +160,7 @@ void testApp::update(){
         
         // Position the lasers on the z-axis (not including movement) and store each value in
         // its own array element:
-        laserZs[i] = canvasFront+myLasers[i].laserSpacing+(myLasers[i].laserSpacing*i);
+        laserZs[i] = canvasFront+(myLasers[i].laserSpacing/2)+(myLasers[i].laserSpacing*i);
         
         // Modify the lasers' z-pos based on their own velocity:
         laserZsMod[i] = laserZs[i] + laserZVel;
@@ -202,7 +202,7 @@ void testApp::update(){
         
         // Position the lasers on the x-axis (not including movement) and store each value in
         // its own array element:
-        laserXs[i] = leftWallx+myLasersV[i].laserSpacing+(myLasersV[i].laserSpacing*i);
+        laserXs[i] = leftWallx+(myLasersV[i].laserSpacing/2)+(myLasersV[i].laserSpacing*i);
         
         // Modify the lasers' x-pos based on their own velocity:
         laserXsMod[i] = laserXs[i] + laserXVel;

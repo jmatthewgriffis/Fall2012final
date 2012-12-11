@@ -195,7 +195,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    cout<<lcounter<<endl; // Debug.
+    //cout<<lcounter<<endl; // Debug.
     
     // Setting the rect mode affects the images:
     ofSetRectMode(OF_RECTMODE_CENTER);

@@ -11,6 +11,11 @@ void testApp::setup(){
     ofSetVerticalSync(true);
     ofBackground(0);
     
+    // The windows:
+    // Image credit:
+    // http://good-wallpapers.com/wallpapers/15912/1280_Starry%20Sky.jpg :
+    nightSky.loadImage("pics/night_sky_texture.jpg");
+    
     // The paintings:
     
     // Image credit:
@@ -269,7 +274,7 @@ void testApp::draw(){
     /* The floor. This looks like a mess but it's not so bad. We simply
      draw the floor by positioning the four corners as vertices, relative
      to the existing objects so all the architecture moves together: */
-    ofSetColor(166,137,23);
+    ofSetColor(127);
     ofBeginShape();
     // Back-left corner:
     ofVertex(leftWallx, floorHeight, canvasFront);
@@ -342,6 +347,175 @@ void testApp::draw(){
     
     
     // Building complete!
+    
+    
+    
+    //__________________________________________________________
+    
+    
+    
+    // The windows:
+    
+    // Left-front window:
+    ofSetColor(255); // Color reset.
+    
+    ofMesh mesh;
+    mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    
+    // Upper-right point:
+    mesh.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-600));
+    mesh.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-600));
+    
+    // Upper-left point:
+    mesh.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-200));
+    mesh.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-200));
+    
+    // Lower-right point:
+    mesh.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-600));
+    mesh.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-600));
+    
+    // Lower-left point:
+    mesh.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-200));
+    mesh.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-200));
+    
+    nightSky.getTextureReference().bind();
+    mesh.draw();
+    nightSky.getTextureReference().unbind();
+    
+    
+    // Left-middle window:
+    ofSetColor(255); // Color reset.
+    
+    ofMesh mesh2;
+    mesh2.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    
+    // Upper-right point:
+    mesh2.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1100));
+    mesh2.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1100));
+    
+    // Upper-left point:
+    mesh2.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-700));
+    mesh2.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-700));
+    
+    // Lower-right point:
+    mesh2.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1100));
+    mesh2.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1100));
+    
+    // Lower-left point:
+    mesh2.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-700));
+    mesh2.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-700));
+    
+    nightSky.getTextureReference().bind();
+    mesh2.draw();
+    nightSky.getTextureReference().unbind();
+    
+    
+    // Left-back window:
+    ofSetColor(255); // Color reset.
+    
+    ofMesh mesh3;
+    mesh3.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    
+    // Upper-right point:
+    mesh3.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1600));
+    mesh3.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1600));
+    
+    // Upper-left point:
+    mesh3.addTexCoord(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1200));
+    mesh3.addVertex(ofPoint(leftWallx,canvasY-200,canvasFront+floorLength-1200));
+    
+    // Lower-right point:
+    mesh3.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1600));
+    mesh3.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1600));
+    
+    // Lower-left point:
+    mesh3.addTexCoord(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1200));
+    mesh3.addVertex(ofPoint(leftWallx,canvasY+200,canvasFront+floorLength-1200));
+    
+    nightSky.getTextureReference().bind();
+    mesh3.draw();
+    nightSky.getTextureReference().unbind();
+    
+    
+    // Right-front window:
+    ofSetColor(255); // Color reset.
+    
+    ofMesh mesh4;
+    mesh4.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    
+    // Upper-right point:
+    mesh4.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-600));
+    mesh4.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-600));
+    
+    // Upper-left point:
+    mesh4.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-200));
+    mesh4.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-200));
+    
+    // Lower-right point:
+    mesh4.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-600));
+    mesh4.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-600));
+    
+    // Lower-left point:
+    mesh4.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-200));
+    mesh4.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-200));
+    
+    nightSky.getTextureReference().bind();
+    mesh4.draw();
+    nightSky.getTextureReference().unbind();
+    
+    
+    // Right-middle window:
+    ofSetColor(255); // Color reset.
+    
+    ofMesh mesh5;
+    mesh5.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    
+    // Upper-right point:
+    mesh5.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1100));
+    mesh5.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1100));
+    
+    // Upper-left point:
+    mesh5.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-700));
+    mesh5.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-700));
+    
+    // Lower-right point:
+    mesh5.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1100));
+    mesh5.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1100));
+    
+    // Lower-left point:
+    mesh5.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-700));
+    mesh5.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-700));
+    
+    nightSky.getTextureReference().bind();
+    mesh5.draw();
+    nightSky.getTextureReference().unbind();
+    
+    
+    // Right-back window:
+    ofSetColor(255); // Color reset.
+    
+    ofMesh mesh6;
+    mesh6.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    
+    // Upper-right point:
+    mesh6.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1600));
+    mesh6.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1600));
+    
+    // Upper-left point:
+    mesh6.addTexCoord(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1200));
+    mesh6.addVertex(ofPoint(rightWallx,canvasY-200,canvasFront+floorLength-1200));
+    
+    // Lower-right point:
+    mesh6.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1600));
+    mesh6.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1600));
+    
+    // Lower-left point:
+    mesh6.addTexCoord(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1200));
+    mesh6.addVertex(ofPoint(rightWallx,canvasY+200,canvasFront+floorLength-1200));
+    
+    nightSky.getTextureReference().bind();
+    mesh6.draw();
+    nightSky.getTextureReference().unbind();
     
     
     

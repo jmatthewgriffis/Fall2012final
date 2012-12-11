@@ -66,6 +66,10 @@ public:
     ofImage davinci;
     ofImage mondrian;
     
+    // Texture for the windows:
+    
+    ofImage nightSky;
+    
     //__________________________________________________________
     
     /* It'd be nice to figure out how to make elements be drawn in front

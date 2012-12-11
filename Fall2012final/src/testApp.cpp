@@ -45,9 +45,9 @@ void testApp::setup(){
     lcounter = 0; // This will count up to initiate laser movement.
     ltimer = 120; // This is what lcounter counts towards.
     
-    windowsill.r = 150;
-    windowsill.g = 150;
-    windowsill.b = 150;
+    windowsill.r = 100;
+    windowsill.g = 100;
+    windowsill.b = 100;
     
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
@@ -395,9 +395,11 @@ void testApp::draw(){
     mesh.draw();
     nightSky.getTextureReference().unbind();
     
-    // Windowsill:
+    // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
     ofLine(leftWallx, canvasY+200, canvasFront+floorLength-200, leftWallx, canvasY+200, canvasFront+floorLength-600);
+    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-600, leftWallx, canvasY-200, canvasFront+floorLength-600);
+    ofLine(leftWallx, canvasY-200, canvasFront+floorLength-200, leftWallx, canvasY-200, canvasFront+floorLength-600);
     
     
     // Left-middle window:
@@ -426,9 +428,11 @@ void testApp::draw(){
     mesh2.draw();
     nightSky.getTextureReference().unbind();
     
-    // Windowsill:
+    // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
     ofLine(leftWallx, canvasY+200, canvasFront+floorLength-700, leftWallx, canvasY+200, canvasFront+floorLength-1100);
+    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-1100, leftWallx, canvasY-200, canvasFront+floorLength-1100);
+    ofLine(leftWallx, canvasY-200, canvasFront+floorLength-700, leftWallx, canvasY-200, canvasFront+floorLength-1100);
     
     
     // Left-back window:
@@ -457,9 +461,11 @@ void testApp::draw(){
     mesh3.draw();
     nightSky.getTextureReference().unbind();
     
-    // Windowsill:
+    // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
     ofLine(leftWallx, canvasY+200, canvasFront+floorLength-1200, leftWallx, canvasY+200, canvasFront+floorLength-1600);
+    ofLine(leftWallx, canvasY+200, canvasFront+floorLength-1600, leftWallx, canvasY-200, canvasFront+floorLength-1600);
+    ofLine(leftWallx, canvasY-200, canvasFront+floorLength-1200, leftWallx, canvasY-200, canvasFront+floorLength-1600);
     
     
     // Right-front window:
@@ -488,9 +494,11 @@ void testApp::draw(){
     mesh4.draw();
     nightSky.getTextureReference().unbind();
     
-    // Windowsill:
+    // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
     ofLine(rightWallx, canvasY+200, canvasFront+floorLength-200, rightWallx, canvasY+200, canvasFront+floorLength-600);
+    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-600, rightWallx, canvasY-200, canvasFront+floorLength-600);
+    ofLine(rightWallx, canvasY-200, canvasFront+floorLength-200, rightWallx, canvasY-200, canvasFront+floorLength-600);
     
     
     // Right-middle window:
@@ -519,9 +527,11 @@ void testApp::draw(){
     mesh5.draw();
     nightSky.getTextureReference().unbind();
     
-    // Windowsill:
+    // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
     ofLine(rightWallx, canvasY+200, canvasFront+floorLength-700, rightWallx, canvasY+200, canvasFront+floorLength-1100);
+    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-1100, rightWallx, canvasY-200, canvasFront+floorLength-1100);
+    ofLine(rightWallx, canvasY-200, canvasFront+floorLength-700, rightWallx, canvasY-200, canvasFront+floorLength-1100);
     
     
     // Right-back window:
@@ -550,9 +560,11 @@ void testApp::draw(){
     mesh6.draw();
     nightSky.getTextureReference().unbind();
     
-    // Windowsill:
+    // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
     ofLine(rightWallx, canvasY+200, canvasFront+floorLength-1200, rightWallx, canvasY+200, canvasFront+floorLength-1600);
+    ofLine(rightWallx, canvasY+200, canvasFront+floorLength-1600, rightWallx, canvasY-200, canvasFront+floorLength-1600);
+    ofLine(rightWallx, canvasY-200, canvasFront+floorLength-1200, rightWallx, canvasY-200, canvasFront+floorLength-1600);
     
     
     // Top-front window:
@@ -581,6 +593,8 @@ void testApp::draw(){
     mesh7.draw();
     nightSky.getTextureReference().unbind();
     
+    // Let's fake that the windows are recessed:
+    
     
     // Top-back window:
     ofSetColor(255); // Color reset.
@@ -607,6 +621,8 @@ void testApp::draw(){
     nightSky.getTextureReference().bind();
     mesh8.draw();
     nightSky.getTextureReference().unbind();
+    
+    // Let's fake that the windows are recessed:
     
     
     

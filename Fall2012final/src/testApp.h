@@ -33,7 +33,7 @@ public:
     
     
     // Positioning:
-    float playerX, playerY, playerZ, canvasX, canvasY, canvasZ,
+    float playerX, playerY, playerZ, capeY, capeZ, canvasX, canvasY, canvasZ,
     centerW, centerH, leftWallx, rightWallx, floorHeight, ceilingHeight,
     canvasFront, roomFront, centerRects;
     

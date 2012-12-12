@@ -121,6 +121,19 @@ void testApp::update(){
     canvasX = centerW;
     canvasY = centerH-100;
     
+    // Let's animate the cape (in a very rudimentary way). Check if
+    // the player is in the air:
+    if (playerY < floorHeight-playerRad) {
+        // If so, change the y- and z-pos of the bottom of the cape:
+        capeY = playerY+playerRad+5-10;
+        capeZ = playerZ+10;
+    }
+    else {
+        // Otherwise draw it as though hanging straight down:
+        capeY = playerY+playerRad+5;
+        capeZ = playerZ;
+    }
+    
     /* You might think you'd want to change the position of the object
      when the object is moving. However, for z, since we don't have a
      camera following the player object, it would appear to grow smaller
@@ -1105,15 +1118,16 @@ void testApp::draw(){
     ofSphere(playerX, playerY, playerZ, playerRad);
     
     
-    // Let's draw a cape. Hey, why not? Make it vary its position depending on jumping:
+    // Let's draw a cape. Why? Why would you ask that?
+    // Make it vary its position depending on jumping:
     ofSetColor(155, 155, 155);
     ofBeginShape();
     ofVertex(playerX-playerRad, playerY, playerZ);
     ofVertex(playerX+playerRad, playerY, playerZ);
-    ofVertex(playerX+playerRad+handRad, playerY+playerRad+5, playerZ);
-    ofVertex(playerX-playerRad-handRad, playerY+playerRad+5, playerZ);
+    ofVertex(playerX+playerRad+handRad, capeY, capeZ);
+    ofVertex(playerX-playerRad-handRad, capeY, capeZ);
     ofEndShape();
-
+    
     
     ofSetColor(255); // Color reset.
     

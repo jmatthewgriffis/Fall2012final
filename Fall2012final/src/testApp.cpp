@@ -11,20 +11,29 @@ void testApp::setup(){
     ofSetVerticalSync(true);
     ofBackground(0);
     
+    
     // The windows:
     // Image credit:
     // http://good-wallpapers.com/wallpapers/15912/1280_Starry%20Sky.jpg :
     nightSky.loadImage("pics/night_sky_texture.jpg");
     
-    // The paintings:
     
+    // The paintings:
     // Image credit:
     // http://www.ibiblio.org/wm/paint/auth/vinci/joconde/joconde.jpg :
     davinci.loadImage("pics/davinci.jpg");
-    
     // Image credit:
     // http://www.ibiblio.org/wm/paint/auth/mondrian/broadway.jpg
     mondrian.loadImage("pics/mondrian.jpg");
+    
+    
+    // The music ( I used this utility to generate the mp3 file from the YouTube video: http://www.youtube-mp3.org/ ):
+    // Music credit:
+    // http://youtu.be/x84m3YyO2oU
+    daft.loadSound("music/daft.mp3");
+    // Music credit:
+    // http://youtu.be/XAYhNHhxN0A
+    impossible.loadSound("music/impossible.mp3");
     
     lasered = false; // Boolean for collision.
     lpause = true; // Stall laser movement.
@@ -377,6 +386,10 @@ void testApp::draw(){
     
     
     // The windows:
+    
+    // I thank my good friend Patricio Gonzales Vivo for instructing
+    // me in how to use mesh. I still don't totally get what it does,
+    // but I understand it enough to use it for cool effect here:
     
     // Left-front window:
     ofSetColor(255); // Color reset.
@@ -772,6 +785,19 @@ void testApp::keyPressed(int key){
             if (lasered == true) {
                 lasered = false;
             }
+            break;
+            
+            case '1':
+            if (daft.getIsPlaying() == false) {
+            daft.play();
+            }
+            else {
+                daft.stop();
+            }
+            break;
+            
+        case '2':
+            
             break;
     }
     

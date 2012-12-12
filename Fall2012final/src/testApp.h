@@ -65,12 +65,19 @@ public:
     
     // Art:
     
-    ofImage davinci;
-    ofImage mondrian;
+    ofImage davinci, mondrian;
     
     // Texture for the windows:
     
     ofImage nightSky;
+    
+    //__________________________________________________________
+    
+    // Jams:
+    
+    ofSoundPlayer daft, impossible;
+    
+    bool playDaft, playImpossible;
     
     //__________________________________________________________
     

@@ -61,7 +61,7 @@ void testApp::setup(){
     centerW = ofGetWidth()/2;
     centerH = ofGetHeight()/2;
     floorHeight = centerH+(canvasSide/2);
-    ceilingHeight = floorWidth-(floorWidth/3); // Temporary value.
+    ceilingHeight = floorHeight-764;
     laserHeight = floorHeight-20;
     
     playerX = centerW;
@@ -288,7 +288,7 @@ void testApp::draw(){
     /* The floor. This looks like a mess but it's not so bad. We simply
      draw the floor by positioning the four corners as vertices, relative
      to the existing objects so all the architecture moves together: */
-    ofSetColor(50);
+    ofSetColor(20);
     ofBeginShape();
     // Back-left corner:
     ofVertex(leftWallx, floorHeight, canvasFront);
@@ -302,28 +302,28 @@ void testApp::draw(){
     ofSetColor(255); // Color reset.
     
     // The left wall (same as with the floor):
-    ofSetColor(60);
+    ofSetColor(10);
     ofBeginShape();
     // Back-lower corner:
     ofVertex(leftWallx, floorHeight, canvasFront);
     // Back-upper corner:
-    ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
+    ofVertex(leftWallx, ceilingHeight, canvasFront);
     // Front-upper corner:
-    ofVertex(leftWallx, floorHeight-ceilingHeight, roomFront);
+    ofVertex(leftWallx, ceilingHeight, roomFront);
     // Front-lower corner:
     ofVertex(leftWallx, floorHeight, roomFront);
     ofEndShape();
     ofSetColor(255); // Color reset.
     
     // The right wall:
-    ofSetColor(60);
+    ofSetColor(10);
     ofBeginShape();
     // Back-lower corner:
     ofVertex(rightWallx, floorHeight, canvasFront);
     // Back-upper corner:
-    ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
+    ofVertex(rightWallx, ceilingHeight, canvasFront);
     // Front-upper corner:
-    ofVertex(rightWallx, floorHeight-ceilingHeight, roomFront);
+    ofVertex(rightWallx, ceilingHeight, roomFront);
     // Front-lower corner:
     ofVertex(rightWallx, floorHeight, roomFront);
     ofEndShape();
@@ -331,14 +331,14 @@ void testApp::draw(){
     
     
     // The back wall:
-    ofSetColor(40);
+    ofSetColor(15);
     ofBeginShape();
     // Lower-left corner:
     ofVertex(leftWallx, floorHeight, canvasFront);
     // Upper-left corner:
-    ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
+    ofVertex(leftWallx, ceilingHeight, canvasFront);
     // Upper-right corner:
-    ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
+    ofVertex(rightWallx, ceilingHeight, canvasFront);
     // Lower-right corner:
     ofVertex(rightWallx, floorHeight, canvasFront);
     ofEndShape();
@@ -346,21 +346,27 @@ void testApp::draw(){
     
     
     // The ceiling:
-    ofSetColor(70);
+    ofSetColor(20);
     ofBeginShape();
     // Back-left corner:
-    ofVertex(leftWallx, floorHeight-ceilingHeight, canvasFront);
+    ofVertex(leftWallx, ceilingHeight, canvasFront);
     // Back-right corner:
-    ofVertex(rightWallx, floorHeight-ceilingHeight, canvasFront);
+    ofVertex(rightWallx, ceilingHeight, canvasFront);
     // Front-right corner:
-    ofVertex(rightWallx, floorHeight-ceilingHeight, roomFront);
+    ofVertex(rightWallx, ceilingHeight, roomFront);
     // Front-left corner:
-    ofVertex(leftWallx, floorHeight-ceilingHeight, roomFront);
+    ofVertex(leftWallx, ceilingHeight, roomFront);
     ofEndShape();
     ofSetColor(255); // Color reset.
     
     
     // Building complete!
+    
+    ofSetColor(0,0,255);
+    ofLine(leftWallx, floorHeight, roomFront, rightWallx, floorHeight, roomFront);
+    ofLine(leftWallx, floorHeight, roomFront, leftWallx, ceilingHeight, roomFront);
+    ofLine(rightWallx, floorHeight, roomFront, rightWallx, ceilingHeight, roomFront);
+    ofLine(leftWallx, ceilingHeight, roomFront, rightWallx, ceilingHeight, roomFront);
     
     
     
@@ -575,20 +581,20 @@ void testApp::draw(){
     mesh7.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
     // Upper-right point:
-    mesh7.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-300));
-    mesh7.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-300));
+    mesh7.addVertex(ofPoint(canvasX+300,ceilingHeight,roomFront-300));
+    mesh7.addTexCoord(ofPoint(canvasX+300,ceilingHeight,roomFront-300));
     
     // Upper-left point:
-    mesh7.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-300));
-    mesh7.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-300));
+    mesh7.addTexCoord(ofPoint(canvasX-300,ceilingHeight,roomFront-300));
+    mesh7.addVertex(ofPoint(canvasX-300,ceilingHeight,roomFront-300));
     
     // Lower-right point:
-    mesh7.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-700));
-    mesh7.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-700));
+    mesh7.addTexCoord(ofPoint(canvasX+300,ceilingHeight,roomFront-700));
+    mesh7.addVertex(ofPoint(canvasX+300,ceilingHeight,roomFront-700));
     
     // Lower-left point:
-    mesh7.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-700));
-    mesh7.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-700));
+    mesh7.addTexCoord(ofPoint(canvasX-300,ceilingHeight,roomFront-700));
+    mesh7.addVertex(ofPoint(canvasX-300,ceilingHeight,roomFront-700));
     
     nightSky.getTextureReference().bind();
     mesh7.draw();
@@ -596,9 +602,9 @@ void testApp::draw(){
     
     // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
-    ofLine(canvasX+300,floorHeight-ceilingHeight,roomFront-300, canvasX+300,floorHeight-ceilingHeight,roomFront-700);
-    ofLine(canvasX+300,floorHeight-ceilingHeight,roomFront-700,canvasX-300,floorHeight-ceilingHeight,roomFront-700);
-    ofLine(canvasX-300,floorHeight-ceilingHeight,roomFront-300,canvasX-300,floorHeight-ceilingHeight,roomFront-700);
+    ofLine(canvasX+300,ceilingHeight,roomFront-300, canvasX+300,ceilingHeight,roomFront-700);
+    ofLine(canvasX+300,ceilingHeight,roomFront-700,canvasX-300,ceilingHeight,roomFront-700);
+    ofLine(canvasX-300,ceilingHeight,roomFront-300,canvasX-300,ceilingHeight,roomFront-700);
     
     
     // Top-back window:
@@ -608,20 +614,20 @@ void testApp::draw(){
     mesh8.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
     // Upper-right point:
-    mesh8.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-1100));
-    mesh8.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-1100));
+    mesh8.addVertex(ofPoint(canvasX+300,ceilingHeight,roomFront-1100));
+    mesh8.addTexCoord(ofPoint(canvasX+300,ceilingHeight,roomFront-1100));
     
     // Upper-left point:
-    mesh8.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-1100));
-    mesh8.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-1100));
+    mesh8.addTexCoord(ofPoint(canvasX-300,ceilingHeight,roomFront-1100));
+    mesh8.addVertex(ofPoint(canvasX-300,ceilingHeight,roomFront-1100));
     
     // Lower-right point:
-    mesh8.addTexCoord(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-1500));
-    mesh8.addVertex(ofPoint(canvasX+300,floorHeight-ceilingHeight,roomFront-1500));
+    mesh8.addTexCoord(ofPoint(canvasX+300,ceilingHeight,roomFront-1500));
+    mesh8.addVertex(ofPoint(canvasX+300,ceilingHeight,roomFront-1500));
     
     // Lower-left point:
-    mesh8.addTexCoord(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-1500));
-    mesh8.addVertex(ofPoint(canvasX-300,floorHeight-ceilingHeight,roomFront-1500));
+    mesh8.addTexCoord(ofPoint(canvasX-300,ceilingHeight,roomFront-1500));
+    mesh8.addVertex(ofPoint(canvasX-300,ceilingHeight,roomFront-1500));
     
     nightSky.getTextureReference().bind();
     mesh8.draw();
@@ -629,9 +635,9 @@ void testApp::draw(){
     
     // Let's fake that the windows are recessed:
     ofSetColor(windowsill);
-    ofLine(canvasX+300,floorHeight-ceilingHeight,roomFront-1100, canvasX+300,floorHeight-ceilingHeight,roomFront-1500);
-    ofLine(canvasX+300,floorHeight-ceilingHeight,roomFront-1500,canvasX-300,floorHeight-ceilingHeight,roomFront-1500);
-    ofLine(canvasX-300,floorHeight-ceilingHeight,roomFront-1100,canvasX-300,floorHeight-ceilingHeight,roomFront-1500);
+    ofLine(canvasX+300,ceilingHeight,roomFront-1100, canvasX+300,ceilingHeight,roomFront-1500);
+    ofLine(canvasX+300,ceilingHeight,roomFront-1500,canvasX-300,ceilingHeight,roomFront-1500);
+    ofLine(canvasX-300,ceilingHeight,roomFront-1100,canvasX-300,ceilingHeight,roomFront-1500);
     
     
     

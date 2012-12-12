@@ -37,6 +37,7 @@ void testApp::setup(){
     
     closeToRestart = false;
     grabPainting = false;
+    paintingGrabbed = false;
     lasered = false; // Boolean for collision.
     lpause = true; // Stall laser movement.
     onePress = false; // Use this to prevent repeat calls to play a music track.
@@ -1073,10 +1074,20 @@ void testApp::draw(){
     // grayscale makes the painting appear as though in dim lighting conditions.
     
     // Draw a pic (I used math to reduce the original image's dimensions
-    // to fit within the 500x500 box. I would use Max Width and Max Height
+    // to fit within the 500x500 canvas size. I would use Max Width and Max Height
     // but I don't know how or if that's even possible):
-    if (lasered == false) {
+    if (lasered == false && paintingGrabbed == false) {
         davinci.draw(canvasX, canvasY, canvasFront, davinciWidth, davinciHeight);
+    }
+    else if (lasered == true) {
+        ofSetColor(255,0,0);
+        // I use this convoluted x-position for a simple reason: if I offset the xPos by a
+        // fixed amount, the text would not stay centered in the frame. By offsetting it to
+        // an amount that changes relative to the distance from the canvas, it stays centered:
+        ofDrawBitmapString("FAIL.", canvasX-0.03*(playerZ-canvasZ), canvasY, canvasFront);
+    }
+    else if (paintingGrabbed == true) {
+        
     }
     //mondrian.draw(canvasX, canvasY, canvasFront, ?, ?);
     

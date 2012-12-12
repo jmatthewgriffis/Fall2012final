@@ -32,6 +32,7 @@ public:
     bool closeToRestart; // Use for the restart control panel.
     
     bool grabPainting; // Use to detect proximity to painting.
+    bool paintingGrabbed; // Time to win.
     
     
     // Positioning:

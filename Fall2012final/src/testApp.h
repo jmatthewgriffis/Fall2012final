@@ -33,6 +33,7 @@ public:
     
     bool grabPainting; // Use to detect proximity to painting.
     bool paintingGrabbed; // Time to win.
+    bool unpressSpace; // Use to force a second press of SPACE.
     
     
     // Positioning:

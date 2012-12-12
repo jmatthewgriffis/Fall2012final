@@ -38,6 +38,7 @@ void testApp::setup(){
     closeToRestart = false;
     grabPainting = false;
     paintingGrabbed = false;
+    unpressSpace = false;
     lasered = false; // Boolean for collision.
     lpause = true; // Stall laser movement.
     onePress = false; // Use this to prevent repeat calls to play a music track.
@@ -213,7 +214,9 @@ void testApp::update(){
                     if (playerY-playerRad < myLasers[i].yPos2) {
                         if (playerZ+playerRad >= myLasers[i].zPos1) {
                             if (playerZ-playerRad <= myLasers[i].zPos2) {
-                                //lasered = true;
+                                if (paintingGrabbed == false) {
+                                    lasered = true;
+                                }
                             }
                         }
                     }
@@ -255,7 +258,9 @@ void testApp::update(){
                     if (playerY-playerRad < myLasersV[i].yPos2) {
                         if (playerZ+playerRad >= myLasersV[i].zPos1) {
                             if (playerZ-playerRad <= myLasersV[i].zPos2) {
-                                //lasered = true;
+                                if (paintingGrabbed == false) {
+                                    lasered = true;
+                                }
                             }
                         }
                     }
@@ -1250,9 +1255,15 @@ void testApp::keyPressed(int key){
             // Check if player is on the floor:
             if (playerY == floorHeight-playerRad) {
                 jump = true;
+                unpressSpace = true;
             }
             if (grabPainting == true) {
-                paintingGrabbed = true;
+                // Check to make sure the player has released the space
+                // bar after jumping and has pressed it again; this
+                // prevents one press covering both actions:
+                if (unpressSpace == false) {
+                    paintingGrabbed = true;
+                }
             }
             break;
             
@@ -1328,6 +1339,7 @@ void testApp::keyReleased(int key){
             
         case ' ':
             jump = false;
+            unpressSpace = false;
             break;
             
         case '1':

@@ -70,11 +70,11 @@ void testApp::setup(){
     windowsill.g = 100;
     windowsill.b = 100;
     light.r = 227;
-    light.g = 224;
+    light.g = 175;
     light.b = 70;
-    lightPatch.r = 255;
-    lightPatch.g = 255;
-    lightPatch.b = 255;
+    lightPatch.r = 35;
+    lightPatch.g = 35;
+    lightPatch.b = 35;
     
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
@@ -503,46 +503,6 @@ void testApp::draw(){
     
     // Building complete!
     
-    // Let's give a blue outline to the front of the room. This would be a lot
-    // more elegant with an array, but I'd have to make a class and don't feel like it:
-    
-    ofSetColor(0,0,255);
-    ofNoFill();
-    ofRect(centerW, centerRects, roomFront, floorWidth, floorHeight-ceilingHeight);
-    
-    ofSetColor(0,0,245);
-    ofNoFill();
-    ofRect(centerW, centerRects, roomFront+50, floorWidth, floorHeight-ceilingHeight);
-    
-    ofSetColor(0,0,235);
-    ofNoFill();
-    ofRect(centerW, centerRects, roomFront+100, floorWidth, floorHeight-ceilingHeight);
-    
-    ofSetColor(0,0,225);
-    ofNoFill();
-    ofRect(centerW, centerRects, roomFront+150, floorWidth, floorHeight-ceilingHeight);
-    
-    ofSetColor(0,0,215);
-    ofNoFill();
-    ofRect(centerW, centerRects, roomFront+200, floorWidth, floorHeight-ceilingHeight);
-    
-    ofSetColor(0,0,205);
-    ofNoFill();
-    ofRect(centerW, centerRects, roomFront+250, floorWidth, floorHeight-ceilingHeight);
-    
-    ofSetColor(0,0,195);
-    ofNoFill();
-    ofRect(centerW, centerRects, roomFront+300, floorWidth, floorHeight-ceilingHeight);
-    
-    ofSetColor(0,0,185);
-    ofNoFill();
-    ofRect(centerW, centerRects, roomFront+350, floorWidth, floorHeight-ceilingHeight);
-    
-    ofSetColor(0,0,175);
-    ofNoFill();
-    ofRect(centerW, centerRects, roomFront+400, floorWidth, floorHeight-ceilingHeight);
-    
-    ofFill();
     
     
     //__________________________________________________________
@@ -879,7 +839,109 @@ void testApp::draw(){
     ofEndShape();
     
     
+    // Light patches on the floor:
+    
+    ofSetColor(lightPatch);
+    
+    // 150 from window; delete this line.
+    
+    // Front-left light patch:
+    ofBeginShape();
+    ofVertex(canvasX-400, floorHeight, roomFront);
+    ofVertex(canvasX-200, floorHeight, roomFront);
+    ofVertex(canvasX-200, floorHeight, roomFront-200);
+    ofVertex(canvasX-400, floorHeight, roomFront-200);
+    ofEndShape();
+    
+    // Front-right light patch:
+    ofBeginShape();
+    ofVertex(canvasX+400, floorHeight, roomFront);
+    ofVertex(canvasX+200, floorHeight, roomFront);
+    ofVertex(canvasX+200, floorHeight, roomFront-200);
+    ofVertex(canvasX+400, floorHeight, roomFront-200);
+    ofEndShape();
+    
+    // Middle-left light patch:
+    ofBeginShape();
+    ofVertex(canvasX-400, floorHeight, roomFront-800);
+    ofVertex(canvasX-200, floorHeight, roomFront-800);
+    ofVertex(canvasX-200, floorHeight, roomFront-1000);
+    ofVertex(canvasX-400, floorHeight, roomFront-1000);
+    ofEndShape();
+    
+    // Middle-right light patch:
+    ofBeginShape();
+    ofVertex(canvasX+400, floorHeight, roomFront-800);
+    ofVertex(canvasX+200, floorHeight, roomFront-800);
+    ofVertex(canvasX+200, floorHeight, roomFront-1000);
+    ofVertex(canvasX+400, floorHeight, roomFront-1000);
+    ofEndShape();
+    
+    // Back-left light patch:
+    ofBeginShape();
+    ofVertex(canvasX-400, floorHeight, roomFront-1600);
+    ofVertex(canvasX-200, floorHeight, roomFront-1600);
+    ofVertex(canvasX-200, floorHeight, roomFront-1800);
+    ofVertex(canvasX-400, floorHeight, roomFront-1800);
+    ofEndShape();
+    
+    // Back-right light patch:
+    ofBeginShape();
+    ofVertex(canvasX+400, floorHeight, roomFront-1600);
+    ofVertex(canvasX+200, floorHeight, roomFront-1600);
+    ofVertex(canvasX+200, floorHeight, roomFront-1800);
+    ofVertex(canvasX+400, floorHeight, roomFront-1800);
+    ofEndShape();
+    
+    
     ofSetColor(255); // Color reset.
+    
+    
+    
+    //__________________________________________________________
+    
+    
+    
+    // Let's give a blue outline to the front of the room. This would be a lot
+    // more elegant with an array, but I'd have to make a class and don't feel like it:
+    
+    ofSetColor(0,0,255);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,245);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+50, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,235);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+100, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,225);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+150, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,215);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+200, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,205);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+250, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,195);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+300, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,185);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+350, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,175);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+400, floorWidth, floorHeight-ceilingHeight);
+    
+    ofFill();
     
     
     

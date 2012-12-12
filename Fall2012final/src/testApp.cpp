@@ -290,12 +290,14 @@ void testApp::update(){
     
     //__________________________________________________________
     
-    cout<<playDaft<<endl;
+    //cout<<playDaft<<endl;
     
     // Let's play some music:
     
     /* Here's how this works. We check if music should change condition. If it should, we
-     check if it's already playing. If it's not, we play it. If it is, we stop it. Either
+     check if it's already playing. If it's not, we check if other music is already playing.
+     If it is, we fade out that music and play this music. If other music is not playing, we
+     play this music. If this music is already playing, we stop it cold (no fade out). Either
      way, we immediately turn off the boolean so the condition doesn't change again until
      the player has released and then repressed the button.*/
     if (playDaft == true) {
@@ -304,6 +306,8 @@ void testApp::update(){
                 fakeFadeImpossible = true;
             }
             else {
+                // We set the volume to full in case we previously turned down the
+                // volume (by fading the music out):
                 daft.setVolume(reduce);
                 daft.play();
                 playDaft = false;
@@ -317,15 +321,31 @@ void testApp::update(){
     
     if (playImpossible == true) {
         if (impossible.getIsPlaying() == false) {
+            if (daft.getIsPlaying() == true) {
+                fakeFadeDaft = true;
+            }
+            else {
             impossible.setVolume(reduce);
             impossible.play();
+                playImpossible = false;
+            }
         }
         else {
             impossible.stop();
+            playImpossible = false;
         }
-        playImpossible = false;
     }
     
+    /* I didn't find a built-in option for fading out sounds. Pfft, who needs one?
+     I can make this myself, and I did. Here's how it works. We check if the music
+     should fade out. If so, we start a counter. When the counter reaches a certain
+     total, it reduces the volume of the music by an increment and resets the counter.
+     We constantly check the music's volume, and once it reaches zero, we reset the
+     volume control (so it can be used again later) and stop the music from playing
+     (since it's still going, even though it's silent. As a final touch, we turn off
+     the fade-out boolean and reset the counter. Note that if we started the music
+     playing again, it would play at its reduced volume, which is why when playing the
+     music we reset the volume to full. */
     if (fakeFadeDaft == true) {
         fadeCounter ++;
         if (fadeCounter >= fadeSpeed) {
@@ -883,12 +903,6 @@ void testApp::keyPressed(int key){
                 onePress = true;
             }
             break;
-            
-        case '3':
-            fakeFadeDaft = true;
-            
-        case '4':
-            fakeFadeImpossible = true;
     }
     
 }

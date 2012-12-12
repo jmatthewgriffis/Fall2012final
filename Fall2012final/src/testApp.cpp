@@ -1103,6 +1103,16 @@ void testApp::draw(){
     // Body:
     ofSetColor(0,130,255); // Blue.
     ofSphere(playerX, playerY, playerZ, playerRad);
+    
+    
+    // Let's draw a cape. Hey, why not? Make it vary its position depending on jumping:
+    ofSetColor(155, 155, 155);
+    ofBeginShape();
+    ofVertex(playerX-playerRad, playerY, playerZ);
+    ofVertex(playerX+playerRad, playerY, playerZ);
+    ofVertex(playerX+playerRad+handRad, playerY+playerRad+5, playerZ);
+    ofVertex(playerX-playerRad-handRad, playerY+playerRad+5, playerZ);
+    ofEndShape();
 
     
     ofSetColor(255); // Color reset.

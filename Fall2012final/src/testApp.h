@@ -35,7 +35,7 @@ public:
     // Positioning:
     float playerX, playerY, playerZ, canvasX, canvasY, canvasZ,
     centerW, centerH, leftWallx, rightWallx, floorHeight, ceilingHeight,
-    canvasFront, roomFront;
+    canvasFront, roomFront, centerRects;
     
     float playerRad, canvasSide, floorLength, floorWidth; // Sizing.
     

@@ -84,6 +84,7 @@ void testApp::setup(){
     floorHeight = centerH+(canvasSide/2);
     ceilingHeight = floorHeight-764;
     laserHeight = floorHeight-20;
+    centerRects = floorHeight-((floorHeight-ceilingHeight)/2);
     
     playerX = centerW;
     playerY = floorHeight-playerRad;
@@ -496,12 +497,46 @@ void testApp::draw(){
     
     // Building complete!
     
-    ofSetColor(0,0,255);
-    ofLine(leftWallx, floorHeight, roomFront, rightWallx, floorHeight, roomFront);
-    ofLine(leftWallx, floorHeight, roomFront, leftWallx, ceilingHeight, roomFront);
-    ofLine(rightWallx, floorHeight, roomFront, rightWallx, ceilingHeight, roomFront);
-    ofLine(leftWallx, ceilingHeight, roomFront, rightWallx, ceilingHeight, roomFront);
+    // Let's give a blue outline to the front of the room. This would be a lot
+    // more elegant with an array, but I'd have to make a class and don't feel like it:
     
+    ofSetColor(0,0,255);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,245);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+50, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,235);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+100, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,225);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+150, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,215);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+200, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,205);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+250, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,195);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+300, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,185);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+350, floorWidth, floorHeight-ceilingHeight);
+    
+    ofSetColor(0,0,175);
+    ofNoFill();
+    ofRect(centerW, centerRects, roomFront+400, floorWidth, floorHeight-ceilingHeight);
+    
+    ofFill();
     
     
     //__________________________________________________________

@@ -289,6 +289,10 @@ void testApp::update(){
     
     // Let's play some music:
     
+    /* Here's how this works. We check if music should change condition. If it should, we
+     check if it's already playing. If it's not, we play it. If it is, we stop it. Either
+     way, we immediately turn off the boolean so the condition doesn't change again until
+     the player has released and then repressed the button.*/
     if (playDaft == true) {
         if (daft.getIsPlaying() == false) {
             daft.play();
@@ -297,6 +301,16 @@ void testApp::update(){
             daft.stop();
         }
         playDaft = false;
+    }
+    
+    if (playImpossible == true) {
+        if (impossible.getIsPlaying() == false) {
+            impossible.play();
+        }
+        else {
+            impossible.stop();
+        }
+        playImpossible = false;
     }
 }
 

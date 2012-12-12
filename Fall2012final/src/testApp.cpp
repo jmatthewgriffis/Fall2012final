@@ -213,7 +213,7 @@ void testApp::update(){
                     if (playerY-playerRad < myLasers[i].yPos2) {
                         if (playerZ+playerRad >= myLasers[i].zPos1) {
                             if (playerZ-playerRad <= myLasers[i].zPos2) {
-                                lasered = true;
+                                //lasered = true;
                             }
                         }
                     }
@@ -255,7 +255,7 @@ void testApp::update(){
                     if (playerY-playerRad < myLasersV[i].yPos2) {
                         if (playerZ+playerRad >= myLasersV[i].zPos1) {
                             if (playerZ-playerRad <= myLasersV[i].zPos2) {
-                                lasered = true;
+                                //lasered = true;
                             }
                         }
                     }
@@ -437,6 +437,12 @@ void testApp::update(){
         }
     }
     else {
+        grabPainting = false;
+    }
+    
+    
+    // Check if painting has been grabbed:
+    if (paintingGrabbed == true) {
         grabPainting = false;
     }
 }
@@ -1198,7 +1204,7 @@ void testApp::draw(){
     // Restart (only display text if a laser has been triggered):
     if (closeToRestart == true) {
         ofSetColor(255);
-        if (lasered == true) {
+        if (lasered == true || paintingGrabbed == true) {
             ofDrawBitmapString("Press r to reload\nthe simulation.", leftWallx-130, playerY, playerZ);
         }
     }
@@ -1245,6 +1251,9 @@ void testApp::keyPressed(int key){
             if (playerY == floorHeight-playerRad) {
                 jump = true;
             }
+            if (grabPainting == true) {
+                paintingGrabbed = true;
+            }
             break;
             
         case 'r':
@@ -1253,6 +1262,9 @@ void testApp::keyPressed(int key){
             if (closeToRestart == true) {
                 if (lasered == true) {
                     lasered = false;
+                }
+                else if (paintingGrabbed == true) {
+                    paintingGrabbed = false;
                 }
             }
             break;

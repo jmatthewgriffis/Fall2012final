@@ -1220,6 +1220,12 @@ void testApp::draw(){
     
     // Text:
     
+    // Display controls:
+    
+    ofSetColor(255);
+    ofDrawBitmapString("Press the arrow keys or WASD to move.\nPress SPACE to jump.", playerX-(1024/2)+120, centerH+(768/2)-100, playerZ);
+    
+    
     // Display text if near a control panel:
     
     // Music (display different text depending on what the current state

@@ -290,7 +290,7 @@ void testApp::update(){
     
     //__________________________________________________________
     
-    
+    cout<<playDaft<<endl;
     
     // Let's play some music:
     
@@ -300,13 +300,19 @@ void testApp::update(){
      the player has released and then repressed the button.*/
     if (playDaft == true) {
         if (daft.getIsPlaying() == false) {
-            daft.setVolume(reduce);
-            daft.play();
+            if (impossible.getIsPlaying() == true) {
+                fakeFadeImpossible = true;
+            }
+            else {
+                daft.setVolume(reduce);
+                daft.play();
+                playDaft = false;
+            }
         }
         else {
             daft.stop();
+            playDaft = false;
         }
-        playDaft = false;
     }
     
     if (playImpossible == true) {
@@ -881,7 +887,7 @@ void testApp::keyPressed(int key){
         case '3':
             fakeFadeDaft = true;
             
-            case '4':
+        case '4':
             fakeFadeImpossible = true;
     }
     

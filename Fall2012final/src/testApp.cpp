@@ -922,6 +922,8 @@ void testApp::draw(){
     
     // Display text if near a control panel:
     
+    // Music (display different text depending on what the current state
+    // of the music is:
     if (closeToMusic == true) {
         ofSetColor(255);
         if (fakeFadeDaft == true || fakeFadeImpossible == true) {
@@ -938,8 +940,12 @@ void testApp::draw(){
         }
     }
     
+    // Restart (only display text if a laser has been triggered):
     if (closeToRestart == true) {
-        ofSetHexColor(0x000000);
+        ofSetColor(255);
+        if (lasered == true) {
+            ofDrawBitmapString("Press r to reload\nthe simulation.", leftWallx-130, playerY, playerZ);
+        }
     }
 }
 

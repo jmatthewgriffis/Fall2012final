@@ -126,7 +126,7 @@ void testApp::update(){
     if (backward == true) {
         // Give the player a little freedom to pull back from the room
         // but not much:
-        if (playerZ < roomFront+300) {
+        if (playerZ < roomFront+400-playerRad) {
             canvasZ -= xVel;
         }
         
@@ -325,8 +325,8 @@ void testApp::update(){
                 fakeFadeDaft = true;
             }
             else {
-            impossible.setVolume(reduce);
-            impossible.play();
+                impossible.setVolume(reduce);
+                impossible.play();
                 playImpossible = false;
             }
         }
@@ -752,6 +752,53 @@ void testApp::draw(){
     ofLine(canvasX-300,ceilingHeight,roomFront-1100,canvasX-300,ceilingHeight,roomFront-1500);
     
     
+    // Let's draw the tune box:
+    
+    ofSetLineWidth(1);
+    ofSetColor(25);
+    ofBeginShape();
+    ofVertex(rightWallx, canvasY+200, roomFront+300);
+    ofVertex(rightWallx, canvasY+200, roomFront+400);
+    ofVertex(rightWallx, canvasY+300, roomFront+400);
+    ofVertex(rightWallx, canvasY+300, roomFront+300);
+    ofEndShape();
+    
+    // Here's a button on it:
+    ofSetColor(255,104,31);
+    ofBeginShape();
+    ofVertex(rightWallx, canvasY+245, roomFront+335);
+    ofVertex(rightWallx, canvasY+245, roomFront+345);
+    ofVertex(rightWallx, canvasY+255, roomFront+345);
+    ofVertex(rightWallx, canvasY+255, roomFront+335);
+    ofEndShape();
+    // Here's another button on it:
+    ofSetColor(255,104,31);
+    ofBeginShape();
+    ofVertex(rightWallx, canvasY+245, roomFront+355);
+    ofVertex(rightWallx, canvasY+245, roomFront+365);
+    ofVertex(rightWallx, canvasY+255, roomFront+365);
+    ofVertex(rightWallx, canvasY+255, roomFront+355);
+    ofEndShape();
+    
+    
+    // Let's draw the restart box:
+    
+    ofSetLineWidth(1);
+    ofSetColor(25);
+    ofBeginShape();
+    ofVertex(leftWallx, canvasY+200, roomFront+300);
+    ofVertex(leftWallx, canvasY+200, roomFront+400);
+    ofVertex(leftWallx, canvasY+300, roomFront+400);
+    ofVertex(leftWallx, canvasY+300, roomFront+300);
+    ofEndShape();
+    // Here's a button on it:
+    ofSetColor(255,104,31);
+    ofBeginShape();
+    ofVertex(leftWallx, canvasY+235, roomFront+335);
+    ofVertex(leftWallx, canvasY+235, roomFront+365);
+    ofVertex(leftWallx, canvasY+265, roomFront+365);
+    ofVertex(leftWallx, canvasY+265, roomFront+335);
+    ofEndShape();
     
     //__________________________________________________________
     
@@ -879,9 +926,13 @@ void testApp::keyPressed(int key){
             
         case 'r':
         case 'R':
-            if (lasered == true) {
-                lasered = false;
-            }
+            // First we check if the player is by the control panel:
+            if (playerX-playerRad <= leftWallx+25)
+                if (playerZ > roomFront+300 && playerZ < roomFront+400){
+                    if (lasered == true) {
+                        lasered = false;
+                    }
+                }
             break;
             
         case '1':
@@ -891,17 +942,26 @@ void testApp::keyPressed(int key){
              indicate the button is already pressed, which remains the case
              until we release the key. This prevents repeat calls if the
              player holds the key down.*/
-            if (onePress == false) {
-                playDaft = true;
-                onePress = true;
-            }
+            
+            // First we check if the player is by the control panel:
+            if (playerX+playerRad >= rightWallx-25)
+                if (playerZ > roomFront+300 && playerZ < roomFront+400){
+                    if (onePress == false) {
+                        playDaft = true;
+                        onePress = true;
+                    }
+                }
             break;
             
         case '2':
-            if (onePress == false) {
-                playImpossible = true;
-                onePress = true;
-            }
+            // First we check if the player is by the control panel:
+            if (playerX+playerRad == rightWallx)
+                if (playerZ > roomFront+300 && playerZ < roomFront+400){
+                    if (onePress == false) {
+                        playImpossible = true;
+                        onePress = true;
+                    }
+                }
             break;
     }
     

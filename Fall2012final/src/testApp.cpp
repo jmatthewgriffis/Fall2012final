@@ -272,7 +272,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    cout<<lasered<<endl; // Debug.
+    //cout<<lasered<<endl; // Debug.
     
     // Setting the rect mode affects the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
@@ -767,7 +767,9 @@ void testApp::keyPressed(int key){
             
         case 'r':
         case 'R':
-            setup();
+            if (lasered == true) {
+                lasered = false;
+            }
             break;
     }
     

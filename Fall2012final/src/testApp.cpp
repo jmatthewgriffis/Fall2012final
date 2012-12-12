@@ -40,6 +40,8 @@ void testApp::setup(){
     onePress = false; // Use this to prevent repeat calls to play a music track.
     playDaft = false;
     playImpossible = false;
+    fakeFadeDaft = false;
+    fakeFadeImpossible = false;
     
     // Movement:
     forward = false;
@@ -58,6 +60,9 @@ void testApp::setup(){
     direction2 = 1;
     lcounter = 0; // This will count up to initiate laser movement.
     ltimer = 120; // This is what lcounter counts towards.
+    reduce = 1.0; // Use this to fake the music fading out (or maybe it's real).
+    fadeCounter = 0; // Use this to time the fading out.
+    fadeSpeed = 30; // Use this to set the speed of fading out.
     
     windowsill.r = 100;
     windowsill.g = 100;
@@ -295,6 +300,7 @@ void testApp::update(){
      the player has released and then repressed the button.*/
     if (playDaft == true) {
         if (daft.getIsPlaying() == false) {
+            daft.setVolume(reduce);
             daft.play();
         }
         else {
@@ -305,12 +311,27 @@ void testApp::update(){
     
     if (playImpossible == true) {
         if (impossible.getIsPlaying() == false) {
+            impossible.setVolume(reduce);
             impossible.play();
         }
         else {
             impossible.stop();
         }
         playImpossible = false;
+    }
+    
+    if (fakeFadeDaft == true) {
+        fadeCounter ++;
+        if (fadeCounter >= fadeSpeed) {
+            reduce -= 0.1;
+            daft.setVolume(reduce);
+            fadeCounter = 0;
+        }
+        if (daft.getVolume() <= 0.0) {
+            reduce = 1.0;
+            daft.stop();
+            fakeFadeDaft = false;
+        }
     }
 }
 
@@ -840,6 +861,9 @@ void testApp::keyPressed(int key){
                 onePress = true;
             }
             break;
+            
+        case '3':
+            fakeFadeDaft = true;
     }
     
 }

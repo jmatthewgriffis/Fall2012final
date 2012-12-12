@@ -77,7 +77,11 @@ public:
     
     ofSoundPlayer daft, impossible;
     
-    bool playDaft, playImpossible, onePress;
+    bool playDaft, playImpossible, onePress, fakeFadeDaft, fakeFadeImpossible;
+    
+    float reduce;
+    
+    int fadeCounter, fadeSpeed;
     
     //__________________________________________________________
     

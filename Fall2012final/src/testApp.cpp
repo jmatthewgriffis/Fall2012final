@@ -331,6 +331,22 @@ void testApp::update(){
             reduce = 1.0;
             daft.stop();
             fakeFadeDaft = false;
+            fadeCounter = 0;
+        }
+    }
+    
+    if (fakeFadeImpossible == true) {
+        fadeCounter ++;
+        if (fadeCounter >= fadeSpeed) {
+            reduce -= 0.1;
+            impossible.setVolume(reduce);
+            fadeCounter = 0;
+        }
+        if (impossible.getVolume() <= 0.0) {
+            reduce = 1.0;
+            impossible.stop();
+            fakeFadeImpossible = false;
+            fadeCounter = 0;
         }
     }
 }
@@ -864,6 +880,9 @@ void testApp::keyPressed(int key){
             
         case '3':
             fakeFadeDaft = true;
+            
+            case '4':
+            fakeFadeImpossible = true;
     }
     
 }

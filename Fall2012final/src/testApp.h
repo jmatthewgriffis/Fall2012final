@@ -77,7 +77,7 @@ public:
     
     ofSoundPlayer daft, impossible;
     
-    bool playDaft, playImpossible;
+    bool playDaft, playImpossible, onePress;
     
     //__________________________________________________________
     

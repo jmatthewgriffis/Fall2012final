@@ -37,6 +37,9 @@ void testApp::setup(){
     
     lasered = false; // Boolean for collision.
     lpause = true; // Stall laser movement.
+    onePress = false; // Use this to prevent repeat calls to play a music track.
+    playDaft = false;
+    playImpossible = false;
     
     // Movement:
     forward = false;
@@ -278,6 +281,23 @@ void testApp::update(){
         laserXVel += direction2;
     }
     
+    
+    
+    //__________________________________________________________
+    
+    
+    
+    // Let's play some music:
+    
+    if (playDaft == true) {
+        if (daft.getIsPlaying() == false) {
+            daft.play();
+        }
+        else {
+            daft.stop();
+        }
+        playDaft = false;
+    }
 }
 
 //--------------------------------------------------------------
@@ -787,17 +807,24 @@ void testApp::keyPressed(int key){
             }
             break;
             
-            case '1':
-            if (daft.getIsPlaying() == false) {
-            daft.play();
-            }
-            else {
-                daft.stop();
+        case '1':
+            /* What happens here and in the following music-related
+             examples is that we check if the button is already pressed.
+             If it is not, we trigger the music track and IMMEDIATELY
+             indicate the button is already pressed, which remains the case
+             until we release the key. This prevents repeat calls if the
+             player holds the key down.*/
+            if (onePress == false) {
+                playDaft = true;
+                onePress = true;
             }
             break;
             
         case '2':
-            
+            if (onePress == false) {
+                playImpossible = true;
+                onePress = true;
+            }
             break;
     }
     
@@ -832,6 +859,14 @@ void testApp::keyReleased(int key){
             
         case ' ':
             jump = false;
+            break;
+            
+        case '1':
+            onePress = false;
+            break;
+            
+        case '2':
+            onePress = false;
             break;
     }
 }

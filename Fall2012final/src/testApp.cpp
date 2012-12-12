@@ -36,6 +36,7 @@ void testApp::setup(){
     impossible.loadSound("music/impossible.mp3");
     
     closeToRestart = false;
+    grabPainting = false;
     lasered = false; // Boolean for collision.
     lpause = true; // Stall laser movement.
     onePress = false; // Use this to prevent repeat calls to play a music track.
@@ -78,6 +79,8 @@ void testApp::setup(){
     
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
+    davinciWidth = 321;
+    davinciHeight = 500;
     playerRad = 50;
     handRad = 13;
     footRad = 17;
@@ -423,12 +426,24 @@ void testApp::update(){
     else {
         closeToRestart = false;
     }
+    
+    
+    // Check for proximity to the painting, too:
+    if (canvasFront+25 >= playerZ-playerRad && playerX+playerRad > canvasX-davinciWidth/2 && playerX-playerRad < canvasX+davinciWidth/2 && playerY-playerRad < canvasY+davinciHeight/2 && playerY+playerRad > canvasY-davinciHeight/2) {
+        // If close, make sure the painting is still available to grab:
+        if (lasered == false) {
+            grabPainting = true;
+        }
+    }
+    else {
+        grabPainting = false;
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    //cout<<lasered<<endl; // Debug.
+    //cout<<grabPainting<<endl; // Debug.
     
     // Setting the rect mode affects the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
@@ -1061,7 +1076,7 @@ void testApp::draw(){
     // to fit within the 500x500 box. I would use Max Width and Max Height
     // but I don't know how or if that's even possible):
     if (lasered == false) {
-        davinci.draw(canvasX, canvasY, canvasFront, 321, 500);
+        davinci.draw(canvasX, canvasY, canvasFront, davinciWidth, davinciHeight);
     }
     //mondrian.draw(canvasX, canvasY, canvasFront, ?, ?);
     
@@ -1095,18 +1110,18 @@ void testApp::draw(){
     
     // Debug to test positioning by changing color when player and
     // canvas are at the same depth:
-    if (canvasZ >= playerZ-playerRad-(canvasSide/2)) {
+    if (grabPainting == true) {
         ofSetColor(0, 255, 0); // Green.
     }
     else {
-        ofSetColor(255,0,0); // Red.
+        ofSetColor(80); // Gray.
     }
     // Left hand:
     ofSphere(playerX-playerRad, playerY+(handRad/2), playerZ, handRad);
     // Right hand:
     ofSphere(playerX+playerRad, playerY+(handRad/2), playerZ, handRad);
     
-    ofSetColor(255, 0, 0); // Red.
+    ofSetColor(80); // Gray.
     // Left foot:
     ofSphere(playerX-playerRad+footRad, playerY+playerRad-footRad/2, playerZ, footRad);
     // Right foot:
@@ -1114,13 +1129,14 @@ void testApp::draw(){
     
     
     // Body:
-    ofSetColor(0,130,255); // Blue.
+    ofSetColor(50); // Gray.
+    //ofSetColor(0,130,255); // Blue.
     ofSphere(playerX, playerY, playerZ, playerRad);
     
     
-    // Let's draw a cape. Why? Why would you ask that?
-    // Make it vary its position depending on jumping:
-    ofSetColor(155, 155, 155);
+    // Let's draw a cape. Why, you say? Why would you ask that?
+    // The bottom of the cape will fly up when the chaaracter is jumping:
+    ofSetColor(127,0,127); // Purple.
     ofBeginShape();
     ofVertex(playerX-playerRad, playerY, playerZ);
     ofVertex(playerX+playerRad, playerY, playerZ);
@@ -1129,7 +1145,15 @@ void testApp::draw(){
     ofEndShape();
     
     
-    ofSetColor(255); // Color reset.
+    /* Can't get this to work as the curve is not drawing as expected.
+     // Goggles:
+     ofSetColor(0);
+     ofNoFill();
+     ofCurve(playerX-playerRad, playerY, playerZ, playerX, playerY, playerZ+playerRad, playerX+playerRad, playerY, playerZ, playerX-playerRad, playerY, playerZ);
+     ofFill();
+     */
+    
+    ofSetColor(255);
     
     
     

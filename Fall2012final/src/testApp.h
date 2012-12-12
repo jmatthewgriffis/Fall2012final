@@ -31,13 +31,15 @@ public:
     
     bool closeToRestart; // Use for the restart control panel.
     
+    bool grabPainting; // Use to detect proximity to painting.
+    
     
     // Positioning:
     float playerX, playerY, playerZ, capeY, capeZ, canvasX, canvasY, canvasZ,
     centerW, centerH, leftWallx, rightWallx, floorHeight, ceilingHeight,
     canvasFront, roomFront, centerRects;
     
-    float playerRad, handRad, footRad, canvasSide, floorLength, floorWidth; // Sizing.
+    float playerRad, handRad, footRad, canvasSide, davinciWidth, davinciHeight, floorLength, floorWidth; // Sizing.
     
     float xVel, yVel, jumpSpd, gravity; // Speed.
     

@@ -10,6 +10,7 @@ void testApp::setup(){
     ofSetFrameRate(60);
     ofSetVerticalSync(true);
     ofBackground(0);
+    ofHideCursor();
     
     
     // The windows:
@@ -1114,14 +1115,17 @@ void testApp::draw(){
     
     // Laser grid:
     
-    // Lasers parallel to the x-axis ("horizontal" lasers):
-    for (int i=0; i<NHLASERS; i++) {
-        myLasers[i].draw(rightWallx-laserLength, laserHeight, laserZsMod[i], rightWallx, laserHeight, laserZsMod[i], laserLength);
-    }
-    
-    // Lasers parallel to the z-axis ("vertical" lasers):
-    for (int i=0; i<NVLASERS; i++) {
-        myLasersV[i].draw(laserXsMod[i], laserHeight, canvasFront, laserXsMod[i], laserHeight, canvasFront+laserLengthV, laserLengthV);
+    // Lasers only appear if the player has not grabbed the painting:
+    if (paintingGrabbed == false) {
+        // Lasers parallel to the x-axis ("horizontal" lasers):
+        for (int i=0; i<NHLASERS; i++) {
+            myLasers[i].draw(rightWallx-laserLength, laserHeight, laserZsMod[i], rightWallx, laserHeight, laserZsMod[i], laserLength);
+        }
+        
+        // Lasers parallel to the z-axis ("vertical" lasers):
+        for (int i=0; i<NVLASERS; i++) {
+            myLasersV[i].draw(laserXsMod[i], laserHeight, canvasFront, laserXsMod[i], laserHeight, canvasFront+laserLengthV, laserLengthV);
+        }
     }
     
     

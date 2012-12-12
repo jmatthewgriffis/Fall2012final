@@ -1202,6 +1202,12 @@ void testApp::draw(){
             ofDrawBitmapString("Press r to reload\nthe simulation.", leftWallx-130, playerY, playerZ);
         }
     }
+    
+    // Display text if near the painting and it can be stolen:
+    if (grabPainting == true) {
+        ofSetColor(255);
+        ofDrawBitmapString("Press SPACE to steal the painting.", playerX-100, playerY-100, playerZ);
+    }
 }
 
 //--------------------------------------------------------------

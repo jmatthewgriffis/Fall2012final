@@ -107,7 +107,7 @@ void testApp::update(){
     if (backward == true) {
         // Give the player a little freedom to pull back from the room
         // but not much:
-        if (playerZ < roomFront+225) {
+        if (playerZ < roomFront+300) {
             canvasZ -= xVel;
         }
         
@@ -272,7 +272,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    //cout<<laserXVel<<endl; // Debug.
+    cout<<lasered<<endl; // Debug.
     
     // Setting the rect mode affects the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
@@ -764,6 +764,11 @@ void testApp::keyPressed(int key){
                 jump = true;
             }
             break;
+            
+        case 'r':
+        case 'R':
+            setup();
+            break;
     }
     
 }
@@ -797,11 +802,6 @@ void testApp::keyReleased(int key){
             
         case ' ':
             jump = false;
-            break;
-            
-        case 'r':
-        case 'R':
-            setup();
             break;
     }
 }

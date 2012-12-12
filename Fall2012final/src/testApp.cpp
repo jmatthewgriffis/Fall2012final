@@ -62,7 +62,7 @@ void testApp::setup(){
     ltimer = 120; // This is what lcounter counts towards.
     reduce = 1.0; // Use this to fake the music fading out (or maybe it's real).
     fadeCounter = 0; // Use this to time the fading out.
-    fadeSpeed = 30; // Use this to set the speed of fading out.
+    fadeSpeed = 15; // Use this to set the speed of fading out.
     
     windowsill.r = 100;
     windowsill.g = 100;

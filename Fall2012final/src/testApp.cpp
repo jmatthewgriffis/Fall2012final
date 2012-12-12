@@ -384,23 +384,19 @@ void testApp::update(){
     
     
     
-    // Work with control panels. First, check for proximity:
+    // Work with control panels. Check for proximity:
     
     // Music:
-    if (playerX+playerRad >= rightWallx-25) {
-        if (playerZ > roomFront+300 && playerZ < roomFront+400) {
-            closeToMusic = true;
-        }
+    if (playerX+playerRad >= rightWallx-25 && playerZ > roomFront+300 && playerZ < roomFront+400) {
+        closeToMusic = true;
     }
     else {
         closeToMusic = false;
     }
     
     // Restart:
-    if (playerX-playerRad <= leftWallx+25) {
-        if (playerZ > roomFront+300 && playerZ < roomFront+400) {
-            closeToRestart = true;
-        }
+    if (playerX-playerRad <= leftWallx+25 && playerZ > roomFront+300 && playerZ < roomFront+400) {
+        closeToRestart = true;
     }
     else {
         closeToRestart = false;
@@ -915,6 +911,36 @@ void testApp::draw(){
     ofSphere(playerX, playerY, playerZ, playerRad);
     
     ofSetColor(255); // Color reset.
+    
+    
+    
+    //__________________________________________________________
+    
+    
+    
+    // Text:
+    
+    // Display text if near a control panel:
+    
+    if (closeToMusic == true) {
+        ofSetColor(255);
+        if (fakeFadeDaft == true || fakeFadeImpossible == true) {
+            ofDrawBitmapString("Loading...\nPlease wait...", rightWallx+25, playerY, playerZ);
+        }
+        else if (daft.getIsPlaying() == true) {
+            ofDrawBitmapString("Press 1 to stop kicking the jams new-school.\nPress 2 to kick the jams old-school.", rightWallx+25, playerY, playerZ);
+        }
+        else if (impossible.getIsPlaying() == true) {
+            ofDrawBitmapString("Press 1 to kick the jams new-school.\nPress 2 to stop kicking the jams old-school.", rightWallx+25, playerY, playerZ);
+        }
+        else {
+        ofDrawBitmapString("Press 1 to kick the jams new-school.\nPress 2 to kick the jams old-school.", rightWallx+25, playerY, playerZ);
+        }
+    }
+    
+    if (closeToRestart == true) {
+        ofSetHexColor(0x000000);
+    }
 }
 
 //--------------------------------------------------------------
@@ -958,10 +984,10 @@ void testApp::keyPressed(int key){
         case 'R':
             // First we check if the player is by the control panel:
             if (closeToRestart == true) {
-                    if (lasered == true) {
-                        lasered = false;
-                    }
+                if (lasered == true) {
+                    lasered = false;
                 }
+            }
             break;
             
         case '1':
@@ -974,21 +1000,21 @@ void testApp::keyPressed(int key){
             
             // First we check if the player is by the control panel:
             if (closeToMusic == true) {
-                    if (onePress == false) {
-                        playDaft = true;
-                        onePress = true;
-                    }
+                if (onePress == false) {
+                    playDaft = true;
+                    onePress = true;
                 }
+            }
             break;
             
         case '2':
             // First we check if the player is by the control panel:
             if (closeToMusic == true) {
-                    if (onePress == false) {
-                        playImpossible = true;
-                        onePress = true;
-                    }
+                if (onePress == false) {
+                    playImpossible = true;
+                    onePress = true;
                 }
+            }
             break;
     }
     

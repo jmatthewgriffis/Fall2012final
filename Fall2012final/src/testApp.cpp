@@ -450,6 +450,8 @@ void testApp::update(){
     // Check if painting has been grabbed:
     if (paintingGrabbed == true) {
         grabPainting = false;
+        laserLength = 0;
+        laserLengthV = 0;
     }
 }
 

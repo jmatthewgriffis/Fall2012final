@@ -34,6 +34,7 @@ public:
     bool grabPainting; // Use to detect proximity to painting.
     bool paintingGrabbed; // Time to win.
     bool unpressSpace; // Use to force a second press of SPACE.
+    int textCounter, textCounterMax; // Use to time some text.
     
     
     // Positioning:
@@ -43,7 +44,7 @@ public:
     
     float playerRad, handRad, footRad, canvasSide, davinciWidth, davinciHeight, floorLength, floorWidth; // Sizing.
     
-    float xVel, yVel, jumpSpd, gravity; // Speed.
+    float xVel, yVel, jumpSpd, gravity, textVel; // Speed.
     
     ofColor windowsill, light, lightPatch;
     

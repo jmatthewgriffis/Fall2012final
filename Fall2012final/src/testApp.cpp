@@ -56,6 +56,7 @@ void testApp::setup(){
     right = false;
     xVel = 5;
     yVel = 0;
+    textVel = 1024/2;
     jumpSpd = -7.8;
     gravity = 0.3;
     laserZVel = 0;
@@ -69,6 +70,8 @@ void testApp::setup(){
     reduce = 1.0; // Use this to fake the music fading out (or maybe it's real).
     fadeCounter = 0; // Use this to time the fading out.
     fadeSpeed = 15; // Use this to set the speed of fading out.
+    textCounter = 0; // This will count up till some of the winning text is displayed.
+    textCounterMax = 240; // This determines how long the textCounter counts.
     
     windowsill.r = 100;
     windowsill.g = 100;
@@ -452,13 +455,26 @@ void testApp::update(){
         grabPainting = false;
         laserLength = 0;
         laserLengthV = 0;
+        
+        // Move winning text:
+        if (textVel > 0) {
+            textVel -= 10;
+        }
+        if (textVel < 0) {
+            textVel = 0;
+        }
+        
+        // Time the display of certain text:
+        if (textCounter < textCounterMax) {
+            textCounter ++;
+        }
     }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    //cout<<grabPainting<<endl; // Debug.
+    //cout<<textVel<<endl; // Debug.
     
     // Setting the rect mode affects the images:
     ofSetRectMode(OF_RECTMODE_CENTER);
@@ -1101,8 +1117,20 @@ void testApp::draw(){
         ofDrawBitmapString("FAIL.", canvasX-0.03*(playerZ-canvasZ), canvasY, canvasFront);
     }
     else if (paintingGrabbed == true) {
-        ofSetColor(0, 0, 255);
+        ofSetColor(0,0,255);
         ofDrawBitmapString("WIN!", canvasX-0.025*(playerZ-canvasZ), canvasY, canvasFront);
+        
+        ofSetColor(255);
+        ofDrawBitmapString("You're ready for", playerX-textVel-100, centerH-20, playerZ);
+        ofDrawBitmapString("the big time!", playerX+textVel+5, centerH-20, playerZ);
+        
+        if (textVel == 0) {
+            // Delay the display of the following text:
+            if (textCounter == textCounterMax) {
+                ofDrawBitmapString("This conludes your training.", playerX-95, centerH, playerZ);
+                ofDrawBitmapString("Press ESC to quit and tackle the big time.\nUse the console to restart the simulation.", playerX-135, centerH+20, playerZ);
+            }
+        }
     }
     //mondrian.draw(canvasX, canvasY, canvasFront, ?, ?);
     
@@ -1281,6 +1309,9 @@ void testApp::keyPressed(int key){
                     lasered = false;
                 }
                 else if (paintingGrabbed == true) {
+                    // Reset the winning text's original position:
+                    textVel = 1024/2;
+                    textCounter = 0;
                     paintingGrabbed = false;
                 }
             }

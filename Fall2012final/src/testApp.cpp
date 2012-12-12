@@ -61,7 +61,7 @@ void testApp::setup(){
     centerW = ofGetWidth()/2;
     centerH = ofGetHeight()/2;
     floorHeight = centerH+(canvasSide/2);
-    ceilingHeight = floorHeight-floorWidth-(floorWidth/3); // Temporary value.
+    ceilingHeight = floorWidth-(floorWidth/3); // Temporary value.
     laserHeight = floorHeight-20;
     
     playerX = centerW;

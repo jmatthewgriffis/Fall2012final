@@ -1087,7 +1087,8 @@ void testApp::draw(){
         ofDrawBitmapString("FAIL.", canvasX-0.03*(playerZ-canvasZ), canvasY, canvasFront);
     }
     else if (paintingGrabbed == true) {
-        
+        ofSetColor(0, 0, 255);
+        ofDrawBitmapString("WIN!", canvasX-0.025*(playerZ-canvasZ), canvasY, canvasFront);
     }
     //mondrian.draw(canvasX, canvasY, canvasFront, ?, ?);
     

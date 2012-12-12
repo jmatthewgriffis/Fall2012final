@@ -29,6 +29,8 @@ public:
     
     bool forward, backward, left, right, jump; // Use for movement.
     
+    bool closeToRestart; // Use for the restart control panel.
+    
     
     // Positioning:
     float playerX, playerY, playerZ, canvasX, canvasY, canvasZ,
@@ -77,7 +79,7 @@ public:
     
     ofSoundPlayer daft, impossible;
     
-    bool playDaft, playImpossible, onePress, fakeFadeDaft, fakeFadeImpossible;
+    bool playDaft, playImpossible, onePress, fakeFadeDaft, fakeFadeImpossible, closeToMusic;
     
     float reduce;
     

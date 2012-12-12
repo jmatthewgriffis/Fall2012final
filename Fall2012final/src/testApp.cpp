@@ -35,6 +35,7 @@ void testApp::setup(){
     // http://youtu.be/XAYhNHhxN0A
     impossible.loadSound("music/impossible.mp3");
     
+    closeToRestart = false;
     lasered = false; // Boolean for collision.
     lpause = true; // Stall laser movement.
     onePress = false; // Use this to prevent repeat calls to play a music track.
@@ -42,6 +43,7 @@ void testApp::setup(){
     playImpossible = false;
     fakeFadeDaft = false;
     fakeFadeImpossible = false;
+    closeToMusic = false;
     
     // Movement:
     forward = false;
@@ -290,7 +292,7 @@ void testApp::update(){
     
     //__________________________________________________________
     
-    //cout<<playDaft<<endl;
+    
     
     // Let's play some music:
     
@@ -374,6 +376,34 @@ void testApp::update(){
             fakeFadeImpossible = false;
             fadeCounter = 0;
         }
+    }
+    
+    
+    
+    //__________________________________________________________
+    
+    
+    
+    // Work with control panels. First, check for proximity:
+    
+    // Music:
+    if (playerX+playerRad >= rightWallx-25) {
+        if (playerZ > roomFront+300 && playerZ < roomFront+400) {
+            closeToMusic = true;
+        }
+    }
+    else {
+        closeToMusic = false;
+    }
+    
+    // Restart:
+    if (playerX-playerRad <= leftWallx+25) {
+        if (playerZ > roomFront+300 && playerZ < roomFront+400) {
+            closeToRestart = true;
+        }
+    }
+    else {
+        closeToRestart = false;
     }
 }
 
@@ -927,8 +957,7 @@ void testApp::keyPressed(int key){
         case 'r':
         case 'R':
             // First we check if the player is by the control panel:
-            if (playerX-playerRad <= leftWallx+25)
-                if (playerZ > roomFront+300 && playerZ < roomFront+400){
+            if (closeToRestart == true) {
                     if (lasered == true) {
                         lasered = false;
                     }
@@ -944,8 +973,7 @@ void testApp::keyPressed(int key){
              player holds the key down.*/
             
             // First we check if the player is by the control panel:
-            if (playerX+playerRad >= rightWallx-25)
-                if (playerZ > roomFront+300 && playerZ < roomFront+400){
+            if (closeToMusic == true) {
                     if (onePress == false) {
                         playDaft = true;
                         onePress = true;
@@ -955,8 +983,7 @@ void testApp::keyPressed(int key){
             
         case '2':
             // First we check if the player is by the control panel:
-            if (playerX+playerRad == rightWallx)
-                if (playerZ > roomFront+300 && playerZ < roomFront+400){
+            if (closeToMusic == true) {
                     if (onePress == false) {
                         playImpossible = true;
                         onePress = true;

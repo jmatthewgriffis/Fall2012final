@@ -37,7 +37,7 @@ public:
     centerW, centerH, leftWallx, rightWallx, floorHeight, ceilingHeight,
     canvasFront, roomFront, centerRects;
     
-    float playerRad, canvasSide, floorLength, floorWidth; // Sizing.
+    float playerRad, handRad, footRad, canvasSide, floorLength, floorWidth; // Sizing.
     
     float xVel, yVel, jumpSpd, gravity; // Speed.
     

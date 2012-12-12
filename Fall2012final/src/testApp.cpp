@@ -79,6 +79,8 @@ void testApp::setup(){
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
     playerRad = 50;
+    handRad = 13;
+    footRad = 17;
     floorLength = 1800; // This should be NHLASERS/laserSpacing.
     floorWidth = 1200; // This should be NVLASERS/laserSpacing.
     laserLength = 0;
@@ -511,6 +513,8 @@ void testApp::draw(){
     
     // The windows:
     
+    ofSetLineWidth(200);
+    
     // I thank my good friend Patricio Gonzales Vivo for instructing
     // me in how to use mesh. I still don't totally get what it does,
     // but I understand it enough to use it for cool effect here:
@@ -786,6 +790,7 @@ void testApp::draw(){
     
     // Lights on the ceiling:
     
+    ofSetLineWidth(1);
     ofSetColor(light);
     
     // 150 from window; delete this line.
@@ -901,6 +906,8 @@ void testApp::draw(){
     //__________________________________________________________
     
     
+    
+    ofSetLineWidth(200);
     
     // Let's give a blue outline to the front of the room. This would be a lot
     // more elegant with an array, but I'd have to make a class and don't feel like it:
@@ -1079,9 +1086,24 @@ void testApp::draw(){
         ofSetColor(0, 255, 0); // Green.
     }
     else {
-        ofSetColor(0,130,255); // Blue.
+        ofSetColor(255,0,0); // Red.
     }
+    // Left hand:
+    ofSphere(playerX-playerRad, playerY+(handRad/2), playerZ, handRad);
+    // Right hand:
+    ofSphere(playerX+playerRad, playerY+(handRad/2), playerZ, handRad);
+    
+    ofSetColor(255, 0, 0); // Red.
+    // Left foot:
+    ofSphere(playerX-playerRad+footRad, playerY+playerRad-footRad/2, playerZ, footRad);
+    // Right foot:
+    ofSphere(playerX+playerRad-footRad, playerY+playerRad-footRad/2, playerZ, footRad);
+    
+    
+    // Body:
+    ofSetColor(0,130,255); // Blue.
     ofSphere(playerX, playerY, playerZ, playerRad);
+
     
     ofSetColor(255); // Color reset.
     
@@ -1109,7 +1131,7 @@ void testApp::draw(){
             ofDrawBitmapString("Press 1 to kick the jams new-school.\nPress 2 to stop kicking the jams old-school.", rightWallx+25, playerY, playerZ);
         }
         else {
-        ofDrawBitmapString("Press 1 to kick the jams new-school.\nPress 2 to kick the jams old-school.", rightWallx+25, playerY, playerZ);
+            ofDrawBitmapString("Press 1 to kick the jams new-school.\nPress 2 to kick the jams old-school.", rightWallx+25, playerY, playerZ);
         }
     }
     

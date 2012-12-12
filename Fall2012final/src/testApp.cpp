@@ -1226,6 +1226,13 @@ void testApp::draw(){
     ofDrawBitmapString("Press the arrow keys or WASD to move.\nPress SPACE to jump.", playerX-(1024/2)+120, centerH+(768/2)-100, playerZ);
     
     
+    // Display text if a laser is triggered:
+    if (lasered == true) {
+        ofSetColor(255);
+        ofDrawBitmapString("Ruh-Row, Shaggy! Use the console\n    at the front to restart.\n\n (And try to be more graceful.)", playerX-95, centerH, playerZ);
+    }
+    
+    
     // Display text if near a control panel:
     
     // Music (display different text depending on what the current state

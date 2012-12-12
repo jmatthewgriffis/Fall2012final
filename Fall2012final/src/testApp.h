@@ -41,7 +41,7 @@ public:
     
     float xVel, yVel, jumpSpd, gravity; // Speed.
     
-    ofColor windowsill;
+    ofColor windowsill, light, lightPatch;
     
     //__________________________________________________________
     

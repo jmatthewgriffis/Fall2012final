@@ -69,6 +69,12 @@ void testApp::setup(){
     windowsill.r = 100;
     windowsill.g = 100;
     windowsill.b = 100;
+    light.r = 227;
+    light.g = 224;
+    light.b = 70;
+    lightPatch.r = 255;
+    lightPatch.g = 255;
+    lightPatch.b = 255;
     
     // Establish sizes first to refer to them when positioning.
     canvasSide = 500;
@@ -812,6 +818,76 @@ void testApp::draw(){
     ofLine(canvasX+300,ceilingHeight,roomFront-1500,canvasX-300,ceilingHeight,roomFront-1500);
     ofLine(canvasX-300,ceilingHeight,roomFront-1100,canvasX-300,ceilingHeight,roomFront-1500);
     
+    
+    
+    //__________________________________________________________
+    
+    
+    
+    // Lights on the ceiling:
+    
+    ofSetColor(light);
+    
+    // 150 from window; delete this line.
+    
+    // Front-left light:
+    ofBeginShape();
+    ofVertex(canvasX-350, ceilingHeight, roomFront-50);
+    ofVertex(canvasX-250, ceilingHeight, roomFront-50);
+    ofVertex(canvasX-250, ceilingHeight, roomFront-150);
+    ofVertex(canvasX-350, ceilingHeight, roomFront-150);
+    ofEndShape();
+    
+    // Front-right light:
+    ofBeginShape();
+    ofVertex(canvasX+350, ceilingHeight, roomFront-50);
+    ofVertex(canvasX+250, ceilingHeight, roomFront-50);
+    ofVertex(canvasX+250, ceilingHeight, roomFront-150);
+    ofVertex(canvasX+350, ceilingHeight, roomFront-150);
+    ofEndShape();
+    
+    // Middle-left light:
+    ofBeginShape();
+    ofVertex(canvasX-350, ceilingHeight, roomFront-850);
+    ofVertex(canvasX-250, ceilingHeight, roomFront-850);
+    ofVertex(canvasX-250, ceilingHeight, roomFront-950);
+    ofVertex(canvasX-350, ceilingHeight, roomFront-950);
+    ofEndShape();
+    
+    // Middle-right light:
+    ofBeginShape();
+    ofVertex(canvasX+350, ceilingHeight, roomFront-850);
+    ofVertex(canvasX+250, ceilingHeight, roomFront-850);
+    ofVertex(canvasX+250, ceilingHeight, roomFront-950);
+    ofVertex(canvasX+350, ceilingHeight, roomFront-950);
+    ofEndShape();
+    
+    // Back-left light:
+    ofBeginShape();
+    ofVertex(canvasX-350, ceilingHeight, roomFront-1650);
+    ofVertex(canvasX-250, ceilingHeight, roomFront-1650);
+    ofVertex(canvasX-250, ceilingHeight, roomFront-1750);
+    ofVertex(canvasX-350, ceilingHeight, roomFront-1750);
+    ofEndShape();
+    
+    // Back-right light:
+    ofBeginShape();
+    ofVertex(canvasX+350, ceilingHeight, roomFront-1650);
+    ofVertex(canvasX+250, ceilingHeight, roomFront-1650);
+    ofVertex(canvasX+250, ceilingHeight, roomFront-1750);
+    ofVertex(canvasX+350, ceilingHeight, roomFront-1750);
+    ofEndShape();
+    
+    
+    ofSetColor(255); // Color reset.
+    
+    
+    
+    //__________________________________________________________
+    
+    
+    
+    // Control panels:
     
     // Let's draw the tune box:
     

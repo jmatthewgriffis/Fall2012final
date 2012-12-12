@@ -40,6 +40,8 @@ void testApp::setup(){
     gravity = 0.3;
     laserZVel = 0;
     laserXVel = 0;
+    extendSpd = 3; // How quickly horizontal lasers stretch across the room.
+    extendSpd2 = 6; // How quickly vertical lasers stretch across the room.
     direction = 1;
     direction2 = 1;
     lcounter = 0; // This will count up to initiate laser movement.
@@ -185,7 +187,7 @@ void testApp::update(){
         laserZsMod[i] = laserZs[i] + laserZVel;
         
         // Feed variables into the lasers' update function:
-        myLasers[i].update(laserLength, floorWidth);
+        myLasers[i].update(laserLength, floorWidth, extendSpd);
         
         // Set a variable on this page equal to the updated result from the laser's function:
         laserLength = myLasers[i].currLaserLength;
@@ -227,7 +229,7 @@ void testApp::update(){
         laserXsMod[i] = laserXs[i] + laserXVel;
         
         // Feed variables into the lasers' update function:
-        myLasersV[i].update(laserLengthV, floorLength);
+        myLasersV[i].update(laserLengthV, floorLength, extendSpd2);
         
         // Set a variable on this page equal to the updated result from the laser's function:
         laserLengthV = myLasersV[i].currLaserLength;

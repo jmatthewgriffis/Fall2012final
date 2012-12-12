@@ -16,12 +16,12 @@ void laser::setup(float x, float y, float z) {
     counterMax = 30;
 }
 
-void laser::update(float l, float maxLaserLength) {
+void laser::update(float l, float maxLaserLength, int spd) {
     
     // Check if the laser has stretched the length of the room
     // yet, and if not, stretch it:
     if (l < maxLaserLength) {
-        l+=3;
+        l+=spd;
     }
     if (l > maxLaserLength) {
         l = maxLaserLength;

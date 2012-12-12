@@ -46,7 +46,7 @@ public:
     // Laser grid:
     
     float laserLength, laserLengthV, laserHeight;
-    int laserZVel, laserXVel;
+    int laserZVel, laserXVel, extendSpd, extendSpd2;
     int direction, direction2; // Boolean-like, to control direction.
     int lcounter, ltimer; // Use to control the timing of the lasers.
     

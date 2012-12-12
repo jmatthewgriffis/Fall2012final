@@ -17,7 +17,7 @@ class laser {
 public:
     
     void setup(float x, float y, float z);
-    void update(float l, float maxlaserLength);
+    void update(float l, float maxlaserLength, int spd);
     void draw(float x, float y, float z, float x2, float y2, float z2, float l);
     
     int laserSpacing;

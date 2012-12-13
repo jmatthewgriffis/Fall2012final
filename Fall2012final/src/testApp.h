@@ -70,6 +70,7 @@ public:
     
     ofSoundPlayer laser;
     ofSoundPlayer ouch;
+    ofSoundPlayer grab;
     
     //__________________________________________________________
     

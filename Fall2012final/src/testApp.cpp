@@ -48,6 +48,12 @@ void testApp::setup(){
     ouch.loadSound("sounds/ouch.mp3");
     ouch.setVolume(0.1f);
     
+    // Sound credit:
+    // http://www.soundrangers.com/index.cfm/category/560/whoosh-sounds-energy.cfm?CFID=5069812&CFTOKEN=27030179 (energy whoosh 07):
+    // Similar process here as with the above sound:
+    grab.loadSound("sounds/grab.mp3");
+    grab.setVolume(0.1f);
+    
     closeToRestart = false;
     grabPainting = false;
     paintingGrabbed = false;
@@ -1340,6 +1346,9 @@ void testApp::keyPressed(int key){
                 // bar after jumping and has pressed it again; this
                 // prevents one press covering both actions:
                 if (unpressSpace == false) {
+                    if (grab.getIsPlaying() == false) {
+                        grab.play();
+                    }
                     paintingGrabbed = true;
                 }
             }

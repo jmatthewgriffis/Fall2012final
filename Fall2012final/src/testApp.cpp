@@ -42,6 +42,12 @@ void testApp::setup(){
     // recorded it as a voice memo on my phone then edited it in Garage Band:
     laser.loadSound("sounds/laser.mp3");
     
+    // Sound credit:
+    // http://www.pond5.com/sound-effect/2732635/zap-laser-blast.html
+    // Similar process here as with the above sound:
+    ouch.loadSound("sounds/ouch.mp3");
+    ouch.setVolume(0.1f);
+    
     closeToRestart = false;
     grabPainting = false;
     paintingGrabbed = false;
@@ -226,6 +232,9 @@ void testApp::update(){
                             if (playerZ-playerRad <= myLasers[i].zPos2) {
                                 if (paintingGrabbed == false) {
                                     lasered = true;
+                                    if (ouch.getIsPlaying() == false) {
+                                        ouch.play();
+                                    }
                                 }
                             }
                         }
@@ -270,6 +279,9 @@ void testApp::update(){
                             if (playerZ-playerRad <= myLasersV[i].zPos2) {
                                 if (paintingGrabbed == false) {
                                     lasered = true;
+                                    if (ouch.getIsPlaying() == false) {
+                                        ouch.play();
+                                    }
                                 }
                             }
                         }

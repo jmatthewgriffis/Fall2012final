@@ -33,8 +33,10 @@ public:
     
     bool grabPainting; // Use to detect proximity to painting.
     bool paintingGrabbed; // Time to win.
+    bool denied; // Use to exasperate.
     bool unpressSpace; // Use to force a second press of SPACE.
     int textCounter, textCounterMax; // Use to time some text.
+    int deniedCounter, deniedCounterMax; // Use to time exasperating the player.
     
     
     // Positioning:

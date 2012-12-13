@@ -57,6 +57,7 @@ void testApp::setup(){
     closeToRestart = false;
     grabPainting = false;
     paintingGrabbed = false;
+    denied = false;
     unpressSpace = false;
     lasered = false; // Boolean for collision.
     lpause = true; // Stall laser movement.
@@ -90,6 +91,8 @@ void testApp::setup(){
     fadeSpeed = 15; // Use this to set the speed of fading out.
     textCounter = 0; // This will count up till some of the winning text is displayed.
     textCounterMax = 240; // This determines how long the textCounter counts.
+    deniedCounter = 0; // This will count up till sassy text disappears.
+    deniedCounterMax = 360; // This determines how long the sassy text appears.
     
     windowsill.r = 100;
     windowsill.g = 100;
@@ -490,6 +493,7 @@ void testApp::update(){
     // Check if painting has been grabbed:
     if (paintingGrabbed == true) {
         grabPainting = false;
+        lasered = false;
         laserLength = 0;
         laserLengthV = 0;
         
@@ -504,6 +508,18 @@ void testApp::update(){
         // Time the display of certain text:
         if (textCounter < textCounterMax) {
             textCounter ++;
+        }
+    }
+    
+    
+    // Check if we are sassing the player:
+    if (denied == true) {
+        if (deniedCounter < deniedCounterMax) {
+            deniedCounter++;
+        }
+        else {
+            deniedCounter = 0;
+            denied = false;
         }
     }
 }
@@ -1269,6 +1285,11 @@ void testApp::draw(){
         ofDrawBitmapString("Ruh-Row, Shaggy! Use the console\n    at the front to restart.\n\n (And try to be more graceful.)", playerX-95, centerH, playerZ);
     }
     
+    // Display text if trying to grab the painting without music playing:
+    if (denied == true) {
+        ofSetColor(255);
+        ofDrawBitmapString("Stealing in silence? No style!\n Use the console at the front\n   to crank up the tunes.", playerX-95, centerH-50, playerZ);
+    }
     
     // Display text if near a control panel:
     
@@ -1346,10 +1367,15 @@ void testApp::keyPressed(int key){
                 // bar after jumping and has pressed it again; this
                 // prevents one press covering both actions:
                 if (unpressSpace == false) {
-                    if (grab.getIsPlaying() == false) {
-                        grab.play();
+                    if (daft.getIsPlaying() == false && impossible.getIsPlaying() == false) {
+                        denied = true;
                     }
-                    paintingGrabbed = true;
+                    else {
+                        if (grab.getIsPlaying() == false) {
+                            grab.play();
+                        }
+                        paintingGrabbed = true;
+                    }
                 }
             }
             break;

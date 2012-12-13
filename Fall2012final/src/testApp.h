@@ -1,3 +1,10 @@
+/* This is a game by me, J. Matthew Griffis. Anything I didn't 
+ take from the Internet is (c)2012 John Matthew Griffis. I 
+ made this for the final project of the Fall 2012 semester of 
+ my studies for the MFA in Design and Technology at Parsons 
+ the New School for Design.
+ */
+
 #pragma once
 
 #include "ofMain.h"

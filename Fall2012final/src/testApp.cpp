@@ -36,6 +36,12 @@ void testApp::setup(){
     // http://youtu.be/XAYhNHhxN0A
     impossible.loadSound("music/impossible.mp3");
     
+    // Sound credit:
+    // http://www.youtube.com/watch?v=pY_d6paPGZ4
+    // I could not convert this one into an MP# file so I just
+    // recorded it as a voice memo on my phone then edited it in Garage Band:
+    laser.loadSound("sounds/laser.mp3");
+    
     closeToRestart = false;
     grabPainting = false;
     paintingGrabbed = false;
@@ -321,6 +327,19 @@ void testApp::update(){
     if (lpause == false) {
         laserZVel += direction;
         laserXVel += direction2;
+    }
+    
+    
+    // Give the lasers sound and loop it:
+    if (paintingGrabbed == false) {
+        if (laser.getIsPlaying() == false) {
+            laser.setVolume(0.1f);
+            laser.play();
+        }
+        laser.setLoop(true);
+    }
+    else {
+        laser.stop();
     }
     
     

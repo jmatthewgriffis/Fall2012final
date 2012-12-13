@@ -68,6 +68,8 @@ public:
     float laserXs [NVLASERS]; // Array of x-pos variables.
     float laserXsMod [NVLASERS]; // Array of modified x-pos variables.
     
+    ofSoundPlayer laser;
+    
     //__________________________________________________________
     
     // Art:

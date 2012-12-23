@@ -3,6 +3,13 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
+    /* So ya wanna make a standalone app? The complied one created in the "bin" folder doesn't
+     have the assets in the "data" folder. To put them there, right click on the app, then choose
+     "Show Package Contents." Open the "Contents" folder, then copy the "data" folder into
+     the "Mac OS" folder (this is the equivalent of the "bin" folder). Finally, put this line
+     in the setup (actually you might need to do this first, pre-compiling): */
+    //ofSetDataPathRoot("data/");
+    
     // Housekeeping:
     ofSetCircleResolution(60);
     ofSetSphereResolution(60);
